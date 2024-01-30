@@ -1,0 +1,9 @@
+# Dependency
+node_modules/
+
+# Next/Vercel
+.next/
+.vercel/
+
+# Environment
+.*.env

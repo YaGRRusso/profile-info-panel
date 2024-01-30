@@ -1,0 +1,7 @@
+{
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "extends": ["next/core-web-vitals", "@yagrrusso/eslint-config/react"]
+}

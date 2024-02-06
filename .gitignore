@@ -4,6 +4,10 @@ node_modules/
 # Next/Vercel
 .next/
 .vercel/
+.swc/
 
 # Environment
 .*.env
+
+# Jest
+coverage/

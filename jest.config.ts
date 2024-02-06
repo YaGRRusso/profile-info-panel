@@ -19,8 +19,9 @@ const config: Config = {
   moduleFileExtensions: ['js', 'json', 'ts'],
   moduleNameMapper: {
     '^@/app/(.*)$': ['<rootDir>/src/app/$1'],
-    '^@/helpers/(.*)$': ['<rootDir>/src/helpers/$1'],
     '^@/components': ['<rootDir>/src/components'],
+    '^@/contexts/(.*)$': ['<rootDir>/src/contexts/$1'],
+    '^@/helpers/(.*)$': ['<rootDir>/src/helpers/$1'],
     '^@/(.*)$': ['<rootDir>/src/$1'],
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],

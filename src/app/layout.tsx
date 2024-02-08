@@ -39,7 +39,7 @@ export default function RootLayout({
               <Sidebar.Button
                 icon={<House weight="bold" />}
                 text="Home"
-                path="/"
+                path=""
               />
               <Sidebar.Button
                 icon={<Brain weight="bold" />}

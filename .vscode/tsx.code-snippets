@@ -9,8 +9,6 @@
     "scope": "typescriptreact",
     "prefix": "reactcomp",
     "body": [
-      "'use client'",
-      "",
       "import { FC, HTMLAttributes } from 'react'",
       "",
       "export interface ${1:${1:${TM_DIRECTORY/(^.+\\/(.*)$)/${2:/pascalcase}/}}}Props extends HTMLAttributes<HTMLDivElement> {}",

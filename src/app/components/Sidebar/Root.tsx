@@ -12,7 +12,7 @@ const SidebarRoot: FC<SidebarRootProps> = ({ children, ...rest }) => {
       <div className="mb-4 mt-8 flex items-center justify-center gap-2 border-b border-sky-400 border-opacity-15 px-2 pb-6 text-3xl font-medium">
         <Image src="/yr-branco.svg" alt="logo" width={24} height={24} />
         <span>
-          <strong className="font-semibold text-sky-400">Yago</strong> Russo
+          <strong className="font-semibold text-sky-400">Yago</strong>Russo
         </span>
       </div>
       <div className="flex flex-1 flex-col items-stretch justify-between gap-4">

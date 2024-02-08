@@ -16,14 +16,14 @@ const SidebarButton: FC<SidebarButtonProps> = ({
   className,
   ...rest
 }) => {
-  const pathname = headers().get('next-url')
+  const pathname = headers().get('next-url') ?? ''
 
   return (
     <button
       className={clsx(
-        'flex items-center gap-2 rounded-r-lg px-4 py-2 font-medium transition-all hover:text-[#6090e4]',
-        path === pathname &&
-          'border-l-4 border-[#6090e4] bg-[#25324a] font-semibold text-[#6090e4]',
+        'flex items-center gap-2 rounded-r-lg px-4 py-2 font-medium transition-all hover:text-sky-400',
+        path === pathname?.replace(/\/$/, '') &&
+          'border-l-4 border-sky-400 bg-sky-400 bg-opacity-15 font-semibold text-sky-400',
         className,
       )}
       {...rest}

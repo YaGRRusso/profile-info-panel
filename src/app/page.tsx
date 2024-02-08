@@ -6,7 +6,7 @@ import { CircleNotch } from '@phosphor-icons/react/dist/ssr'
 
 export default function Home() {
   return (
-    <main className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center gap-16">
+    <main className="flex h-full w-full flex-col items-center justify-center gap-16">
       <Buttons />
       <div className="flex items-center justify-center gap-6 max-md:flex-col">
         <Logos src={['yr-preto.svg', 'yr-branco.svg', 'yr-cor.svg']} />

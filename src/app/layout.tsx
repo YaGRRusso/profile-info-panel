@@ -1,6 +1,16 @@
 import Body from './components/Body'
+import Sidebar from './components/Sidebar'
 import { Providers } from './providers'
 
+import {
+  Brain,
+  House,
+  SignOut,
+  User,
+  Trophy,
+  GraduationCap,
+  Certificate,
+} from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import { ReactNode } from 'react'
@@ -23,11 +33,50 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <Body className={montserrat.className}>
-          <div className="bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
-            {children}
-          </div>
-        </Body>
+        <Body.Root className={montserrat.className}>
+          <Sidebar.Root>
+            <Sidebar.Group>
+              <Sidebar.Button
+                icon={<House weight="bold" />}
+                text="Home"
+                path="/"
+              />
+              <Sidebar.Button
+                icon={<Brain weight="bold" />}
+                text="Skills"
+                path="/skills"
+              />
+              <Sidebar.Button
+                icon={<Trophy weight="bold" />}
+                text="Projetos"
+                path="/projects"
+              />
+              <Sidebar.Button
+                icon={<GraduationCap weight="bold" />}
+                text="Experiências"
+                path="/experiences"
+              />
+              <Sidebar.Button
+                icon={<Certificate weight="bold" />}
+                text="Cursos"
+                path="/courses"
+              />
+            </Sidebar.Group>
+            <Sidebar.Group>
+              <Sidebar.Button
+                icon={<User weight="bold" />}
+                text="Pessoal"
+                path="/personal"
+              />
+              <Sidebar.Button
+                icon={<SignOut weight="bold" />}
+                text="Sair"
+                path="/leave"
+              />
+            </Sidebar.Group>
+          </Sidebar.Root>
+          <Body.Main>{children}</Body.Main>
+        </Body.Root>
       </Providers>
     </html>
   )

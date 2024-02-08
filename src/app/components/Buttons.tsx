@@ -2,7 +2,7 @@
 
 import { useThemeContext } from '@/contexts/theme'
 
-import { GithubLogo, MoonStars, Sun, Translate } from '@phosphor-icons/react'
+import { GithubLogo, MoonStars, Sun } from '@phosphor-icons/react'
 import Link from 'next/link'
 import { FC, HTMLAttributes } from 'react'
 
@@ -22,9 +22,6 @@ const Buttons: FC<ButtonsProps> = ({ ...rest }) => {
       <Link href="https://github.com/YaGRRusso" target="_blank">
         <GithubLogo />
       </Link>
-      <button disabled>
-        <Translate />
-      </button>
     </div>
   )
 }

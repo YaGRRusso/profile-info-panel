@@ -1,12 +1,12 @@
 import { tryCatch } from './request'
 
-const errorFn = async () => {
+const errorFn: any = async () => {
   return await new Promise((resolve, reject) =>
     setTimeout(() => reject(new Error('error')), 100),
   )
 }
 
-const successFn = async () => {
+const successFn: any = async () => {
   return await new Promise((resolve) =>
     setTimeout(() => resolve('success'), 100),
   )

@@ -1,4 +1,4 @@
-import { Logos, ThemeChanger } from '@/components'
+import { ApiInfo, Logos, ThemeChanger } from '@/components'
 
 import { CircleNotch, GithubLogo } from '@phosphor-icons/react/dist/ssr'
 import Link from 'next/link'
@@ -7,6 +7,7 @@ export default function Home() {
   return (
     <main className="flex h-full w-full flex-col items-center justify-center gap-16">
       <div className="flex items-center justify-center gap-4 text-xl text-gray-800 dark:text-gray-400 [&_*:disabled]:opacity-50">
+        <ApiInfo />
         <Link href="https://github.com/YaGRRusso" target="_blank">
           <GithubLogo />
         </Link>

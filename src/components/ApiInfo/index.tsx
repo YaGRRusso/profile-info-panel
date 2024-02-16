@@ -1,24 +1,27 @@
 'use client'
 
-import { unwrap } from '@/helpers/response'
+import { GetHelloOutput, root } from '@/services'
 
-import { Question } from '@phosphor-icons/react'
+import { CircleNotch, Question } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
+import { clsx } from 'clsx'
 import { ButtonHTMLAttributes, FC } from 'react'
 
 export interface ApiInfoProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const ApiInfo: FC<ApiInfoProps> = ({ ...rest }) => {
-  const { data } = useQuery({
+  const { data, isFetching } = useQuery<GetHelloOutput>({
     queryKey: ['info'],
-    queryFn: async () => {
-      return await fetch('https://yagrrusso-info.onrender.com').then(unwrap)
-    },
+    queryFn: async () => await root.getHello(),
   })
 
   return (
-    <button onClick={() => console.log(data)} {...rest}>
-      <Question />
+    <button
+      onClick={() => console.log(data)}
+      className={clsx(isFetching && 'pointer-events-none opacity-15')}
+      {...rest}
+    >
+      {isFetching ? <CircleNotch className="animate-spin" /> : <Question />}
     </button>
   )
 }

@@ -7,7 +7,18 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: 'class',
-  theme: {},
+  theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1.5rem',
+        lg: '2rem',
+      },
+      screens: {
+        lg: '1440px',
+      },
+    },
+  },
   plugins: [],
 }
 

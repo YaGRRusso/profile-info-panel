@@ -13,7 +13,7 @@ export default function Home() {
         </Link>
         <ThemeChanger />
       </div>
-      <div className="flex items-center justify-center gap-6 max-md:flex-col">
+      <div className="flex items-center justify-center gap-6 max-md:flex-col max-md:text-center">
         <Logos />
         <h1 className="flex flex-col gap-2 text-7xl">
           <span>Yago</span>

@@ -22,6 +22,7 @@ const config: Config = {
     '^@/components': ['<rootDir>/src/components'],
     '^@/contexts/(.*)$': ['<rootDir>/src/contexts/$1'],
     '^@/helpers/(.*)$': ['<rootDir>/src/helpers/$1'],
+    '^@/services/(.*)$': ['<rootDir>/src/services/$1'],
     '^@/(.*)$': ['<rootDir>/src/$1'],
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],

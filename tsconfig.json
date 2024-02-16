@@ -19,6 +19,7 @@
       "@/components": ["./src/components"],
       "@/contexts/*": ["./src/contexts/*"],
       "@/helpers/*": ["./src/helpers/*"],
+      "@/services/*": ["./src/services/*"],
       "@/*": ["./src/*"]
     }
   },

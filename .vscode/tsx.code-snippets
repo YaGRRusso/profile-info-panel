@@ -23,5 +23,24 @@
       ""
     ],
     "description": "Create ReactJS component with all is necessary"
+  },
+  "Create NextJS Page": {
+    "scope": "typescriptreact",
+    "prefix": "nextpage",
+    "body": [
+      "import { Metadata } from 'next'",
+      "",
+      "export default async function ${1:${TM_DIRECTORY/(^.+\\/(.*)$)/${2:/pascalcase}/}}() {",
+      "  return <main></main>",
+      "}",
+      "",
+      "export const metadata: Metadata = {",
+      "  title: '${2}',",
+      "  description: '${3}',",
+      "  icons: './favicon.ico',",
+      "}",
+      ""
+    ],
+    "description": "Create NextJS page with all is necessary"
   }
 }

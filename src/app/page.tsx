@@ -3,6 +3,7 @@ import { root } from '../services'
 import { ApiInfo, Logos, ThemeChanger } from '@/components'
 
 import { CircleNotch, GithubLogo } from '@phosphor-icons/react/dist/ssr'
+import { Metadata } from 'next'
 import Link from 'next/link'
 
 const getServerSideProps = async () => {
@@ -38,4 +39,10 @@ export default async function Home() {
       </div>
     </main>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'Home',
+  description: 'Management of profile infos',
+  icons: './favicon.ico',
 }

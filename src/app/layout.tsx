@@ -5,25 +5,18 @@ import { Providers } from './providers'
 import {
   Brain,
   House,
-  SignOut,
   User,
   Trophy,
   GraduationCap,
   Certificate,
+  SignIn,
 } from '@phosphor-icons/react/dist/ssr'
-import { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import { ReactNode } from 'react'
 
 import './globals.css'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-  title: 'Profile Info',
-  description: 'Management of profile infos',
-  icons: './favicon.ico',
-}
 
 export default function RootLayout({
   children,
@@ -36,7 +29,11 @@ export default function RootLayout({
         <Body.Root className={montserrat.className}>
           <Menu.Root>
             <Menu.Group>
-              <Menu.Button icon={<House weight="bold" />} text="Home" path="" />
+              <Menu.Button
+                icon={<House weight="bold" />}
+                text="Home"
+                path="/"
+              />
               <Menu.Button
                 icon={<Brain weight="bold" />}
                 text="Skills"
@@ -65,9 +62,9 @@ export default function RootLayout({
                 path="/personal"
               />
               <Menu.Button
-                icon={<SignOut weight="bold" />}
-                text="Sair"
-                path="/leave"
+                icon={<SignIn weight="bold" />}
+                text="Entrar"
+                path="/signin"
               />
             </Menu.Group>
           </Menu.Root>

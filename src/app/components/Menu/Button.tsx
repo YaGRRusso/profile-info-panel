@@ -2,14 +2,14 @@ import { clsx } from 'clsx'
 import { headers } from 'next/headers'
 import { ButtonHTMLAttributes, FC, ReactNode } from 'react'
 
-export interface SidebarButtonProps
+export interface MenuButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: ReactNode
   text: string
   path: string
 }
 
-const SidebarButton: FC<SidebarButtonProps> = ({
+const MenuButton: FC<MenuButtonProps> = ({
   icon,
   text,
   path,
@@ -34,6 +34,6 @@ const SidebarButton: FC<SidebarButtonProps> = ({
   )
 }
 
-SidebarButton.displayName = 'Sidebar.Button'
+MenuButton.displayName = 'Menu.Button'
 
-export default SidebarButton
+export default MenuButton

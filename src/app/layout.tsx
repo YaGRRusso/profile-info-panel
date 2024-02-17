@@ -1,5 +1,5 @@
 import Body from './components/Body'
-import Sidebar from './components/Sidebar'
+import Menu from './components/Menu'
 import { Providers } from './providers'
 
 import {
@@ -34,47 +34,43 @@ export default function RootLayout({
     <html lang="en">
       <Providers>
         <Body.Root className={montserrat.className}>
-          <Sidebar.Root>
-            <Sidebar.Group>
-              <Sidebar.Button
-                icon={<House weight="bold" />}
-                text="Home"
-                path=""
-              />
-              <Sidebar.Button
+          <Menu.Root>
+            <Menu.Group>
+              <Menu.Button icon={<House weight="bold" />} text="Home" path="" />
+              <Menu.Button
                 icon={<Brain weight="bold" />}
                 text="Skills"
                 path="/skills"
               />
-              <Sidebar.Button
+              <Menu.Button
                 icon={<Trophy weight="bold" />}
                 text="Projetos"
                 path="/projects"
               />
-              <Sidebar.Button
+              <Menu.Button
                 icon={<GraduationCap weight="bold" />}
                 text="Experiências"
                 path="/experiences"
               />
-              <Sidebar.Button
+              <Menu.Button
                 icon={<Certificate weight="bold" />}
                 text="Cursos"
                 path="/courses"
               />
-            </Sidebar.Group>
-            <Sidebar.Group>
-              <Sidebar.Button
+            </Menu.Group>
+            <Menu.Group>
+              <Menu.Button
                 icon={<User weight="bold" />}
                 text="Pessoal"
                 path="/personal"
               />
-              <Sidebar.Button
+              <Menu.Button
                 icon={<SignOut weight="bold" />}
                 text="Sair"
                 path="/leave"
               />
-            </Sidebar.Group>
-          </Sidebar.Root>
+            </Menu.Group>
+          </Menu.Root>
           <Body.Main>{children}</Body.Main>
         </Body.Root>
       </Providers>

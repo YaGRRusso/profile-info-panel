@@ -7,12 +7,15 @@ import { useQuery } from '@tanstack/react-query'
 import { clsx } from 'clsx'
 import { ButtonHTMLAttributes, FC } from 'react'
 
-export interface ApiInfoProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface ApiInfoProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  getHello?: GetHelloOutput
+}
 
-const ApiInfo: FC<ApiInfoProps> = ({ ...rest }) => {
+const ApiInfo: FC<ApiInfoProps> = ({ getHello, ...rest }) => {
   const { data, isFetching } = useQuery<GetHelloOutput>({
     queryKey: ['info'],
     queryFn: async () => await root.getHello(),
+    initialData: getHello,
   })
 
   return (

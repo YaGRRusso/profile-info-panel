@@ -1,4 +1,5 @@
 import Body from './components/Body'
+import SignButton from './components/Buttons/Sign'
 import Menu from './components/Menu'
 import { Providers } from './providers'
 
@@ -9,7 +10,6 @@ import {
   Trophy,
   GraduationCap,
   Certificate,
-  SignIn,
 } from '@phosphor-icons/react/dist/ssr'
 import { Montserrat } from 'next/font/google'
 import { ReactNode } from 'react'
@@ -61,11 +61,7 @@ export default function RootLayout({
                 text="Pessoal"
                 path="/personal"
               />
-              <Menu.Button
-                icon={<SignIn weight="bold" />}
-                text="Entrar"
-                path="/signin"
-              />
+              <SignButton />
             </Menu.Group>
           </Menu.Root>
           <Body.Main>{children}</Body.Main>

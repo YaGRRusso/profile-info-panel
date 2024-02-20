@@ -1,4 +1,8 @@
-import { ApiInfo, Logos, ThemeChanger } from '@/components'
+import ApiInfo from './components/Buttons/ApiInfo'
+import SessionInfo from './components/Buttons/SessionInfo'
+import ThemeChanger from './components/Buttons/ThemeChange'
+
+import { Logos } from '@/components'
 
 import { CircleNotch, GithubLogo } from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
@@ -9,6 +13,7 @@ export default async function Home() {
     <main className="flex h-full w-full flex-col items-center justify-center gap-16">
       <div className="flex items-center justify-center gap-4 text-xl text-gray-800 dark:text-gray-400 [&_*:disabled]:opacity-50">
         <ApiInfo />
+        <SessionInfo />
         <Link href="https://github.com/YaGRRusso" target="_blank">
           <GithubLogo />
         </Link>

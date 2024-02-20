@@ -1,26 +1,14 @@
-import { root } from '../services'
-
 import { ApiInfo, Logos, ThemeChanger } from '@/components'
 
 import { CircleNotch, GithubLogo } from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
-const getServerSideProps = async () => {
-  'use server'
-
-  return {
-    getHello: await root.getHello(),
-  }
-}
-
 export default async function Home() {
-  const { getHello } = await getServerSideProps()
-
   return (
     <main className="flex h-full w-full flex-col items-center justify-center gap-16">
       <div className="flex items-center justify-center gap-4 text-xl text-gray-800 dark:text-gray-400 [&_*:disabled]:opacity-50">
-        <ApiInfo getHello={getHello} />
+        <ApiInfo />
         <Link href="https://github.com/YaGRRusso" target="_blank">
           <GithubLogo />
         </Link>

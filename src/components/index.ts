@@ -6,3 +6,9 @@ export type * from './ThemeChanger'
 
 export { default as ApiInfo } from './ApiInfo'
 export type * from './ApiInfo'
+
+export { default as Button } from './Button'
+export type * from './Button'
+
+export { default as Emphasis } from './Emphasis'
+export type * from './Emphasis'

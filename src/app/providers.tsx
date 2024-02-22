@@ -1,6 +1,6 @@
 'use client'
 
-import { SessionContextProvider } from '@/contexts/session'
+import NextAuthProvider from '@/contexts/auth'
 import { ThemeContextProvider } from '@/contexts/theme'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -18,9 +18,9 @@ export const Providers = ({ children }: { children: ReactNode }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SessionContextProvider>
+      <NextAuthProvider>
         <ThemeContextProvider>{children}</ThemeContextProvider>
-      </SessionContextProvider>
+      </NextAuthProvider>
     </QueryClientProvider>
   )
 }

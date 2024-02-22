@@ -1,15 +1,14 @@
 'use client'
 
-import { useSessionContext } from '@/contexts/session'
-
 import { User } from '@phosphor-icons/react'
+import { useSession } from 'next-auth/react'
 import { ButtonHTMLAttributes, FC } from 'react'
 
 export interface SessionInfoProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const SessionInfo: FC<SessionInfoProps> = ({ ...rest }) => {
-  const { session } = useSessionContext()
+  const { data: session } = useSession()
 
   return (
     <button onClick={() => console.log(session)} {...rest}>

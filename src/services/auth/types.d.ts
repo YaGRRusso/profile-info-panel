@@ -1,10 +1,11 @@
+export type GetMeInput = string
 export type GetMeOutput = {
   id: string
   email: string
   name: string
   role: any
 }
-export type GetMeProps = () => Promise<GetMeOutput>
+export type GetMeProps = (data?: GetMeInput) => Promise<GetMeOutput>
 
 export type PostLoginInput = {
   email: string

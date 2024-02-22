@@ -1,14 +1,12 @@
 'use client'
 
 import { Button, Emphasis, TextInput, Form } from '@/components'
-import { useSessionContext } from '@/contexts/session'
-import auth from '@/services/auth'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Envelope, Eye, SignIn } from '@phosphor-icons/react'
-import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import { FC, FormHTMLAttributes, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -23,8 +21,7 @@ type FormSchemaProps = z.infer<typeof formSchema>
 export interface SignInFormProps extends FormHTMLAttributes<HTMLFormElement> {}
 
 const SignInForm: FC<SignInFormProps> = ({ ...rest }) => {
-  const { setSession } = useSessionContext()
-  const { push } = useRouter()
+  const { replace } = useRouter()
 
   const {
     watch,
@@ -41,15 +38,15 @@ const SignInForm: FC<SignInFormProps> = ({ ...rest }) => {
 
   const onSubmit = useCallback(
     async (data: FormSchemaProps) => {
-      const res = await auth.postLogin(data)
-      if (res) {
-        const me = await auth.getMe()
-        setSession(me)
-        Cookies.set('session', res)
-        push('/')
-      }
+      const res = await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      })
+
+      if (res?.ok) replace('/')
     },
-    [push, setSession],
+    [replace],
   )
 
   return (

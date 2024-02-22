@@ -2,29 +2,20 @@
 
 import Menu, { MenuButtonProps } from '../Menu'
 
-import { useSessionContext } from '@/contexts/session'
-
 import { SignIn, SignOut } from '@phosphor-icons/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import { FC } from 'react'
 
 export interface SignButtonProps extends Partial<MenuButtonProps> {}
 
 const SignButton: FC<SignButtonProps> = ({ ...rest }) => {
-  const { session, clearSession } = useSessionContext()
+  const { data: session } = useSession()
 
-  return session ? (
+  return (
     <Menu.Button
-      icon={<SignOut weight="bold" />}
-      text="Sair"
-      path="/signin"
-      onClick={() => clearSession()}
-      {...rest}
-    />
-  ) : (
-    <Menu.Button
-      icon={<SignIn weight="bold" />}
-      text="Entrar"
-      path="/signin"
+      icon={session ? <SignOut weight="bold" /> : <SignIn weight="bold" />}
+      text={session ? 'Sair' : 'Entrar'}
+      onClick={() => (session ? signOut() : signIn())}
       {...rest}
     />
   )

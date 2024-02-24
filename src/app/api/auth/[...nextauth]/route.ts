@@ -4,6 +4,7 @@ import NextAuth, { AuthOptions } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 
 const authOptions: AuthOptions = {
+  pages: { signIn: '/signin' },
   providers: [
     Credentials({
       name: 'credentials',
@@ -14,20 +15,28 @@ const authOptions: AuthOptions = {
       async authorize(credentials) {
         if (credentials) {
           const token = await auth.postLogin(credentials)
-          if (token) return await auth.getMe(token)
+          const user = await auth.getMe(token)
+          if (token && user) return { ...user, token }
         }
         return null
       },
     }),
   ],
-  pages: { signIn: '/signin' },
   callbacks: {
     async jwt({ token, user }) {
-      user && (token.user = user)
+      if (user) {
+        const { token: userToken, ...userInfos } = user
+        token.user = userInfos
+        token.token = userToken
+      }
       return token
     },
     async session({ session, token }) {
-      session = token.user as any
+      session = {
+        user: token.user,
+        expires: token.exp,
+        token: token.token,
+      } as any
       return session
     },
   },

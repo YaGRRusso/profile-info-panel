@@ -1,8 +1,8 @@
 import { GetHelloProps } from '..'
-import request from '../axios'
+import instance from '../axios'
 
 const getHello: GetHelloProps = async () =>
-  await request.get('/').then((res) => res.data)
+  await instance.get('/').then((res) => res.data)
 
 const root = {
   getHello,

@@ -1,16 +1,17 @@
 import axios from 'axios'
-import Cookies from 'js-cookie'
+import { getSession } from 'next-auth/react'
 
-const token = Cookies.get('session')
-
-const request = axios.create({
+const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     'Content-Type': 'application/json',
-    ...(token && {
-      Authorization: 'Bearer ' + token,
-    }),
   },
 })
 
-export default request
+instance.interceptors.request.use(async (config) => {
+  const session = await getSession()
+  if (session?.token) config.headers.Authorization = `Bearer ${session.token}`
+  return config
+})
+
+export default instance

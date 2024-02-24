@@ -1,9 +1,9 @@
 import { GetMeProps, PostLoginProps } from './types'
 
-import request from '../axios'
+import instance from '../axios'
 
 const getMe: GetMeProps = async (data) =>
-  await request
+  await instance
     .get('/auth/me', {
       ...(data && {
         headers: { Authorization: 'Bearer ' + data },
@@ -12,7 +12,7 @@ const getMe: GetMeProps = async (data) =>
     .then((res) => res.data)
 
 const postLogin: PostLoginProps = async (data) =>
-  await request.post('/auth', data).then((res) => res.data)
+  await instance.post('/auth', data).then((res) => res.data)
 
 const auth = {
   getMe,

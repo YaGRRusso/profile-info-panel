@@ -20,6 +20,7 @@ const config: Config = {
   moduleNameMapper: {
     '^@/app/(.*)$': ['<rootDir>/src/app/$1'],
     '^@/components': ['<rootDir>/src/components'],
+    '^@/configs/(.*)$': ['<rootDir>/src/configs/$1'],
     '^@/contexts/(.*)$': ['<rootDir>/src/contexts/$1'],
     '^@/helpers/(.*)$': ['<rootDir>/src/helpers/$1'],
     '^@/services/(.*)$': ['<rootDir>/src/services/$1'],

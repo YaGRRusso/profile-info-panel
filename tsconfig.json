@@ -17,6 +17,7 @@
     "paths": {
       "@/app/*": ["./src/app/*"],
       "@/components": ["./src/components"],
+      "@/configs/*": ["./src/configs/*"],
       "@/contexts/*": ["./src/contexts/*"],
       "@/helpers/*": ["./src/helpers/*"],
       "@/services/*": ["./src/services/*"],

@@ -1,9 +1,9 @@
-import { authOptions } from './api/auth/[...nextauth]/route'
 import ApiInfo from './components/Buttons/ApiInfo'
 import SessionInfo from './components/Buttons/SessionInfo'
 import ThemeChanger from './components/Buttons/ThemeChange'
 
 import { Logos } from '@/components'
+import options from '@/configs/auth'
 
 import { CircleNotch, GithubLogo } from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
@@ -12,7 +12,7 @@ import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth'
 
 export default async function Home() {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(options)
   if (!session) redirect('/signin')
 
   return (

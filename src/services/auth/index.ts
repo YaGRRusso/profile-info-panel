@@ -1,6 +1,6 @@
 import { GetMeProps, PostLoginProps } from './types'
 
-import instance from '../axios'
+import instance from '@/configs/axios'
 
 const getMe: GetMeProps = async (data) =>
   await instance

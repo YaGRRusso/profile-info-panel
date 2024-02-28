@@ -3,17 +3,14 @@ import SessionInfo from './components/Buttons/SessionInfo'
 import ThemeChanger from './components/Buttons/ThemeChange'
 
 import { Logos } from '@/components'
-import options from '@/configs/auth'
 
 import { CircleNotch, GithubLogo } from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
-import { getServerSession } from 'next-auth'
+import { useTranslations } from 'next-intl'
 
-export default async function Home() {
-  const session = await getServerSession(options)
-  if (!session) redirect('/signin')
+export default function Home() {
+  const tHome = useTranslations('home')
 
   return (
     <main className="flex h-full w-full flex-col items-center justify-center gap-16">
@@ -34,7 +31,7 @@ export default async function Home() {
       </div>
       <div className="flex animate-pulse items-center justify-center gap-4 text-center dark:text-gray-300">
         <CircleNotch className="animate-spin" />
-        <span>Em desenvolvimento...</span>
+        <span>{tHome('underDevelopment')}</span>
       </div>
     </main>
   )

@@ -1,0 +1,15 @@
+{
+  "sidebar": {
+    "home": "Home",
+    "skills": "Skills",
+    "projects": "Projetos",
+    "experiences": "Experiências",
+    "courses": "Cursos",
+    "profile": "Perfil",
+    "signOut": "Sair",
+    "signIn": "Entrar"
+  },
+  "home": {
+    "underDevelopment": "Em desenvolvimento..."
+  }
+}

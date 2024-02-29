@@ -12,3 +12,6 @@ export type * from './Form'
 
 export { default as TextInput } from './Inputs/Text'
 export type * from './Inputs/Text'
+
+export { default as MessagePage } from './MessagePage'
+export type * from './MessagePage'

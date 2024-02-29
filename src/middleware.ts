@@ -1,10 +1,8 @@
-import { locales } from '@/common/navigation'
+import { locales, publicRoutes } from '@/common/navigation'
 
 import { NextRequest } from 'next/server'
 import { withAuth } from 'next-auth/middleware'
 import createIntlMiddleware from 'next-intl/middleware'
-
-const publicPages = ['/', '/signin']
 
 const intlMiddleware = createIntlMiddleware({
   locales,
@@ -23,7 +21,7 @@ const authMiddleware = withAuth((req) => intlMiddleware(req), {
 
 export default function middleware(req: NextRequest) {
   const publicPathnameRegex = RegExp(
-    `^(/(${locales.join('|')}))?(${publicPages
+    `^(/(${locales.join('|')}))?(${publicRoutes
       .flatMap((p) => (p === '/' ? ['', '/'] : p))
       .join('|')})/?$`,
     'i',

@@ -3,8 +3,6 @@ import SignButton from './components/Buttons/Sign'
 import Menu from './components/Menu'
 import { Providers } from './providers'
 
-import options from '@/configs/auth'
-
 import {
   Brain,
   House,
@@ -14,8 +12,6 @@ import {
   Certificate,
 } from '@phosphor-icons/react/dist/ssr'
 import { Montserrat } from 'next/font/google'
-import { redirect } from 'next/navigation'
-import { getServerSession } from 'next-auth'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { ReactNode } from 'react'
@@ -29,9 +25,6 @@ export default async function RootLayout({
   children: ReactNode
   params: { locale: string }
 }>) {
-  const session = await getServerSession(options)
-  if (!session) redirect('/signin')
-
   const messages = await getMessages()
   const tSidebar = await getTranslations('sidebar')
 

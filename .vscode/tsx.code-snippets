@@ -37,7 +37,6 @@
       "export const metadata: Metadata = {",
       "  title: '${2}',",
       "  description: '${3}',",
-      "  icons: './favicon.ico',",
       "}",
       ""
     ],

@@ -1,4 +1,4 @@
-import options from '@/configs/auth'
+import options from '@/common/auth'
 
 import NextAuth from 'next-auth'
 

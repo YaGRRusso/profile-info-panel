@@ -16,8 +16,8 @@
     "baseUrl": "./",
     "paths": {
       "@/app/*": ["./src/app/*"],
+      "@/common/*": ["src/common/*"],
       "@/components": ["./src/components"],
-      "@/configs/*": ["./src/configs/*"],
       "@/contexts/*": ["./src/contexts/*"],
       "@/helpers/*": ["./src/helpers/*"],
       "@/services/*": ["./src/services/*"],

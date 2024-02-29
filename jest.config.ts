@@ -19,8 +19,8 @@ const config: Config = {
   moduleFileExtensions: ['js', 'json', 'ts'],
   moduleNameMapper: {
     '^@/app/(.*)$': ['<rootDir>/src/app/$1'],
+    '^@/common/(.*)$': ['<rootDir>/src/common/$1'],
     '^@/components': ['<rootDir>/src/components'],
-    '^@/configs/(.*)$': ['<rootDir>/src/configs/$1'],
     '^@/contexts/(.*)$': ['<rootDir>/src/contexts/$1'],
     '^@/helpers/(.*)$': ['<rootDir>/src/helpers/$1'],
     '^@/services/(.*)$': ['<rootDir>/src/services/$1'],

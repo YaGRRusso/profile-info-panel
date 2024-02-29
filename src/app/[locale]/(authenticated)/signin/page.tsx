@@ -22,5 +22,4 @@ export default async function SignIn() {
 export const metadata: Metadata = {
   title: 'Sign In',
   description: 'Management of profile infos',
-  icons: './favicon.ico',
 }

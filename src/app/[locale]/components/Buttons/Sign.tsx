@@ -1,6 +1,6 @@
 'use client'
 
-import Menu, { MenuButtonProps } from './Menu'
+import Menu, { MenuButtonProps } from '../Menu'
 
 import { SignIn, SignOut } from '@phosphor-icons/react'
 import { signIn, signOut, useSession } from 'next-auth/react'

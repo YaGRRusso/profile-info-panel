@@ -1,6 +1,6 @@
 import Body from './components/Body'
+import SignButton from './components/Buttons/Sign'
 import Menu from './components/Menu'
-import SignButton from './components/Sign'
 import { Providers } from './providers'
 
 import {

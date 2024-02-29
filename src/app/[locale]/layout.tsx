@@ -65,7 +65,7 @@ export default async function RootLayout({
                 <Menu.Button
                   icon={<User weight="bold" />}
                   text={tSidebar('profile')}
-                  path="/personal"
+                  path="/profile"
                 />
                 <SignButton />
               </Menu.Group>

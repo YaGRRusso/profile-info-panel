@@ -1,6 +1,6 @@
 'use client'
 
-import Menu, { MenuButtonProps } from '../Menu'
+import Menu, { MenuButtonProps } from './Menu'
 
 import { SignIn, SignOut } from '@phosphor-icons/react'
 import { signIn, signOut, useSession } from 'next-auth/react'
@@ -18,6 +18,7 @@ const SignButton: FC<SignButtonProps> = ({ ...rest }) => {
       icon={session ? <SignOut weight="bold" /> : <SignIn weight="bold" />}
       text={session ? tSidebar('signOut') : tSidebar('signIn')}
       onClick={() => (session ? signOut() : signIn())}
+      path="/signin"
       {...rest}
     />
   )

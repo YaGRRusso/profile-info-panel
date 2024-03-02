@@ -65,7 +65,7 @@ const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
           placeholder={tForm('writeHere')}
         />
       </Form.Group>
-      <Form.Group title="Senha" error={errors.password?.message}>
+      <Form.Group title="Password" error={errors.password?.message}>
         <TextInput
           icon={<Eye onClick={() => console.log('oi')} />}
           onChange={(ev) => setValue('password', ev.target.value)}

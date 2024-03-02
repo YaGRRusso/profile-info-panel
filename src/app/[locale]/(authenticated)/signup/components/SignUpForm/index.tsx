@@ -1,6 +1,7 @@
 'use client'
 
 import { Button, Emphasis, TextInput, Form } from '@/components'
+import { mask } from '@/helpers/mask'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -117,7 +118,7 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
             placeholder={tForm('writeHere')}
           />
         </Form.Group>
-        <Form.Group title="Senha" error={errors.password?.message}>
+        <Form.Group title="Password" error={errors.password?.message}>
           <TextInput
             icon={<Eye onClick={() => console.log('oi')} />}
             onChange={(ev) => setValue('password', ev.target.value)}
@@ -129,9 +130,14 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
         <Form.Group title="Phone" error={errors.phone?.message}>
           <TextInput
             icon={<Phone />}
-            onChange={(ev) => setValue('phone', ev.target.value)}
-            value={watch('phone')}
             placeholder={tForm('writeHere')}
+            value={mask('(00) 00000-0000', watch('phone')).value}
+            onChange={(ev) =>
+              setValue(
+                'phone',
+                mask('(00) 00000-0000', ev.target.value).unmaskedValue,
+              )
+            }
           />
         </Form.Group>
         <Form.Group title="Picture" error={errors.picture?.message}>
@@ -146,9 +152,14 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
         <Form.Group title="Postal" error={errors.postal?.message}>
           <TextInput
             icon={<Package />}
-            onChange={(ev) => setValue('postal', ev.target.value)}
-            value={watch('postal')}
             placeholder={tForm('writeHere')}
+            value={mask('00000-000', watch('postal')).value}
+            onChange={(ev) =>
+              setValue(
+                'postal',
+                mask('00000-000', ev.target.value).unmaskedValue,
+              )
+            }
           />
         </Form.Group>
         <Form.Group title="Presentation" error={errors.presentation?.message}>

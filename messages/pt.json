@@ -1,6 +1,7 @@
 {
   "form": {
-    "writeHere": "Digite aqui..."
+    "writeHere": "Digite aqui...",
+    "showPassword": "Visualizar senha"
   },
   "sidebar": {
     "home": "Home",

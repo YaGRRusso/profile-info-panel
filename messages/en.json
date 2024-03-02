@@ -1,6 +1,7 @@
 {
   "form": {
-    "writeHere": "Write here..."
+    "writeHere": "Write here...",
+    "showPassword": "Show password"
   },
   "sidebar": {
     "home": "Home",

@@ -17,9 +17,16 @@
   },
   "signIn": {
     "welcome": "Welcome!",
-    "provideYourInfos": "Provide your infos below",
-    "dontHaveAccount": "Don't have and account?",
+    "provideYourInfos": "Provide your login infos below",
+    "dontHaveAccount": "Don't have an account?",
     "signUp": "Create an account",
+    "signIn": "Sign in"
+  },
+  "signUp": {
+    "welcome": "Welcome!",
+    "provideYourInfos": "Provide your infos below",
+    "alreadyHaveAccount": "Already have an account?",
+    "signUp": "Sign up",
     "signIn": "Sign in"
   }
 }

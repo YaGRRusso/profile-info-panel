@@ -1,24 +1,24 @@
-import SignInForm from './components/SignInForm'
+import SignUpForm from './components/SignUpForm'
 
 import { FormContainer } from '@/components'
 
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
-export default async function SignIn() {
-  const tSignIn = await getTranslations('signIn')
+export default async function SignUp() {
+  const tSignUp = await getTranslations('signUp')
 
   return (
     <FormContainer
-      title={tSignIn('welcome')}
-      description={tSignIn('provideYourInfos')}
+      title={tSignUp('welcome')}
+      description={tSignUp('provideYourInfos')}
     >
-      <SignInForm />
+      <SignUpForm />
     </FormContainer>
   )
 }
 
 export const metadata: Metadata = {
-  title: 'Sign In',
+  title: 'Sign Up',
   description: 'Management of profile infos',
 }

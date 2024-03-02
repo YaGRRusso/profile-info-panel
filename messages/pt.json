@@ -21,5 +21,12 @@
     "dontHaveAccount": "Não tem uma conta?",
     "signUp": "Criar uma conta",
     "signIn": "Entrar"
+  },
+  "signUp": {
+    "welcome": "Bem-vindo!",
+    "provideYourInfos": "Forneça suas informações abaixo",
+    "alreadyHaveAccount": "Já tem uma conta?",
+    "signUp": "Cadastrar",
+    "signIn": "Entrar"
   }
 }

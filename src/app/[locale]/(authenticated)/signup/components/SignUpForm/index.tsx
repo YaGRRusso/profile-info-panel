@@ -4,6 +4,7 @@ import { Button, Emphasis, TextInput, Form } from '@/components'
 import CheckboxInput from '@/components/Inputs/Checkbox'
 import TextAreaInput from '@/components/Inputs/TextArea'
 import { mask } from '@/helpers/mask'
+import users from '@/services/users'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -18,6 +19,7 @@ import {
   User,
 } from '@phosphor-icons/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { FC, FormHTMLAttributes, useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -32,9 +34,9 @@ const formSchema = z
     password: z.string().min(1),
     nickname: z.string().min(1),
     phone: z.string().min(1),
-    picture: z.string().optional(),
+    picture: z.string(),
     postal: z.string().min(1),
-    presentation: z.string().optional(),
+    presentation: z.string(),
     address: z.string().min(1),
     title: z.string().min(1),
     passwordConfirm: z.string().min(1).optional(),
@@ -54,6 +56,7 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
   const [isShowingPassword, setIsShowingPassword] = useState(false)
   const tSignUp = useTranslations('signUp')
   const tForm = useTranslations('form')
+  const { replace } = useRouter()
 
   const {
     watch,
@@ -74,16 +77,22 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
       phone: '',
       picture: 'https://picsum.photos/60',
       postal: '',
-      presentation: '',
+      presentation: 'empty',
       title: '',
       ...defaultValues,
     },
   })
 
-  const onSubmit = useCallback(async (data: FormSchemaProps) => {
-    delete data.passwordConfirm
-    console.log(data)
-  }, [])
+  const onSubmit = useCallback(
+    async (data: FormSchemaProps) => {
+      delete data.passwordConfirm
+      data.birth = new Date(data.birth).toISOString()
+      const res = await users.postUser(data)
+
+      if (res) replace('/signin')
+    },
+    [replace],
+  )
 
   return (
     <Form.Root onSubmit={handleSubmit(onSubmit)} {...rest}>

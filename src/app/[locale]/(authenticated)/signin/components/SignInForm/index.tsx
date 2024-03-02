@@ -67,7 +67,7 @@ const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
       </Form.Group>
       <Form.Group title="Password" error={errors.password?.message}>
         <TextInput
-          icon={<Eye onClick={() => console.log('oi')} />}
+          icon={<Eye />}
           onChange={(ev) => setValue('password', ev.target.value)}
           value={watch('password')}
           type="password"

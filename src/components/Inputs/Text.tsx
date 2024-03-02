@@ -16,7 +16,7 @@ const TextInput: FC<TextInputProps> = ({ icon, className, ...rest }) => {
   }, [elementRef])
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    // eslint-disable-next-line
     <div
       className={clsx(
         'flex max-w-full cursor-text items-center gap-4 rounded border border-gray-700 bg-gray-950 px-4 py-2 outline-1 outline-sky-400 transition-all focus-within:outline',

@@ -7,6 +7,7 @@ import { Envelope, Eye, SignIn } from '@phosphor-icons/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { FC, FormHTMLAttributes, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -18,9 +19,13 @@ const formSchema = z.object({
 
 type FormSchemaProps = z.infer<typeof formSchema>
 
-export interface SignInFormProps extends FormHTMLAttributes<HTMLFormElement> {}
+export interface SignInFormProps extends FormHTMLAttributes<HTMLFormElement> {
+  defaultValues?: Partial<FormSchemaProps>
+}
 
-const SignInForm: FC<SignInFormProps> = ({ ...rest }) => {
+const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
+  const tSignIn = useTranslations('signIn')
+  const tForm = useTranslations('form')
   const { replace } = useRouter()
 
   const {
@@ -33,6 +38,7 @@ const SignInForm: FC<SignInFormProps> = ({ ...rest }) => {
     defaultValues: {
       email: '',
       password: '',
+      ...defaultValues,
     },
   })
 
@@ -56,7 +62,7 @@ const SignInForm: FC<SignInFormProps> = ({ ...rest }) => {
           icon={<Envelope />}
           onChange={(ev) => setValue('email', ev.target.value)}
           value={watch('email')}
-          placeholder="Digite seu email..."
+          placeholder={tForm('writeHere')}
         />
       </Form.Group>
       <Form.Group title="Senha" error={errors.password?.message}>
@@ -65,18 +71,18 @@ const SignInForm: FC<SignInFormProps> = ({ ...rest }) => {
           onChange={(ev) => setValue('password', ev.target.value)}
           value={watch('password')}
           type="password"
-          placeholder="Digite sua senha..."
+          placeholder={tForm('writeHere')}
         />
       </Form.Group>
-      <div className="flex items-end gap-1 text-sm text-gray-300">
-        <span>Não tem uma conta?</span>
+      <span className='text-gray-300" text-sm'>
+        {tSignIn('dontHaveAccount')}{' '}
         <Link href="/signup">
-          <Emphasis>Criar conta</Emphasis>
+          <Emphasis>{tSignIn('signUp')}</Emphasis>
         </Link>
-      </div>
+      </span>
       <Button type="submit" className="mt-2">
         <SignIn />
-        Entrar
+        {tSignIn('signIn')}
       </Button>
     </Form.Root>
   )

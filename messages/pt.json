@@ -1,4 +1,7 @@
 {
+  "form": {
+    "writeHere": "Digite aqui..."
+  },
   "sidebar": {
     "home": "Home",
     "skills": "Skills",
@@ -11,5 +14,12 @@
   },
   "home": {
     "underDevelopment": "Em desenvolvimento..."
+  },
+  "signIn": {
+    "welcome": "Bem-vindo!",
+    "provideYourInfos": "Forneça suas informações de login abaixo",
+    "dontHaveAccount": "Não tem uma conta?",
+    "signUp": "Criar uma conta",
+    "signIn": "Entrar"
   }
 }

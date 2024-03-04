@@ -15,3 +15,6 @@ export type * from './Inputs/Text'
 
 export { default as MessagePage } from './MessagePage'
 export type * from './MessagePage'
+
+export { default as FormContainer } from './FormContainer'
+export type * from './FormContainer'

@@ -1,4 +1,8 @@
 {
+  "form": {
+    "writeHere": "Write here...",
+    "showPassword": "Show password"
+  },
   "sidebar": {
     "home": "Home",
     "skills": "Skills",
@@ -11,5 +15,19 @@
   },
   "home": {
     "underDevelopment": "Under development..."
+  },
+  "signIn": {
+    "welcome": "Welcome!",
+    "provideYourInfos": "Provide your login infos below",
+    "dontHaveAccount": "Don't have an account?",
+    "signUp": "Create an account",
+    "signIn": "Sign in"
+  },
+  "signUp": {
+    "welcome": "Welcome!",
+    "provideYourInfos": "Provide your infos below",
+    "alreadyHaveAccount": "Already have an account?",
+    "signUp": "Sign up",
+    "signIn": "Sign in"
   }
 }

@@ -7,8 +7,12 @@ export interface CheckboxInputProps
 
 const CheckboxInput: FC<CheckboxInputProps> = ({ placeholder, ...rest }) => {
   return (
-    <div className="flex items-center gap-2 text-sm">
-      <input type="checkbox" {...rest} />
+    <div className="flex w-fit cursor-pointer items-center gap-2 text-sm">
+      <input
+        className="rounded outline-1 outline-sky-500"
+        type="checkbox"
+        {...rest}
+      />
       {placeholder && <span>{placeholder}</span>}
     </div>
   )

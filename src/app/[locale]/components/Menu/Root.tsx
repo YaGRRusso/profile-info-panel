@@ -16,10 +16,10 @@ const MenuRoot: FC<MenuRootProps> = ({ children, ...rest }) => {
         className="[&_*]:ellipsis sticky top-0 flex h-screen w-64 flex-col gap-2 border-r border-black bg-gray-900 p-4 text-gray-50 max-lg:hidden"
         {...rest}
       >
-        <div className="mb-4 mt-8 flex items-center justify-center gap-2 border-b border-sky-400 border-opacity-15 px-2 pb-6 text-3xl font-medium">
+        <div className="mb-4 mt-8 flex items-center justify-center gap-2 border-b border-sky-500 border-opacity-15 px-2 pb-6 text-3xl font-medium">
           <Image src="/yr-branco.svg" alt="logo" width={24} height={24} />
           <span>
-            <strong className="font-semibold text-sky-400">Yago</strong>Russo
+            <strong className="font-semibold text-sky-500">Yago</strong>Russo
           </span>
         </div>
         <div className="flex flex-1 flex-col items-stretch justify-between gap-4">
@@ -34,7 +34,7 @@ const MenuRoot: FC<MenuRootProps> = ({ children, ...rest }) => {
         <div className="m-4 flex items-center justify-center gap-2 text-3xl font-medium">
           <Image src="/yr-branco.svg" alt="logo" width={24} height={24} />
           <span>
-            <strong className="font-semibold text-sky-400">Yago</strong>Russo
+            <strong className="font-semibold text-sky-500">Yago</strong>Russo
           </span>
         </div>
         <button className="text-3xl" onClick={() => setIsExpanded(true)}>
@@ -47,13 +47,13 @@ const MenuRoot: FC<MenuRootProps> = ({ children, ...rest }) => {
         aria-expanded={isExpanded}
       >
         <div
-          className="[&_*]:ellipsis flex w-full justify-between gap-2 border-b border-sky-400 border-opacity-15 p-4"
+          className="[&_*]:ellipsis flex w-full justify-between gap-2 border-b border-sky-500 border-opacity-15 p-4"
           {...rest}
         >
           <div className="m-4 flex items-center justify-center gap-2 text-3xl font-medium">
             <Image src="/yr-branco.svg" alt="logo" width={24} height={24} />
             <span>
-              <strong className="font-semibold text-sky-400">Yago</strong>Russo
+              <strong className="font-semibold text-sky-500">Yago</strong>Russo
             </span>
           </div>
           <button className="text-3xl" onClick={() => setIsExpanded(false)}>

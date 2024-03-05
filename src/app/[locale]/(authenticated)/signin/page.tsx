@@ -11,6 +11,7 @@ export default async function SignIn() {
 
   return (
     <FormContainer
+      size="sm"
       icon={<SignInIcon />}
       title={tSignIn('welcome')}
       description={tSignIn('provideYourInfos')}

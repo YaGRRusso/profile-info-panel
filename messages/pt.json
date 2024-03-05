@@ -11,7 +11,8 @@
     "courses": "Cursos",
     "profile": "Perfil",
     "signOut": "Sair",
-    "signIn": "Entrar"
+    "signIn": "Entrar",
+    "signUp": "Cadastrar"
   },
   "home": {
     "underDevelopment": "Em desenvolvimento..."

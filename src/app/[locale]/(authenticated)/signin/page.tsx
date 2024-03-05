@@ -2,6 +2,7 @@ import SignInForm from './components/SignInForm'
 
 import { FormContainer } from '@/components'
 
+import { SignIn as SignInIcon } from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
@@ -10,6 +11,7 @@ export default async function SignIn() {
 
   return (
     <FormContainer
+      icon={<SignInIcon />}
       title={tSignIn('welcome')}
       description={tSignIn('provideYourInfos')}
     >

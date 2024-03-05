@@ -2,6 +2,7 @@ import SignUpForm from './components/SignUpForm'
 
 import { FormContainer } from '@/components'
 
+import { UserPlus } from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
@@ -10,6 +11,7 @@ export default async function SignUp() {
 
   return (
     <FormContainer
+      icon={<UserPlus />}
       title={tSignUp('welcome')}
       description={tSignUp('provideYourInfos')}
     >

@@ -12,6 +12,7 @@
   },
   "scripts": {
     "dev": "next dev",
+    "dev:turbo": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "eslint \"{src}/**/*.tsx\" --fix",

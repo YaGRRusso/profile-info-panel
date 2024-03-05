@@ -28,7 +28,7 @@ const TextAreaInput: FC<TextAreaInputProps> = ({
     // eslint-disable-next-line
     <div
       className={clsx(
-        'flex max-w-full cursor-text gap-4 rounded border border-gray-700 bg-gray-950 px-4 py-2 outline-1 outline-sky-400 transition-all focus-within:outline',
+        'flex max-w-full cursor-text gap-4 rounded border border-gray-800 px-4 py-2 outline-1 outline-sky-500 backdrop-brightness-90 transition-all focus-within:outline',
         className,
       )}
       ref={elementRef}

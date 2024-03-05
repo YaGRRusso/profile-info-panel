@@ -21,7 +21,7 @@ const MenuButton: FC<MenuButtonProps> = ({ icon, text, path, ...rest }) => {
 
   return (
     <Link
-      className='flex items-center gap-2 rounded-r-lg border-sky-400 px-4 py-2 font-medium transition-all hover:border-l-4 hover:text-sky-400 aria-[current="true"]:border-l-4 aria-[current="true"]:bg-sky-400 aria-[current="true"]:bg-opacity-15 aria-[current="true"]:font-semibold aria-[current="true"]:text-sky-400'
+      className='flex items-center gap-2 rounded-r-lg border-sky-500 px-4 py-2 font-medium transition-all hover:border-l-4 hover:text-sky-500 aria-[current="true"]:border-l-4 aria-[current="true"]:bg-sky-500 aria-[current="true"]:bg-opacity-15 aria-[current="true"]:font-semibold aria-[current="true"]:text-sky-500'
       aria-current={regex.test(pathname)}
       href={path ?? '/'}
       {...rest}

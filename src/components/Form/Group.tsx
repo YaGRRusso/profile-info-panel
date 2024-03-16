@@ -1,36 +1,18 @@
-import { Warning } from '@phosphor-icons/react/dist/ssr'
-import { clsx } from 'clsx'
-import { FC, LabelHTMLAttributes } from 'react'
+import { cn } from '@/lib/utils'
 
-export interface FormGroupProps extends LabelHTMLAttributes<HTMLLabelElement> {
-  title?: string
-  error?: string
-}
+import { HtmlHTMLAttributes, forwardRef } from 'react'
 
-const FormGroup: FC<FormGroupProps> = ({
-  title,
-  error,
-  className,
-  children,
-  ...rest
-}) => {
-  return (
-    <label className={clsx('flex flex-col gap-2', className)} {...rest}>
-      {title && (
-        <span className="text-xs font-semibold uppercase text-gray-400">
-          {title}
-        </span>
-      )}
-      {children}
-      {error && (
-        <div className="flex items-center gap-1 text-xs text-red-500">
-          <Warning />
-          <span>{error}</span>
-        </div>
-      )}
-    </label>
-  )
-}
+export interface FormGroupProps extends HtmlHTMLAttributes<HTMLDivElement> {}
+
+const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>(
+  ({ className, children, ...rest }, ref) => {
+    return (
+      <div ref={ref} className={cn('flex flex-col gap-2', className)} {...rest}>
+        {children}
+      </div>
+    )
+  },
+)
 
 FormGroup.displayName = 'FormGroup'
 

@@ -1,16 +1,22 @@
-import { clsx } from 'clsx'
-import { FC, FormHTMLAttributes } from 'react'
+import { cn } from '@/lib/utils'
+
+import { FormHTMLAttributes, forwardRef } from 'react'
 
 export interface FormRootProps extends FormHTMLAttributes<HTMLFormElement> {}
 
-const FormRoot: FC<FormRootProps> = ({ className, children, ...rest }) => {
-  return (
-    <form className={clsx('flex w-full flex-col gap-4', className)} {...rest}>
-      {children}
-    </form>
-  )
-}
-
+const FormRoot = forwardRef<HTMLFormElement, FormRootProps>(
+  ({ className, children, ...rest }, ref) => {
+    return (
+      <form
+        ref={ref}
+        className={cn('flex w-full flex-col gap-4', className)}
+        {...rest}
+      >
+        {children}
+      </form>
+    )
+  },
+)
 FormRoot.displayName = 'FormRoot'
 
 export default FormRoot

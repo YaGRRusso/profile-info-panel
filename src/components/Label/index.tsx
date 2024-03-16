@@ -14,11 +14,11 @@ export type LabelProps = ComponentPropsWithoutRef<typeof LabelPrimitiveRoot> &
   VariantProps<typeof labelVariants>
 
 const Label = forwardRef<ElementRef<typeof LabelPrimitiveRoot>, LabelProps>(
-  ({ className, ...props }, ref) => (
+  ({ className, ...rest }, ref) => (
     <LabelPrimitiveRoot
       ref={ref}
       className={cn(labelVariants(), className)}
-      {...props}
+      {...rest}
     />
   ),
 )

@@ -5,11 +5,11 @@ import { TdHTMLAttributes, forwardRef } from 'react'
 export const TableCell = forwardRef<
   HTMLTableCellElement,
   TdHTMLAttributes<HTMLTableCellElement>
->(({ className, ...props }, ref) => (
+>(({ className, ...rest }, ref) => (
   <td
     ref={ref}
     className={cn('p-4 align-middle [&:has([role=checkbox])]:pr-0', className)}
-    {...props}
+    {...rest}
   />
 ))
 TableCell.displayName = 'TableCell'

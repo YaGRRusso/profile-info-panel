@@ -19,13 +19,13 @@ export interface FormMessageProps
     VariantProps<typeof messageVariants> {}
 
 const FormMessage = forwardRef<HTMLParagraphElement, FormMessageProps>(
-  ({ status = 'error', className, children, ...props }, ref) => {
+  ({ status = 'error', className, children, ...rest }, ref) => {
     return (
       children && (
         <p
           ref={ref}
           className={cn(messageVariants({ status, className }))}
-          {...props}
+          {...rest}
         >
           {children}
         </p>

@@ -14,7 +14,7 @@ export interface CheckboxProps
 const Checkbox = forwardRef<
   ElementRef<typeof CheckboxPrimitive.Root>,
   CheckboxProps
->(({ placeholder, className, ...props }, ref) => (
+>(({ placeholder, className, ...rest }, ref) => (
   <label className="flex items-center gap-2">
     <CheckboxPrimitive.Root
       ref={ref}
@@ -22,7 +22,7 @@ const Checkbox = forwardRef<
         'interactive h-4 w-4 rounded border bg-white focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-gray-900 data-[state=checked]:text-gray-50 dark:border-gray-800 dark:bg-gray-950 dark:data-[state=checked]:bg-gray-50 dark:data-[state=checked]:text-gray-900',
         className,
       )}
-      {...props}
+      {...rest}
     >
       <CheckboxPrimitive.Indicator
         className={cn('flex items-center justify-center text-current')}

@@ -6,7 +6,7 @@ export interface TextareaProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, ...rest }, ref) => {
     return (
       <textarea
         className={cn(
@@ -14,7 +14,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           className,
         )}
         ref={ref}
-        {...props}
+        {...rest}
       />
     )
   },

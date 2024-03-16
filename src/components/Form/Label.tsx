@@ -9,8 +9,8 @@ export interface FormLabelProps
 const FormLabel = forwardRef<
   ElementRef<typeof LabelPrimitiveRoot>,
   FormLabelProps
->(({ ...props }, ref) => {
-  return <Label ref={ref} {...props} />
+>(({ ...rest }, ref) => {
+  return <Label ref={ref} {...rest} />
 })
 
 FormLabel.displayName = 'FormLabel'

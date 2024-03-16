@@ -5,11 +5,11 @@ import { HTMLAttributes, forwardRef } from 'react'
 export const TableBody = forwardRef<
   HTMLTableSectionElement,
   HTMLAttributes<HTMLTableSectionElement>
->(({ className, ...props }, ref) => (
+>(({ className, ...rest }, ref) => (
   <tbody
     ref={ref}
     className={cn('[&_tr:last-child]:border-0', className)}
-    {...props}
+    {...rest}
   />
 ))
 TableBody.displayName = 'TableBody'

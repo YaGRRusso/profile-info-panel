@@ -25,6 +25,9 @@ export type * from './Checkbox'
 export { default as Textarea } from './Textarea'
 export type * from './Textarea'
 
+export { default as IconText } from './IconText'
+export type * from './IconText'
+
 export { default as ThemeChanger } from './ThemeChanger'
 export type * from './ThemeChanger'
 

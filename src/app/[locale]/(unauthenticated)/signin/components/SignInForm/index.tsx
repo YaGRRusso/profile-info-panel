@@ -1,9 +1,9 @@
 'use client'
 
-import { Button, Emphasis, TextInput, Form } from '@/components'
+import { Button, Form, Input } from '@/components'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Envelope, Eye, SignIn } from '@phosphor-icons/react'
+import { SignIn } from '@phosphor-icons/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
@@ -57,17 +57,15 @@ const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
 
   return (
     <Form.Root onSubmit={handleSubmit(onSubmit)} {...rest}>
-      <Form.Group title="Email" error={errors.email?.message}>
-        <TextInput
-          icon={<Envelope />}
+      <Form.Group>
+        <Input
           onChange={(ev) => setValue('email', ev.target.value)}
           value={watch('email')}
           placeholder={tForm('writeHere')}
         />
       </Form.Group>
-      <Form.Group title="Password" error={errors.password?.message}>
-        <TextInput
-          icon={<Eye />}
+      <Form.Group>
+        <Input
           onChange={(ev) => setValue('password', ev.target.value)}
           value={watch('password')}
           type="password"
@@ -76,9 +74,7 @@ const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
       </Form.Group>
       <span className='text-gray-300" text-sm'>
         {tSignIn('dontHaveAccount')}{' '}
-        <Link href="/signup">
-          <Emphasis>{tSignIn('signUp')}</Emphasis>
-        </Link>
+        <Link href="/signup">{tSignIn('signUp')}</Link>
       </span>
       <Button type="submit" className="mt-2">
         <SignIn />

@@ -1,7 +1,7 @@
-import Body from './components/Body'
-import SignButton from './components/Buttons/Sign'
-import Menu from './components/Menu'
-import { Providers } from './providers'
+import Body from '../components/Body'
+import SignButton from '../components/Buttons/Sign'
+import Menu from '../components/Menu'
+import { Providers } from '../providers'
 
 import { cn } from '@/lib/utils'
 

@@ -5,7 +5,7 @@ import { mask } from '@/helpers/mask'
 import users from '@/services/users'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { User } from '@phosphor-icons/react'
+import { UserPlus } from '@phosphor-icons/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -86,29 +86,36 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
     <Form.Root onSubmit={handleSubmit(onSubmit)} {...rest}>
       <div className="grid grid-cols-[repeat(auto-fit,_minmax(180px,1fr))] gap-x-6 gap-y-4">
         <Form.Group className="col-span-full">
+          <Form.Label>Name</Form.Label>
           <Input
             onChange={(ev) => setValue('name', ev.target.value)}
             value={watch('name')}
-            placeholder={tForm('writeHere')}
+            placeholder="John Doe"
           />
+          <Form.Message>{errors.name?.message}</Form.Message>
         </Form.Group>
         <Form.Group>
+          <Form.Label>Nickname</Form.Label>
           <Input
             onChange={(ev) => setValue('nickname', ev.target.value)}
             value={watch('nickname')}
-            placeholder={tForm('writeHere')}
+            placeholder="JohnDoe123"
           />
+          <Form.Message>{errors.nickname?.message}</Form.Message>
         </Form.Group>
         <Form.Group>
+          <Form.Label>Title</Form.Label>
           <Input
             onChange={(ev) => setValue('title', ev.target.value)}
             value={watch('title')}
-            placeholder={tForm('writeHere')}
+            placeholder="Full Stack Developer"
           />
+          <Form.Message>{errors.title?.message}</Form.Message>
         </Form.Group>
         <Form.Group>
+          <Form.Label>Phone</Form.Label>
           <Input
-            placeholder={tForm('writeHere')}
+            placeholder="(00) 00000-0000"
             value={mask('(00) 00000-0000', watch('phone')).value}
             onChange={(ev) =>
               setValue(
@@ -117,44 +124,54 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
               )
             }
           />
+          <Form.Message>{errors.phone?.message}</Form.Message>
         </Form.Group>
         <Form.Group>
+          <Form.Label>Birth</Form.Label>
           <Input
             onChange={(ev) => setValue('birth', ev.target.value)}
             value={watch('birth')}
-            placeholder={tForm('writeHere')}
             type="date"
           />
+          <Form.Message>{errors.birth?.message}</Form.Message>
         </Form.Group>
         <Form.Group className="col-span-full">
+          <Form.Label>Description</Form.Label>
           <Input
             onChange={(ev) => setValue('description', ev.target.value)}
             value={watch('description')}
-            placeholder={tForm('writeHere')}
+            placeholder="Description about you"
           />
+          <Form.Message>{errors.description?.message}</Form.Message>
         </Form.Group>
         <Form.Group className="col-span-full">
+          <Form.Label>Email</Form.Label>
           <Input
             onChange={(ev) => setValue('email', ev.target.value)}
             value={watch('email')}
-            placeholder={tForm('writeHere')}
+            placeholder="johndoe@email.com"
           />
+          <Form.Message>{errors.email?.message}</Form.Message>
         </Form.Group>
         <Form.Group>
+          <Form.Label>Password</Form.Label>
           <Input
             onChange={(ev) => setValue('password', ev.target.value)}
             value={watch('password')}
             type={isShowingPassword ? 'text' : 'password'}
-            placeholder={tForm('writeHere')}
+            placeholder="Strong password here"
           />
+          <Form.Message>{errors.password?.message}</Form.Message>
         </Form.Group>
         <Form.Group>
+          <Form.Label>Password Confirm</Form.Label>
           <Input
             onChange={(ev) => setValue('passwordConfirm', ev.target.value)}
             value={watch('passwordConfirm')}
             type={isShowingPassword ? 'text' : 'password'}
-            placeholder={tForm('writeHere')}
+            placeholder="Strong password here"
           />
+          <Form.Message>{errors.passwordConfirm?.message}</Form.Message>
         </Form.Group>
         <Form.Group className="col-span-full">
           <Checkbox
@@ -164,15 +181,18 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
           />
         </Form.Group>
         <Form.Group>
+          <Form.Label>Address</Form.Label>
           <Input
             onChange={(ev) => setValue('address', ev.target.value)}
             value={watch('address')}
-            placeholder={tForm('writeHere')}
+            placeholder="Brazil, SP"
           />
+          <Form.Message>{errors.address?.message}</Form.Message>
         </Form.Group>
         <Form.Group>
+          <Form.Label>Postal Code</Form.Label>
           <Input
-            placeholder={tForm('writeHere')}
+            placeholder="00000-000"
             value={mask('00000-000', watch('postal')).value}
             onChange={(ev) =>
               setValue(
@@ -181,14 +201,17 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
               )
             }
           />
+          <Form.Message>{errors.postal?.message}</Form.Message>
         </Form.Group>
       </div>
       <span className='text-gray-300" text-sm'>
         {tSignUp('alreadyHaveAccount')}{' '}
-        <Link href="/signup">{tSignUp('signIn')}</Link>
+        <Link className="emphasis" href="/signin">
+          {tSignUp('signIn')}
+        </Link>
       </span>
       <Button type="submit" className="mt-2">
-        <User />
+        <UserPlus />
         {tSignUp('signUp')}
       </Button>
     </Form.Root>

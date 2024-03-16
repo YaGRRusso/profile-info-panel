@@ -1,5 +1,7 @@
 import SignInForm from './components/SignInForm'
 
+import { TitleDesc } from '@/components'
+
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
@@ -7,13 +9,13 @@ export default async function SignIn() {
   const tSignIn = await getTranslations('signIn')
 
   return (
-    // <FormContainer
-    //   size="sm"
-    //   icon={<SignInIcon />}
-    //   title={tSignIn('welcome')}
-    //   description={tSignIn('provideYourInfos')}
-    // >
-    <SignInForm />
+    <div className="flex w-full flex-col gap-4">
+      <TitleDesc
+        description={tSignIn('provideYourInfos')}
+        title={tSignIn('welcome')}
+      />
+      <SignInForm />
+    </div>
   )
 }
 

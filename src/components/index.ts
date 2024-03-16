@@ -25,5 +25,8 @@ export type * from './Checkbox'
 export { default as Textarea } from './Textarea'
 export type * from './Textarea'
 
+export { default as ThemeChanger } from './ThemeChanger'
+export type * from './ThemeChanger'
+
 export { default as TitleDesc } from './TitleDesc'
 export type * from './TitleDesc'

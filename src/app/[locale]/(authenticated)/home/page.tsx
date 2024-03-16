@@ -1,9 +1,8 @@
 import ApiInfo from './components/Buttons/ApiInfo'
 import SessionInfo from './components/Buttons/SessionInfo'
-import ThemeChanger from './components/Buttons/ThemeChange'
 
 import { Link } from '@/common/navigation'
-import { Logos } from '@/components'
+import { Logos, ThemeChanger } from '@/components'
 
 import {
   CircleNotch,

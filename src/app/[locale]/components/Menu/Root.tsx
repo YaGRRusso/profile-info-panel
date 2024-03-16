@@ -13,10 +13,10 @@ const MenuRoot: FC<MenuRootProps> = ({ children, ...rest }) => {
   return (
     <>
       <aside
-        className="[&_*]:ellipsis sticky top-0 flex h-screen w-64 flex-col gap-2 border-r border-black bg-gray-900 p-4 text-gray-50 max-lg:hidden"
+        className="[&_*]:ellipsis sticky top-0 flex h-screen w-64 flex-col gap-2 border-r border-gray-900 bg-gray-900 p-4 text-gray-50 dark:bg-gray-950 max-lg:hidden"
         {...rest}
       >
-        <div className="mb-4 mt-8 flex items-center justify-center gap-2 border-b border-sky-500 border-opacity-15 px-2 pb-6 text-3xl font-medium">
+        <div className="mb-4 mt-8 flex items-center justify-center gap-2 border-b border-gray-800 px-2 pb-6 text-3xl font-medium dark:border-gray-900">
           <Image src="/yr-branco.svg" alt="logo" width={24} height={24} />
           <span>
             <strong className="font-semibold text-sky-500">Yago</strong>Russo
@@ -28,7 +28,7 @@ const MenuRoot: FC<MenuRootProps> = ({ children, ...rest }) => {
       </aside>
 
       <header
-        className="[&_*]:ellipsis hidden w-full justify-between gap-2 bg-gray-900 p-4 text-gray-50 max-lg:flex"
+        className="[&_*]:ellipsis hidden w-full justify-between gap-2 bg-gray-900 p-4 text-gray-50 dark:bg-gray-950 max-lg:flex"
         {...rest}
       >
         <div className="m-4 flex items-center justify-center gap-2 text-3xl font-medium">
@@ -47,7 +47,7 @@ const MenuRoot: FC<MenuRootProps> = ({ children, ...rest }) => {
         aria-expanded={isExpanded}
       >
         <div
-          className="[&_*]:ellipsis flex w-full justify-between gap-2 border-b border-sky-500 border-opacity-15 p-4"
+          className="[&_*]:ellipsis flex w-full justify-between gap-2 border-b border-gray-800 p-4 dark:border-gray-900"
           {...rest}
         >
           <div className="m-4 flex items-center justify-center gap-2 text-3xl font-medium">

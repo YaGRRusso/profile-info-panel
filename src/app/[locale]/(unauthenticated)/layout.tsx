@@ -26,7 +26,11 @@ export default async function RootLayout({
           <Body.Root
             className={cn('font-sans antialiased', montserrat.variable)}
           >
-            <Body.Main>{children}</Body.Main>
+            <Body.Main>
+              <main className="mx-auto flex max-w-xl flex-1 flex-col items-center justify-center gap-8 py-12">
+                {children}
+              </main>
+            </Body.Main>
           </Body.Root>
         </NextIntlClientProvider>
       </Providers>

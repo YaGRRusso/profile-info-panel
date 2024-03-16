@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Checkbox, Form, Input } from '@/components'
+import { Button, Checkbox, Form, Input, Textarea } from '@/components'
 import { mask } from '@/helpers/mask'
 import users from '@/services/users'
 
@@ -137,7 +137,7 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
         </Form.Group>
         <Form.Group className="col-span-full">
           <Form.Label>Description</Form.Label>
-          <Input
+          <Textarea
             onChange={(ev) => setValue('description', ev.target.value)}
             value={watch('description')}
             placeholder="Description about you"

@@ -1,7 +1,9 @@
-import Body from './components/Body'
-import SignButton from './components/Buttons/Sign'
-import Menu from './components/Menu'
-import { Providers } from './providers'
+import Body from '../components/Body'
+import SignButton from '../components/Buttons/Sign'
+import Menu from '../components/Menu'
+import { Providers } from '../providers'
+
+import { cn } from '@/lib/utils'
 
 import {
   Brain,
@@ -16,7 +18,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { ReactNode } from 'react'
 
-const montserrat = Montserrat({ subsets: ['latin'] })
+const montserrat = Montserrat({ subsets: ['latin'], variable: '--font-sans' })
 
 export default async function RootLayout({
   children,
@@ -32,7 +34,9 @@ export default async function RootLayout({
     <html lang={params.locale}>
       <Providers>
         <NextIntlClientProvider locale={params.locale} messages={messages}>
-          <Body.Root className={montserrat.className}>
+          <Body.Root
+            className={cn('font-sans antialiased', montserrat.variable)}
+          >
             <Menu.Root>
               <Menu.Group>
                 <Menu.Button

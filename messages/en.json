@@ -19,14 +19,14 @@
   },
   "signIn": {
     "welcome": "Welcome!",
-    "provideYourInfos": "Provide your login infos below",
+    "provideYourInfos": "Provide your credentials below",
     "dontHaveAccount": "Don't have an account?",
     "signUp": "Create an account",
     "signIn": "Sign in"
   },
   "signUp": {
-    "welcome": "Welcome!",
-    "provideYourInfos": "Provide your infos below",
+    "welcome": "Sign Up!",
+    "provideYourInfos": "Provide your infos below to create and account",
     "alreadyHaveAccount": "Already have an account?",
     "signUp": "Sign up",
     "signIn": "Sign in"

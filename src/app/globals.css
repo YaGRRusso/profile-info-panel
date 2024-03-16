@@ -3,7 +3,15 @@
 @tailwind utilities;
 
 @layer utilities {
+  .interactive {
+    @apply focus-visible:ring-1 focus-visible:ring-sky-600 dark:focus-visible:ring-sky-400;
+  }
+
   .ellipsis {
     @apply max-w-full overflow-hidden text-ellipsis whitespace-nowrap;
+  }
+
+  .emphasis {
+    @apply hover:underline underline-offset-1
   }
 }

@@ -1,7 +1,7 @@
 // https://code.visualstudio.com/docs/editor/userdefinedsnippets
-// DiretórioArquivo: ${TM_DIRECTORY/(^.+\\/(.*)$)/${2:/pascalcase}/}${TM_FILENAME/[.].*/${2:/pascalcase}/}
-// Diretório: ${TM_DIRECTORY/(^.+\\/(.*)$)/${2:/pascalcase}/}
-// Arquivo: ${TM_FILENAME/[.].*/${2:/pascalcase}/}
+// DiretórioArquivo: ${TM_DIRECTORY/.*[\\/\\\\](.*)/${1:/pascalcase}/}${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}
+// Diretório: ${TM_DIRECTORY/.*[\\/\\\\](.*)/${1:/pascalcase}/}
+// Arquivo: ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}
 // Variáveis: ${1}, ${1:default}, ${1|one,two,three|}...
 
 {
@@ -9,17 +9,24 @@
     "scope": "typescriptreact",
     "prefix": "reactcomp",
     "body": [
-      "import { FC, HTMLAttributes } from 'react'",
+      "import { cn } from '@/lib/utils'",
       "",
-      "export interface ${1:${1:${TM_DIRECTORY/(^.+\\/(.*)$)/${2:/pascalcase}/}}}Props extends HTMLAttributes<HTMLDivElement> {}",
+      "import { HTMLAttributes, forwardRef } from 'react'",
       "",
-      "const ${1:${TM_DIRECTORY/(^.+\\/(.*)$)/${2:/pascalcase}/}}: FC<${1:${TM_DIRECTORY/(^.+\\/(.*)$)/${2:/pascalcase}/}}Props> = ({ children, ...rest }) => {",
-      "  return <div {...rest}>{children}</div>",
-      "}",
+      "export interface ${1:${TM_DIRECTORY/.*[\\/\\\\](.*)/${1:/pascalcase}/}}Props extends HTMLAttributes<HTMLDivElement> {}",
       "",
-      "${1:${TM_DIRECTORY/(^.+\\/(.*)$)/${2:/pascalcase}/}}.displayName = '${1:${TM_DIRECTORY/(^.+\\/(.*)$)/${2:/pascalcase}/}}'",
+      "const ${1:${TM_DIRECTORY/.*[\\/\\\\](.*)/${1:/pascalcase}/}} = forwardRef<HTMLDivElement, ${1:${TM_DIRECTORY/.*[\\/\\\\](.*)/${1:/pascalcase}/}}Props>(",
+      "  ({ className, children, ...rest }, ref) => {",
+      "    return (",
+      "      <div className={cn('', className)} ref={ref} {...rest}>",
+      "        {children}",
+      "      </div>",
+      "    )",
+      "  },",
+      ")",
+      "${1:${TM_DIRECTORY/.*[\\/\\\\](.*)/${1:/pascalcase}/}}.displayName = '${1:${TM_DIRECTORY/.*[\\/\\\\](.*)/${1:/pascalcase}/}}'",
       "",
-      "export default ${1:${TM_DIRECTORY/(^.+\\/(.*)$)/${2:/pascalcase}/}}",
+      "export default ${1:${TM_DIRECTORY/.*[\\/\\\\](.*)/${1:/pascalcase}/}}",
       ""
     ],
     "description": "Create ReactJS component with all is necessary"

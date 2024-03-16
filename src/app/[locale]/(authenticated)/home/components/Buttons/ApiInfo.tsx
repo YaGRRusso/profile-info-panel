@@ -1,10 +1,10 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import { GetHelloOutput, root } from '@/services'
 
 import { CircleNotch, Question } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
-import { clsx } from 'clsx'
 import { ButtonHTMLAttributes, FC } from 'react'
 
 export interface ApiInfoProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
@@ -18,7 +18,7 @@ const ApiInfo: FC<ApiInfoProps> = ({ ...rest }) => {
   return (
     <button
       onClick={() => console.log(data)}
-      className={clsx(isFetching && 'pointer-events-none opacity-15')}
+      className={cn(isFetching && 'pointer-events-none opacity-15')}
       {...rest}
     >
       {isFetching ? <CircleNotch className="animate-spin" /> : <Question />}

@@ -1,8 +1,7 @@
 import SignUpForm from './components/SignUpForm'
 
-import { FormContainer } from '@/components'
+import { TitleDesc } from '@/components'
 
-import { UserPlus } from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
@@ -10,13 +9,13 @@ export default async function SignUp() {
   const tSignUp = await getTranslations('signUp')
 
   return (
-    <FormContainer
-      icon={<UserPlus />}
-      title={tSignUp('welcome')}
-      description={tSignUp('provideYourInfos')}
-    >
+    <div className="flex w-full flex-col gap-4">
+      <TitleDesc
+        description={tSignUp('provideYourInfos')}
+        title={tSignUp('welcome')}
+      />
       <SignUpForm />
-    </FormContainer>
+    </div>
   )
 }
 

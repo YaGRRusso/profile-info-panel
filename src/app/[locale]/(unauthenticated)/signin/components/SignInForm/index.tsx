@@ -1,9 +1,9 @@
 'use client'
 
-import { Button, Emphasis, TextInput, Form } from '@/components'
+import { Button, Form, Input } from '@/components'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Envelope, Eye, SignIn } from '@phosphor-icons/react'
+import { SignIn } from '@phosphor-icons/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
@@ -25,7 +25,6 @@ export interface SignInFormProps extends FormHTMLAttributes<HTMLFormElement> {
 
 const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
   const tSignIn = useTranslations('signIn')
-  const tForm = useTranslations('form')
   const { replace } = useRouter()
 
   const {
@@ -57,27 +56,29 @@ const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
 
   return (
     <Form.Root onSubmit={handleSubmit(onSubmit)} {...rest}>
-      <Form.Group title="Email" error={errors.email?.message}>
-        <TextInput
-          icon={<Envelope />}
+      <Form.Group>
+        <Form.Label>Email</Form.Label>
+        <Input
           onChange={(ev) => setValue('email', ev.target.value)}
           value={watch('email')}
-          placeholder={tForm('writeHere')}
+          placeholder="johndoe@email.com"
         />
+        <Form.Message>{errors.email?.message}</Form.Message>
       </Form.Group>
-      <Form.Group title="Password" error={errors.password?.message}>
-        <TextInput
-          icon={<Eye />}
+      <Form.Group>
+        <Form.Label>Password</Form.Label>
+        <Input
           onChange={(ev) => setValue('password', ev.target.value)}
           value={watch('password')}
           type="password"
-          placeholder={tForm('writeHere')}
+          placeholder="Your password"
         />
+        <Form.Message>{errors.password?.message}</Form.Message>
       </Form.Group>
       <span className='text-gray-300" text-sm'>
         {tSignIn('dontHaveAccount')}{' '}
-        <Link href="/signup">
-          <Emphasis>{tSignIn('signUp')}</Emphasis>
+        <Link className="emphasis" href="/signup">
+          {tSignIn('signUp')}
         </Link>
       </span>
       <Button type="submit" className="mt-2">

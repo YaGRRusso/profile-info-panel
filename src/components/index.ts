@@ -21,3 +21,6 @@ export type * from './Input'
 
 export { default as Checkbox } from './Checkbox'
 export type * from './Checkbox'
+
+export { default as TitleDesc } from './TitleDesc'
+export type * from './TitleDesc'

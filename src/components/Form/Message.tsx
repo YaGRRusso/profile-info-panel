@@ -1,23 +1,35 @@
 import { cn } from '@/lib/utils'
 
+import { VariantProps, cva } from 'class-variance-authority'
 import { HTMLAttributes, forwardRef } from 'react'
 
+const messageVariants = cva('text-xs font-medium', {
+  variants: {
+    status: {
+      error: 'text-red-500 dark:text-red-800',
+      warning: 'text-yellow-500 dark:text-yellow-800',
+    },
+  },
+  defaultVariants: {
+    status: 'error',
+  },
+})
 export interface FormMessageProps
-  extends HTMLAttributes<HTMLParagraphElement> {}
+  extends HTMLAttributes<HTMLParagraphElement>,
+    VariantProps<typeof messageVariants> {}
 
 const FormMessage = forwardRef<HTMLParagraphElement, FormMessageProps>(
-  ({ className, children, ...props }, ref) => {
+  ({ status = 'error', className, children, ...props }, ref) => {
     return (
-      <p
-        ref={ref}
-        className={cn(
-          'text-sm font-medium text-red-500 dark:text-red-900',
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </p>
+      children && (
+        <p
+          ref={ref}
+          className={cn(messageVariants({ status, className }))}
+          {...props}
+        >
+          {children}
+        </p>
+      )
     )
   },
 )

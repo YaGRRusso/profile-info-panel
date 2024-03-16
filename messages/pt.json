@@ -19,14 +19,14 @@
   },
   "signIn": {
     "welcome": "Bem-vindo!",
-    "provideYourInfos": "Forneça suas informações de login abaixo",
+    "provideYourInfos": "Forneça suas credenciais abaixo",
     "dontHaveAccount": "Não tem uma conta?",
     "signUp": "Criar uma conta",
     "signIn": "Entrar"
   },
   "signUp": {
-    "welcome": "Bem-vindo!",
-    "provideYourInfos": "Forneça suas informações abaixo",
+    "welcome": "Cadastro",
+    "provideYourInfos": "Forneça suas informações abaixo para criar uma conta",
     "alreadyHaveAccount": "Já tem uma conta?",
     "signUp": "Cadastrar",
     "signIn": "Entrar"

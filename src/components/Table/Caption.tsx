@@ -2,9 +2,12 @@ import { cn } from '@/lib/utils'
 
 import { HTMLAttributes, forwardRef } from 'react'
 
+export interface TableCaptionProps
+  extends HTMLAttributes<HTMLTableCaptionElement> {}
+
 export const TableCaption = forwardRef<
   HTMLTableCaptionElement,
-  HTMLAttributes<HTMLTableCaptionElement>
+  TableCaptionProps
 >(({ className, ...rest }, ref) => (
   <caption
     ref={ref}

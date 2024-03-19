@@ -1,9 +1,8 @@
 'use client'
 
-import { IconText, Table } from '@/components'
+import { Table } from '@/components'
 import { skills as skillsService } from '@/services'
 
-import { CircleNotch, Warning } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import { TableHTMLAttributes, forwardRef } from 'react'
 
@@ -18,18 +17,6 @@ const PageTable = forwardRef<HTMLTableElement, TableProps>(
 
     return (
       <Table.Root ref={ref} {...rest}>
-        {!skills.data && (
-          <Table.Caption>
-            {skills.isFetching ? (
-              <IconText
-                icon={<CircleNotch className="animate-spin" />}
-                text="Loading"
-              />
-            ) : (
-              <IconText icon={<Warning />} text="Empty" />
-            )}
-          </Table.Caption>
-        )}
         <Table.Header>
           <Table.Row>
             <Table.Head className="w-[100px]">Identification</Table.Head>

@@ -76,7 +76,7 @@ export interface CourseDto {
      * @type {Array<string>}
      * @memberof CourseDto
      */
-    'skills': Array<string>;
+    'skills'?: Array<string>;
     /**
      * 
      * @type {string}
@@ -143,7 +143,7 @@ export interface CreateCourseDto {
      * @type {Array<string>}
      * @memberof CreateCourseDto
      */
-    'skills': Array<string>;
+    'skills'?: Array<string>;
 }
 /**
  * 
@@ -180,13 +180,13 @@ export interface CreateExperienceDto {
      * @type {string}
      * @memberof CreateExperienceDto
      */
-    'end': string;
+    'end'?: string;
     /**
      * 
      * @type {Array<string>}
      * @memberof CreateExperienceDto
      */
-    'skills': Array<string>;
+    'skills'?: Array<string>;
 }
 /**
  * 
@@ -235,13 +235,13 @@ export interface CreateFormationDto {
      * @type {string}
      * @memberof CreateFormationDto
      */
-    'end': string;
+    'end'?: string;
     /**
      * 
      * @type {Array<string>}
      * @memberof CreateFormationDto
      */
-    'skills': Array<string>;
+    'skills'?: Array<string>;
 }
 /**
  * 
@@ -278,7 +278,7 @@ export interface CreateProjectDto {
      * @type {Array<string>}
      * @memberof CreateProjectDto
      */
-    'skills': Array<string>;
+    'skills'?: Array<string>;
 }
 /**
  * 
@@ -393,7 +393,7 @@ export interface CreateUserDto {
      * @type {Array<string>}
      * @memberof CreateUserDto
      */
-    'skills': Array<string>;
+    'skills'?: Array<string>;
 }
 /**
  * 
@@ -436,13 +436,13 @@ export interface ExperienceDto {
      * @type {string}
      * @memberof ExperienceDto
      */
-    'end': string;
+    'end'?: string;
     /**
      * 
      * @type {Array<string>}
      * @memberof ExperienceDto
      */
-    'skills': Array<string>;
+    'skills'?: Array<string>;
     /**
      * 
      * @type {string}
@@ -515,13 +515,13 @@ export interface FormationDto {
      * @type {string}
      * @memberof FormationDto
      */
-    'end': string;
+    'end'?: string;
     /**
      * 
      * @type {Array<string>}
      * @memberof FormationDto
      */
-    'skills': Array<string>;
+    'skills'?: Array<string>;
     /**
      * 
      * @type {string}
@@ -640,7 +640,7 @@ export interface ProjectDto {
      * @type {Array<string>}
      * @memberof ProjectDto
      */
-    'skills': Array<string>;
+    'skills'?: Array<string>;
     /**
      * 
      * @type {string}
@@ -1395,7 +1395,7 @@ export interface UserDto {
      * @type {Array<string>}
      * @memberof UserDto
      */
-    'skills': Array<string>;
+    'skills'?: Array<string>;
     /**
      * 
      * @type {string}

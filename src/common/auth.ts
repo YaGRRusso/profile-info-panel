@@ -1,4 +1,4 @@
-import auth from '@/services/auth'
+import { useAuth } from '@/sdk'
 
 import { AuthOptions } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
@@ -12,11 +12,15 @@ const options: AuthOptions = {
         email: { label: 'email', type: 'text' },
         password: { label: 'password', type: 'password' },
       },
+      // @ts-expect-error unnecessary
       async authorize(credentials) {
         if (credentials) {
-          const token = await auth.postLogin(credentials)
-          const user = await auth.getMe(token)
-          if (token && user) return { ...user, token }
+          const token = await useAuth.authControllerLogin(credentials)
+          const user = await useAuth.authControllerMe({
+            headers: { Authorization: 'Bearer ' + token.data },
+          })
+
+          if (token && user) return { ...user.data, token: token.data }
         }
         return null
       },

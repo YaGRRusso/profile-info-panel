@@ -2,7 +2,6 @@
 
 import { Button, Checkbox, Form, Input, Textarea } from '@/components'
 import { mask } from '@/helpers/mask'
-import users from '@/services/users'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserPlus } from '@phosphor-icons/react'
@@ -75,9 +74,9 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
     async (data: FormSchemaProps) => {
       delete data.passwordConfirm
       data.birth = new Date(data.birth).toISOString()
-      const res = await users.postUser(data)
-
-      if (res) replace('/signin')
+      // const res = await users.postUser(data)
+      // if (res)
+      replace('/signin')
     },
     [replace],
   )

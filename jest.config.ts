@@ -18,12 +18,6 @@ const config: Config = {
   collectCoverageFrom: ['**/*.service.(t|j)s', '**/*.controller.(t|j)s'],
   moduleFileExtensions: ['js', 'json', 'ts'],
   moduleNameMapper: {
-    '^@/app/(.*)$': ['<rootDir>/src/app/$1'],
-    '^@/common/(.*)$': ['<rootDir>/src/common/$1'],
-    '^@/components': ['<rootDir>/src/components'],
-    '^@/contexts/(.*)$': ['<rootDir>/src/contexts/$1'],
-    '^@/helpers/(.*)$': ['<rootDir>/src/helpers/$1'],
-    '^@/services/(.*)$': ['<rootDir>/src/services/$1'],
     '^@/(.*)$': ['<rootDir>/src/$1'],
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],

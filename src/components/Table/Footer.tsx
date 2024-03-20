@@ -2,9 +2,12 @@ import { cn } from '@/lib/utils'
 
 import { HTMLAttributes, forwardRef } from 'react'
 
+export interface TableFooterProps
+  extends HTMLAttributes<HTMLTableSectionElement> {}
+
 export const TableFooter = forwardRef<
   HTMLTableSectionElement,
-  HTMLAttributes<HTMLTableSectionElement>
+  TableFooterProps
 >(({ className, ...rest }, ref) => (
   <tfoot
     ref={ref}

@@ -1,7 +1,7 @@
 import { CircleNotch } from '@phosphor-icons/react/dist/ssr'
 import { useTranslations } from 'next-intl'
 
-export default function Projects() {
+export default function Skills() {
   const tHome = useTranslations('home')
   const tSidebar = useTranslations('sidebar')
 

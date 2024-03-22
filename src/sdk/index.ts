@@ -3,6 +3,7 @@ import {
   CoursesApi,
   DefaultApi,
   ExperiencesApi,
+  FormationsApi,
   ProjectsApi,
   SkillsApi,
   UsersApi,
@@ -52,6 +53,13 @@ export function useCourses() {
   return useSingleton(
     'courses',
     () => new CoursesApi(undefined, undefined, instance),
+  )
+}
+
+export function useFormations() {
+  return useSingleton(
+    'formations',
+    () => new FormationsApi(undefined, undefined, instance),
   )
 }
 

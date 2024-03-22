@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [Profile Info](https://profile-info-panel.vercel.app) 🚀
 
-## Getting Started
+Panel to manage personal infos from API
 
-First, run the development server:
+![modelo](diagram.png)
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Running Panel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# production mode
+$ npm run start
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# development mode
+$ npm run dev
 
-## Learn More
+# development turbo mode (unstable)
+$ npm run dev:turbo
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Test
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# unit tests
+$ npm run test
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# watch tests
+$ npm run test:watch
 
-## Deploy on Vercel
+# test coverage
+$ npm run test:cov
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [x] Development Patterns (Clean Code, Clean Architecture, SOLID, KISS, DRY and YAGNI)
+- [x] Development Configs (Formatters, Code Patterns, ESLint, Prettier, TSConfig and Husky)
+- [x] SSR
+- [x] Authentication (next-auth)
+- [x] Fetch Configs (axios)
+- [x] Query and Mutations (react-query)
+- [x] Form Management and Validation (react-hook-form)
+- [x] Form Schemas (zod)
+- [x] Form Masks (imask)
+- [x] Dark and White Theme (tailwind)
+- [x] i18n (next-intl)
+- [x] Error Boundary
+- [x] SDK From API
+- [x] Roles (User and Admin)
+- [x] Protected Pages (Public, Authenticated and By Role)
+- [x] Multi Users (Protected)
+- [x] Helpers Tests
+- [x] [Deploy](https://profile-info-panel.vercel.app) 🚀
+
+## Resources (Pages, Management, Tables and more...)
+
+- [x] Auth
+- [x] Home
+- [x] Users
+- [ ] Skills
+- [ ] Projects
+- [ ] Formations
+- [ ] Courses
+- [ ] Experiences
+
+## License
+
+Nest is [MIT licensed](LICENSE).

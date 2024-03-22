@@ -31,7 +31,6 @@ const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(
         )}
         <Table.Header>
           <Table.Row>
-            <Table.Head className="w-[100px]">ID</Table.Head>
             <Table.Head>Name</Table.Head>
             <Table.Head>Category</Table.Head>
             <Table.Head className="text-right">Last Update</Table.Head>
@@ -40,7 +39,6 @@ const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(
         <Table.Body>
           {data?.data.map((skill) => (
             <Table.Row key={skill.id}>
-              <Table.Cell className="font-medium">{skill.id}</Table.Cell>
               <Table.Cell>{skill.name}</Table.Cell>
               <Table.Cell>{skill.category}</Table.Cell>
               <Table.Cell className="text-right">

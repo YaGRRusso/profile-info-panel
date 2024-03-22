@@ -45,6 +45,7 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
   const tSignUp = useTranslations('signUp')
   const tForm = useTranslations('form')
   const { replace } = useRouter()
+  const users = useUsers()
 
   const {
     watch,
@@ -75,10 +76,10 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
     async (data: FormSchemaProps) => {
       delete data.passwordConfirm
       data.birth = new Date(data.birth).toISOString()
-      const res = await useUsers.usersControllerCreate(data)
+      const res = await users.usersControllerCreate(data)
       if (res.status === 201) replace('/signin')
     },
-    [replace],
+    [replace, users],
   )
 
   return (

@@ -10,9 +10,11 @@ import { ButtonHTMLAttributes, FC } from 'react'
 export interface ApiInfoProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const ApiInfo: FC<ApiInfoProps> = ({ ...rest }) => {
+  const root = useRoot()
+
   const { data, isFetching } = useQuery({
     queryKey: ['info'],
-    queryFn: async () => await useRoot.appControllerGetHello(),
+    queryFn: async () => await root.appControllerGetHello(),
   })
 
   return (

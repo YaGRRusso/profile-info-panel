@@ -2,6 +2,7 @@ import ExperiencesTable from './components/Table'
 
 import { TitleDesc } from '@/components'
 
+import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
 export default function Experiences() {
@@ -17,4 +18,9 @@ export default function Experiences() {
       <ExperiencesTable />
     </main>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'Experiences',
+  description: 'Management of experiences profile infos',
 }

@@ -2,6 +2,7 @@ import CoursesTable from './components/Table'
 
 import { TitleDesc } from '@/components'
 
+import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
 export default function Courses() {
@@ -17,4 +18,9 @@ export default function Courses() {
       <CoursesTable />
     </main>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'Courses',
+  description: 'Management of courses profile infos',
 }

@@ -2,6 +2,7 @@ import ProjectsTable from './components/Table'
 
 import { TitleDesc } from '@/components'
 
+import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
 export default function Projects() {
@@ -17,4 +18,9 @@ export default function Projects() {
       <ProjectsTable />
     </main>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'Projects',
+  description: 'Management of projects profile infos',
 }

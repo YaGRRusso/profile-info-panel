@@ -2,6 +2,7 @@ import SkillsTable from './components/Table'
 
 import { TitleDesc } from '@/components'
 
+import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
 export default function Skills() {
@@ -17,4 +18,9 @@ export default function Skills() {
       <SkillsTable />
     </main>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'Skills',
+  description: 'Management of skills profile infos',
 }

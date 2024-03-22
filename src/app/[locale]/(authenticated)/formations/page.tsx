@@ -2,6 +2,7 @@ import FormationsTable from './components/Table'
 
 import { TitleDesc } from '@/components'
 
+import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
 export default function Formations() {
@@ -17,4 +18,9 @@ export default function Formations() {
       <FormationsTable />
     </main>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'Formations',
+  description: 'Management of formations profile infos',
 }

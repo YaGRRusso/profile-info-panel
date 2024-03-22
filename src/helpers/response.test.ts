@@ -1,22 +1,23 @@
 import { unwrap } from './response'
 
-const successFn: any = async () => {
-  return await new Promise((resolve) =>
+import { AxiosResponse } from 'axios'
+
+const successFn = async () => {
+  return (await new Promise((resolve) =>
     setTimeout(
       () =>
         resolve({
+          data: 'success',
           status: 200,
-          headers: { 'Content-type': 'application/json' },
-          json: () => ({ status: 'success' }),
         }),
       100,
     ),
-  )
+  )) as unknown as AxiosResponse<any, any>
 }
 
 describe('unwrap', () => {
   it('should return the function response', async () => {
     const res = await successFn().then(unwrap)
-    expect(res).toEqual({ status: 'success' })
+    expect(res).toEqual('success')
   })
 })

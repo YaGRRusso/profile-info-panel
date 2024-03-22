@@ -18,6 +18,8 @@ function useSingleton<T>(key: string, factory: () => T): T {
   return singletons.get(key)
 }
 
+export type * from './api'
+
 export function useRoot() {
   return useSingleton(
     'default',

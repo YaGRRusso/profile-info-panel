@@ -6,6 +6,7 @@ import { Providers } from '../providers'
 import { cn } from '@/lib/utils'
 
 import {
+  Suitcase,
   Brain,
   House,
   User,
@@ -56,6 +57,11 @@ export default async function RootLayout({
                 />
                 <Menu.Button
                   icon={<GraduationCap weight="bold" />}
+                  text={tSidebar('formations')}
+                  path="/formations"
+                />
+                <Menu.Button
+                  icon={<Suitcase weight="bold" />}
                   text={tSidebar('experiences')}
                   path="/experiences"
                 />

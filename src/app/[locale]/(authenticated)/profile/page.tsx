@@ -1,4 +1,5 @@
 import { CircleNotch } from '@phosphor-icons/react/dist/ssr'
+import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
 export default function Profile() {
@@ -14,4 +15,9 @@ export default function Profile() {
       </div>
     </main>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'Profile',
+  description: 'Management of profile infos',
 }

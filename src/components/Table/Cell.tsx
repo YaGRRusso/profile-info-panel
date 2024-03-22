@@ -10,7 +10,7 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
     <td
       ref={ref}
       className={cn(
-        'p-4 align-middle [&:has([role=checkbox])]:pr-0',
+        'p-4 align-middle aria-[disabled=true]:opacity-50 [&:has([role=checkbox])]:pr-0',
         className,
       )}
       {...rest}

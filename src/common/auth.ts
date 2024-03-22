@@ -15,8 +15,10 @@ const options: AuthOptions = {
       // @ts-expect-error unnecessary
       async authorize(credentials) {
         if (credentials) {
-          const token = await useAuth.authControllerLogin(credentials)
-          const user = await useAuth.authControllerMe({
+          // eslint-disable-next-line
+          const auth = useAuth()
+          const token = await auth.authControllerLogin(credentials)
+          const user = await auth.authControllerMe({
             headers: { Authorization: 'Bearer ' + token.data },
           })
 

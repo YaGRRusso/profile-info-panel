@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { HTMLAttributes, ReactNode, forwardRef } from 'react'
 
 export interface IconTextProps extends HTMLAttributes<HTMLDivElement> {
-  icon: ReactNode
+  icon?: ReactNode
   text: string
 }
 

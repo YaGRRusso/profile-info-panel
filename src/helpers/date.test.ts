@@ -28,4 +28,9 @@ describe('formatDate', () => {
     const res = formatDate(date, { hour: '2-digit', minute: '2-digit' })
     expect(res).toEqual('20:59')
   })
+
+  it('should return undefined', async () => {
+    const res = formatDate(undefined, { day: '2-digit' })
+    expect(res).toEqual(undefined)
+  })
 })

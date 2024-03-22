@@ -6,7 +6,7 @@
  * @returns formatted date as string
  */
 export const formatDate = (
-  date: Date | string,
+  date?: Date | string,
   options?: Intl.DateTimeFormatOptions,
   language?: Intl.LocalesArgument,
 ) => {
@@ -15,5 +15,5 @@ export const formatDate = (
     ...options,
   }
 
-  return new Date(date).toLocaleString(language ?? 'pt-BR', opt)
+  return date && new Date(date).toLocaleString(language ?? 'pt-BR', opt)
 }

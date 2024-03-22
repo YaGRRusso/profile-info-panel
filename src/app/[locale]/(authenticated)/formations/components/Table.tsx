@@ -1,10 +1,9 @@
 'use client'
 
-import { IconText, Table, TableRootProps } from '@/components'
+import { Table, TableRootProps } from '@/components'
 import { formatDate } from '@/helpers/date'
 import { useFormations } from '@/sdk'
 
-import { CircleNotch } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import { forwardRef } from 'react'
@@ -21,17 +20,14 @@ const FormationsTable = forwardRef<HTMLTableElement, FormationsTableProps>(
     })
 
     return (
-      <Table.Root ref={ref} {...rest}>
-        {!data && (
-          <Table.Caption className="py-8">
-            <IconText
-              icon={isFetching && <CircleNotch className="animate-spin" />}
-              text={isFetching ? 'Loading...' : 'Empty'}
-            />
-          </Table.Caption>
-        )}
+      <Table.Root
+        ref={ref}
+        isLoading={isFetching}
+        isEmpty={!data?.data.length}
+        {...rest}
+      >
         <Table.Header>
-          <Table.Row>
+          <Table.Row hasHover={false}>
             <Table.Head>Name</Table.Head>
             <Table.Head>School</Table.Head>
             <Table.Head>Description</Table.Head>

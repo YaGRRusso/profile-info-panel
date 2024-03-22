@@ -1,10 +1,9 @@
 'use client'
 
-import { IconText, Table, TableRootProps } from '@/components'
+import { Table, TableRootProps } from '@/components'
 import { formatDate } from '@/helpers/date'
 import { useExperiences } from '@/sdk'
 
-import { CircleNotch } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import { forwardRef } from 'react'
 
@@ -20,17 +19,14 @@ const ExperiencesTable = forwardRef<HTMLTableElement, ExperiencesTableProps>(
     })
 
     return (
-      <Table.Root ref={ref} {...rest}>
-        {!data && (
-          <Table.Caption className="py-8">
-            <IconText
-              icon={isFetching && <CircleNotch className="animate-spin" />}
-              text={isFetching ? 'Loading...' : 'Empty'}
-            />
-          </Table.Caption>
-        )}
+      <Table.Root
+        ref={ref}
+        isLoading={isFetching}
+        isEmpty={!data?.data.length}
+        {...rest}
+      >
         <Table.Header>
-          <Table.Row>
+          <Table.Row hasHover={false}>
             <Table.Head>Role</Table.Head>
             <Table.Head>Description</Table.Head>
             <Table.Head>Organization</Table.Head>

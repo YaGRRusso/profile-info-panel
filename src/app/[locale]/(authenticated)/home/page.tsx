@@ -1,5 +1,6 @@
 import ApiInfo from './components/Buttons/ApiInfo'
 import SessionInfo from './components/Buttons/SessionInfo'
+import UserInfo from './components/Buttons/UserInfo'
 
 import { Link } from '@/common/navigation'
 import { Logos, ThemeChanger } from '@/components'
@@ -21,6 +22,7 @@ export default function Home() {
       <div className="flex items-center justify-center gap-4 text-xl text-gray-800 dark:text-gray-400 [&_*:disabled]:opacity-50">
         <ApiInfo />
         <SessionInfo />
+        <UserInfo />
         <Link href="https://github.com/YaGRRusso" target="_blank">
           <GithubLogo />
         </Link>

@@ -44,12 +44,14 @@ $ npm run test:cov
 - [x] Authentication (next-auth)
 - [x] Fetch Configs (axios)
 - [x] Query and Mutations (react-query)
+- [ ] Cache and Memo Persist
 - [x] Form Management and Validation (react-hook-form)
 - [x] Form Schemas (zod)
 - [x] Form Masks (imask)
 - [x] Dark and White Theme (tailwind)
 - [x] i18n (next-intl)
-- [x] Error Boundary
+- [x] Error Boundary (Client)
+- [ ] Error Boundary (Server)
 - [x] SDK From API
 - [x] Roles (User and Admin)
 - [x] Protected Pages (Public, Authenticated and By Role)

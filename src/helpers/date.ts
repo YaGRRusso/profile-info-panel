@@ -11,7 +11,6 @@ export const formatDate = (
   language?: Intl.LocalesArgument,
 ) => {
   const opt: Intl.DateTimeFormatOptions = {
-    localeMatcher: 'best fit',
     ...options,
   }
 

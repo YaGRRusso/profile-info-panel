@@ -12,15 +12,12 @@ const options: AuthOptions = {
         email: { label: 'email', type: 'text' },
         password: { label: 'password', type: 'password' },
       },
-      // @ts-expect-error unnecessary
       async authorize(credentials) {
         if (credentials) {
           // eslint-disable-next-line
           const auth = useAuth()
           const token = await auth.authControllerLogin(credentials)
-          const user = await auth.authControllerMe({
-            headers: { Authorization: 'Bearer ' + token.data },
-          })
+          const user = await auth.authControllerMe('Bearer ' + token.data)
 
           if (token && user) return { ...user.data, token: token.data }
         }

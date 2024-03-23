@@ -381,12 +381,6 @@ export interface CreateUserDto {
      * @type {string}
      * @memberof CreateUserDto
      */
-    'presentation': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateUserDto
-     */
     'title': string;
     /**
      * 
@@ -945,12 +939,6 @@ export interface SearchUserDto {
      * @type {string}
      * @memberof SearchUserDto
      */
-    'presentation'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SearchUserDto
-     */
     'title'?: string;
     /**
      * 
@@ -995,6 +983,12 @@ export interface SkillDto {
      * @memberof SkillDto
      */
     'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SkillDto
+     */
+    'userId': string;
 }
 
 export const SkillDtoCategoryEnum = {
@@ -1292,12 +1286,6 @@ export interface UpdateUserDto {
      * @type {string}
      * @memberof UpdateUserDto
      */
-    'presentation'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateUserDto
-     */
     'title'?: string;
     /**
      * 
@@ -1378,12 +1366,6 @@ export interface UserDto {
      * @memberof UserDto
      */
     'postal': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserDto
-     */
-    'presentation': string;
     /**
      * 
      * @type {string}
@@ -4951,10 +4933,11 @@ export const SkillsApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
+         * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        skillsControllerFindAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        skillsControllerFindAll: async (authorization?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/skills`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4966,6 +4949,10 @@ export const SkillsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authorization != null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
 
     
@@ -4981,10 +4968,11 @@ export const SkillsApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @param {string} id 
+         * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        skillsControllerFindOne: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        skillsControllerFindOne: async (id: string, authorization?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('skillsControllerFindOne', 'id', id)
             const localVarPath = `/skills/{id}`
@@ -4999,6 +4987,10 @@ export const SkillsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authorization != null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
 
     
@@ -5052,10 +5044,11 @@ export const SkillsApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @param {SearchSkillDto} searchSkillDto 
+         * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        skillsControllerSearchAll: async (searchSkillDto: SearchSkillDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        skillsControllerSearchAll: async (searchSkillDto: SearchSkillDto, authorization?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'searchSkillDto' is not null or undefined
             assertParamExists('skillsControllerSearchAll', 'searchSkillDto', searchSkillDto)
             const localVarPath = `/skills/search`;
@@ -5069,6 +5062,10 @@ export const SkillsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authorization != null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
 
     
@@ -5153,11 +5150,12 @@ export const SkillsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async skillsControllerFindAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkillDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.skillsControllerFindAll(options);
+        async skillsControllerFindAll(authorization?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkillDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.skillsControllerFindAll(authorization, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SkillsApi.skillsControllerFindAll']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -5165,11 +5163,12 @@ export const SkillsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
+         * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async skillsControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SkillDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.skillsControllerFindOne(id, options);
+        async skillsControllerFindOne(id: string, authorization?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SkillDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.skillsControllerFindOne(id, authorization, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SkillsApi.skillsControllerFindOne']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -5190,11 +5189,12 @@ export const SkillsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {SearchSkillDto} searchSkillDto 
+         * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async skillsControllerSearchAll(searchSkillDto: SearchSkillDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkillDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.skillsControllerSearchAll(searchSkillDto, options);
+        async skillsControllerSearchAll(searchSkillDto: SearchSkillDto, authorization?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkillDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.skillsControllerSearchAll(searchSkillDto, authorization, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SkillsApi.skillsControllerSearchAll']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -5235,20 +5235,22 @@ export const SkillsApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
+         * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        skillsControllerFindAll(options?: any): AxiosPromise<Array<SkillDto>> {
-            return localVarFp.skillsControllerFindAll(options).then((request) => request(axios, basePath));
+        skillsControllerFindAll(authorization?: string, options?: any): AxiosPromise<Array<SkillDto>> {
+            return localVarFp.skillsControllerFindAll(authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} id 
+         * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        skillsControllerFindOne(id: string, options?: any): AxiosPromise<SkillDto> {
-            return localVarFp.skillsControllerFindOne(id, options).then((request) => request(axios, basePath));
+        skillsControllerFindOne(id: string, authorization?: string, options?: any): AxiosPromise<SkillDto> {
+            return localVarFp.skillsControllerFindOne(id, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5263,11 +5265,12 @@ export const SkillsApiFactory = function (configuration?: Configuration, basePat
         /**
          * 
          * @param {SearchSkillDto} searchSkillDto 
+         * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        skillsControllerSearchAll(searchSkillDto: SearchSkillDto, options?: any): AxiosPromise<Array<SkillDto>> {
-            return localVarFp.skillsControllerSearchAll(searchSkillDto, options).then((request) => request(axios, basePath));
+        skillsControllerSearchAll(searchSkillDto: SearchSkillDto, authorization?: string, options?: any): AxiosPromise<Array<SkillDto>> {
+            return localVarFp.skillsControllerSearchAll(searchSkillDto, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5304,23 +5307,25 @@ export class SkillsApi extends BaseAPI {
 
     /**
      * 
+     * @param {string} [authorization] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SkillsApi
      */
-    public skillsControllerFindAll(options?: RawAxiosRequestConfig) {
-        return SkillsApiFp(this.configuration).skillsControllerFindAll(options).then((request) => request(this.axios, this.basePath));
+    public skillsControllerFindAll(authorization?: string, options?: RawAxiosRequestConfig) {
+        return SkillsApiFp(this.configuration).skillsControllerFindAll(authorization, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} id 
+     * @param {string} [authorization] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SkillsApi
      */
-    public skillsControllerFindOne(id: string, options?: RawAxiosRequestConfig) {
-        return SkillsApiFp(this.configuration).skillsControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
+    public skillsControllerFindOne(id: string, authorization?: string, options?: RawAxiosRequestConfig) {
+        return SkillsApiFp(this.configuration).skillsControllerFindOne(id, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5338,12 +5343,13 @@ export class SkillsApi extends BaseAPI {
     /**
      * 
      * @param {SearchSkillDto} searchSkillDto 
+     * @param {string} [authorization] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SkillsApi
      */
-    public skillsControllerSearchAll(searchSkillDto: SearchSkillDto, options?: RawAxiosRequestConfig) {
-        return SkillsApiFp(this.configuration).skillsControllerSearchAll(searchSkillDto, options).then((request) => request(this.axios, this.basePath));
+    public skillsControllerSearchAll(searchSkillDto: SearchSkillDto, authorization?: string, options?: RawAxiosRequestConfig) {
+        return SkillsApiFp(this.configuration).skillsControllerSearchAll(searchSkillDto, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5368,46 +5374,6 @@ export class SkillsApi extends BaseAPI {
  */
 export const UsersApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * 
-         * @param {UpdateUserDto} updateUserDto 
-         * @param {string} [authorization] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usersControllerAddSkills: async (updateUserDto: UpdateUserDto, authorization?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'updateUserDto' is not null or undefined
-            assertParamExists('usersControllerAddSkills', 'updateUserDto', updateUserDto)
-            const localVarPath = `/users/me/skills/add`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (authorization != null) {
-                localVarHeaderParameter['Authorization'] = String(authorization);
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateUserDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * 
          * @param {CreateUserDto} createUserDto 
@@ -5585,46 +5551,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {UpdateUserDto} updateUserDto 
-         * @param {string} [authorization] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usersControllerRemoveSkills: async (updateUserDto: UpdateUserDto, authorization?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'updateUserDto' is not null or undefined
-            assertParamExists('usersControllerRemoveSkills', 'updateUserDto', updateUserDto)
-            const localVarPath = `/users/me/skills/remove`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (authorization != null) {
-                localVarHeaderParameter['Authorization'] = String(authorization);
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateUserDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {SearchUserDto} searchUserDto 
          * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
@@ -5715,19 +5641,6 @@ export const UsersApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {UpdateUserDto} updateUserDto 
-         * @param {string} [authorization] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usersControllerAddSkills(updateUserDto: UpdateUserDto, authorization?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerAddSkills(updateUserDto, authorization, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['UsersApi.usersControllerAddSkills']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @param {CreateUserDto} createUserDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5789,19 +5702,6 @@ export const UsersApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {UpdateUserDto} updateUserDto 
-         * @param {string} [authorization] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usersControllerRemoveSkills(updateUserDto: UpdateUserDto, authorization?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerRemoveSkills(updateUserDto, authorization, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['UsersApi.usersControllerRemoveSkills']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @param {SearchUserDto} searchUserDto 
          * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
@@ -5836,16 +5736,6 @@ export const UsersApiFp = function(configuration?: Configuration) {
 export const UsersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = UsersApiFp(configuration)
     return {
-        /**
-         * 
-         * @param {UpdateUserDto} updateUserDto 
-         * @param {string} [authorization] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usersControllerAddSkills(updateUserDto: UpdateUserDto, authorization?: string, options?: any): AxiosPromise<UserDto> {
-            return localVarFp.usersControllerAddSkills(updateUserDto, authorization, options).then((request) => request(axios, basePath));
-        },
         /**
          * 
          * @param {CreateUserDto} createUserDto 
@@ -5894,16 +5784,6 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {UpdateUserDto} updateUserDto 
-         * @param {string} [authorization] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usersControllerRemoveSkills(updateUserDto: UpdateUserDto, authorization?: string, options?: any): AxiosPromise<UserDto> {
-            return localVarFp.usersControllerRemoveSkills(updateUserDto, authorization, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {SearchUserDto} searchUserDto 
          * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
@@ -5932,18 +5812,6 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
  * @extends {BaseAPI}
  */
 export class UsersApi extends BaseAPI {
-    /**
-     * 
-     * @param {UpdateUserDto} updateUserDto 
-     * @param {string} [authorization] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsersApi
-     */
-    public usersControllerAddSkills(updateUserDto: UpdateUserDto, authorization?: string, options?: RawAxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersControllerAddSkills(updateUserDto, authorization, options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * 
      * @param {CreateUserDto} createUserDto 
@@ -5998,18 +5866,6 @@ export class UsersApi extends BaseAPI {
      */
     public usersControllerRemove(authorization?: string, options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).usersControllerRemove(authorization, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {UpdateUserDto} updateUserDto 
-     * @param {string} [authorization] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsersApi
-     */
-    public usersControllerRemoveSkills(updateUserDto: UpdateUserDto, authorization?: string, options?: RawAxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersControllerRemoveSkills(updateUserDto, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

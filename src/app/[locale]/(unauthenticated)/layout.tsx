@@ -2,7 +2,7 @@ import Body from '../components/Body'
 import { Providers } from '../providers'
 
 import { Link } from '@/common/navigation'
-import { ThemeChanger } from '@/components'
+import { ThemeChanger, Toaster } from '@/components'
 import { cn } from '@/lib/utils'
 
 import { GithubLogo, House, Translate } from '@phosphor-icons/react/dist/ssr'
@@ -44,6 +44,7 @@ export default async function RootLayout({
                     <Translate />
                   </Link>
                 </div>
+                <Toaster />
                 {children}
               </main>
             </Body.Main>

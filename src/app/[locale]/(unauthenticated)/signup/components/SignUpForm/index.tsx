@@ -1,7 +1,8 @@
 'use client'
 
-import { Button, Checkbox, Form, Input, Textarea } from '@/components'
+import { Button, Checkbox, Form, Input, Textarea, useToast } from '@/components'
 import { mask } from '@/helpers/mask'
+import { tryCatch } from '@/helpers/request'
 import { useUsers } from '@/sdk'
 
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -45,6 +46,7 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
   const tForm = useTranslations('form')
   const { replace } = useRouter()
   const users = useUsers()
+  const { toast } = useToast()
 
   const {
     watch,
@@ -74,10 +76,19 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
     async (data: FormSchemaProps) => {
       delete data.passwordConfirm
       data.birth = new Date(data.birth).toISOString()
-      const res = await users.usersControllerCreate(data)
-      if (res.status === 201) replace('/signin')
+      const res = await tryCatch(users.usersControllerCreate(data))
+
+      if (res instanceof Error) {
+        return toast({
+          title: `Error ${res.name}`,
+          description: res.message,
+          variant: 'destructive',
+        })
+      }
+
+      replace('/signin')
     },
-    [replace, users],
+    [replace, toast, users],
   )
 
   return (

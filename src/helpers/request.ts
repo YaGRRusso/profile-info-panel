@@ -1,16 +1,21 @@
 /**
- * Fast try catch block
- * @param promise function to try
+ * Auto do try catch
+ * @param fn function to try
  * @param fallback optional fallback to catch
- * @returns promise result or error
+ * @returns fn result or null
  */
 export const tryCatch = async (
-  promise: Promise<any>,
+  fn: Promise<any> | (() => Promise<any>),
   fallback?: (error?: any) => void,
 ) => {
   try {
-    return await promise
+    return typeof fn === 'function' ? await fn() : await fn
   } catch (error) {
-    return fallback ? fallback(error) : error
+    if (fallback) {
+      return fallback(error)
+    } else {
+      console.error(error)
+      return error
+    }
   }
 }

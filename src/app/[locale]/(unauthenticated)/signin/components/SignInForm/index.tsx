@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Form, Input } from '@/components'
+import { Button, Form, Input, useToast } from '@/components'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SignIn } from '@phosphor-icons/react'
@@ -26,6 +26,7 @@ export interface SignInFormProps extends FormHTMLAttributes<HTMLFormElement> {
 const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
   const tSignIn = useTranslations('signIn')
   const { replace } = useRouter()
+  const { toast } = useToast()
 
   const {
     watch,
@@ -49,9 +50,16 @@ const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
         redirect: false,
       })
 
-      if (res?.ok) replace('/')
+      if (!res?.ok)
+        return toast({
+          title: `Error ${res?.status}`,
+          description: res?.error,
+          variant: 'destructive',
+        })
+
+      replace('/')
     },
-    [replace],
+    [replace, toast],
   )
 
   return (

@@ -3,6 +3,7 @@ import SignButton from '../components/Buttons/Sign'
 import Menu from '../components/Menu'
 import { Providers } from '../providers'
 
+import { Toaster } from '@/components'
 import { cn } from '@/lib/utils'
 
 import {
@@ -80,7 +81,10 @@ export default async function RootLayout({
                 <SignButton />
               </Menu.Group>
             </Menu.Root>
-            <Body.Main>{children}</Body.Main>
+            <Body.Main>
+              <Toaster />
+              {children}
+            </Body.Main>
           </Body.Root>
         </NextIntlClientProvider>
       </Providers>

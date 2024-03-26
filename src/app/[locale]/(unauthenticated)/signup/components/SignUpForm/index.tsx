@@ -2,11 +2,11 @@
 
 import { Button, Checkbox, Form, Input, Textarea, useToast } from '@/components'
 import { mask } from '@/helpers/mask'
-import { tryCatch } from '@/helpers/request'
 import { useUsers } from '@/sdk'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserPlus } from '@phosphor-icons/react'
+import { useMutation } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -72,23 +72,26 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
     },
   })
 
+  const createUser = useMutation({
+    mutationFn: users.usersControllerCreate.bind(users),
+    mutationKey: ['usersControllerCreate'],
+    onSuccess: () => replace('/signin'),
+    onError: (error) => {
+      toast({
+        title: `Error ${error.name}`,
+        description: error.message,
+        variant: 'destructive',
+      })
+    },
+  })
+
   const onSubmit = useCallback(
     async (data: FormSchemaProps) => {
       delete data.passwordConfirm
       data.birth = new Date(data.birth).toISOString()
-      const res = await tryCatch(users.usersControllerCreate(data))
-
-      if (res instanceof Error) {
-        return toast({
-          title: `Error ${res.name}`,
-          description: res.message,
-          variant: 'destructive',
-        })
-      }
-
-      replace('/signin')
+      createUser.mutate(data)
     },
-    [replace, toast, users],
+    [createUser],
   )
 
   return (

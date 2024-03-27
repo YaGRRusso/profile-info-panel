@@ -7,6 +7,7 @@ import { useUsers } from '@/sdk'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserPlus } from '@phosphor-icons/react'
 import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -76,10 +77,10 @@ const SignUpForm: FC<SignUpFormProps> = ({ defaultValues, ...rest }) => {
     mutationFn: users.usersControllerCreate.bind(users),
     mutationKey: ['usersControllerCreate'],
     onSuccess: () => replace('/signin'),
-    onError: (error) => {
+    onError: ({ response }: AxiosError<any>) => {
       toast({
-        title: `Error ${error.name}`,
-        description: error.message,
+        title: response?.data.name,
+        description: response?.data.message,
         variant: 'destructive',
       })
     },

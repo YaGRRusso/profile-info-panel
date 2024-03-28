@@ -1,5 +1,6 @@
 'use client'
 
+import { Tooltip } from '@/components'
 import { cn } from '@/lib/utils'
 import { useRoot } from '@/sdk'
 
@@ -18,13 +19,18 @@ const ApiInfo: FC<ApiInfoProps> = ({ ...rest }) => {
   })
 
   return (
-    <button
-      onClick={() => console.log(data)}
-      className={cn(isFetching && 'pointer-events-none opacity-15')}
-      {...rest}
-    >
-      {isFetching ? <CircleNotch className="animate-spin" /> : <Question />}
-    </button>
+    <Tooltip.Root>
+      <Tooltip.Trigger asChild>
+        <button
+          onClick={() => console.log(data)}
+          className={cn(isFetching && 'pointer-events-none opacity-15')}
+          {...rest}
+        >
+          {isFetching ? <CircleNotch className="animate-spin" /> : <Question />}
+        </button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>API Info</Tooltip.Content>
+    </Tooltip.Root>
   )
 }
 

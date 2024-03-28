@@ -2,7 +2,6 @@ import ApiInfo from './components/Buttons/ApiInfo'
 import DialogInfo from './components/Buttons/DialogInfo'
 import SessionInfo from './components/Buttons/SessionInfo'
 import ToastInfo from './components/Buttons/ToastInfo'
-import UserInfo from './components/Buttons/UserInfo'
 
 import { Link } from '@/common/navigation'
 import { Logos, ThemeChanger } from '@/components'
@@ -24,9 +23,7 @@ export default function Home() {
       <div className="flex items-center justify-center gap-4 text-xl text-gray-800 dark:text-gray-400 [&_*:disabled]:opacity-50">
         <ApiInfo />
         <SessionInfo />
-        <UserInfo />
-        <ToastInfo />
-        <DialogInfo />
+        <div className="mx-2 h-4 border-x border-gray-800 opacity-15 dark:border-gray-400 max-sm:hidden" />
         <Link href="https://github.com/YaGRRusso" target="_blank">
           <GithubLogo />
         </Link>
@@ -34,6 +31,9 @@ export default function Home() {
         <Link href="/" locale={locale === 'pt' ? 'en' : 'pt'}>
           <Translate />
         </Link>
+        <div className="mx-2 h-4 border-x border-gray-800 opacity-15 dark:border-gray-400 max-sm:hidden" />
+        <ToastInfo />
+        <DialogInfo />
       </div>
       <div className="flex items-center justify-center gap-6 max-md:flex-col max-md:text-center">
         <Logos />

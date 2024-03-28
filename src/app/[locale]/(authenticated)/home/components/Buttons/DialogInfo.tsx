@@ -1,6 +1,6 @@
 'use client'
 
-import { AlertDialog, AlertDialogContentProps } from '@/components'
+import { AlertDialog, AlertDialogContentProps, Tooltip } from '@/components'
 
 import { Notification } from '@phosphor-icons/react'
 import { FC, useState } from 'react'
@@ -12,9 +12,14 @@ const DialogInfo: FC<DialogInfoProps> = ({ ...rest }) => {
 
   return (
     <AlertDialog.Root open={isOpen} onOpenChange={setIsOpen}>
-      <AlertDialog.Trigger>
-        <Notification />
-      </AlertDialog.Trigger>
+      <Tooltip.Root>
+        <Tooltip.Trigger asChild>
+          <AlertDialog.Trigger>
+            <Notification />
+          </AlertDialog.Trigger>
+        </Tooltip.Trigger>
+        <Tooltip.Content>Trigger Dialog</Tooltip.Content>
+      </Tooltip.Root>
       <AlertDialog.Content {...rest}>
         <AlertDialog.Header>
           <AlertDialog.Title>Are you absolutely sure?</AlertDialog.Title>

@@ -3,7 +3,7 @@
 import { ToastAction, useToast } from '@/components'
 import { formatDate } from '@/helpers/date'
 
-import { Notification } from '@phosphor-icons/react'
+import { Bell } from '@phosphor-icons/react'
 import { ButtonHTMLAttributes, FC } from 'react'
 
 export interface ToastInfoProps
@@ -23,7 +23,7 @@ const ToastInfo: FC<ToastInfoProps> = ({ ...rest }) => {
       }
       {...rest}
     >
-      <Notification />
+      <Bell />
     </button>
   )
 }

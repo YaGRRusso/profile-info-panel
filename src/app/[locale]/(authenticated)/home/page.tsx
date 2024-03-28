@@ -1,4 +1,5 @@
 import ApiInfo from './components/Buttons/ApiInfo'
+import DialogInfo from './components/Buttons/DialogInfo'
 import SessionInfo from './components/Buttons/SessionInfo'
 import ToastInfo from './components/Buttons/ToastInfo'
 import UserInfo from './components/Buttons/UserInfo'
@@ -25,6 +26,7 @@ export default function Home() {
         <SessionInfo />
         <UserInfo />
         <ToastInfo />
+        <DialogInfo />
         <Link href="https://github.com/YaGRRusso" target="_blank">
           <GithubLogo />
         </Link>

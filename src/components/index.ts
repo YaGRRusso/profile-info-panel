@@ -30,6 +30,9 @@ export type * from './Textarea'
 export { default as AlertDialog } from './AlertDialog'
 export type * from './AlertDialog'
 
+export { default as Tooltip } from './Tooltip'
+export type * from './Tooltip'
+
 export { default as IconText } from './IconText'
 export type * from './IconText'
 

@@ -1,5 +1,6 @@
 'use client'
 
+import { Tooltip } from '@/components'
 import NextAuthProvider from '@/contexts/auth'
 import { ThemeContextProvider } from '@/contexts/theme'
 
@@ -19,7 +20,9 @@ export const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <NextAuthProvider>
-        <ThemeContextProvider>{children}</ThemeContextProvider>
+        <ThemeContextProvider>
+          <Tooltip.Provider>{children}</Tooltip.Provider>
+        </ThemeContextProvider>
       </NextAuthProvider>
     </QueryClientProvider>
   )

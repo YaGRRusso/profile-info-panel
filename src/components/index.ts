@@ -41,3 +41,6 @@ export type * from './ThemeChanger'
 
 export { default as TitleDesc } from './TitleDesc'
 export type * from './TitleDesc'
+
+export { default as DeleteButton } from './DeleteButton'
+export type * from './DeleteButton'

@@ -1,10 +1,11 @@
 'use client'
 
-import { Table, TableRootProps } from '@/components'
+import { DeleteButton, Table, TableRootProps, useToast } from '@/components'
 import { formatDate } from '@/helpers/date'
 import { useFormations } from '@/sdk'
 
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import Link from 'next/link'
 import { forwardRef } from 'react'
 
@@ -13,10 +14,31 @@ export interface FormationsTableProps extends TableRootProps {}
 const FormationsTable = forwardRef<HTMLTableElement, FormationsTableProps>(
   ({ ...rest }, ref) => {
     const formations = useFormations()
+    const queryClient = useQueryClient()
+    const { toast } = useToast()
 
     const { data, isFetching } = useQuery({
       queryKey: ['formations'],
       queryFn: () => formations.formationsControllerFindAll(),
+    })
+
+    const deleteFormation = useMutation({
+      mutationFn: formations.formationsControllerRemove.bind(formations),
+      mutationKey: ['formationsControllerRemove'],
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['formations'] })
+        toast({
+          title: 'Success',
+          description: 'Removed successfully',
+        })
+      },
+      onError: ({ response }: AxiosError<any>) => {
+        toast({
+          title: response?.data.name,
+          description: response?.data.message,
+          variant: 'destructive',
+        })
+      },
     })
 
     return (
@@ -36,6 +58,7 @@ const FormationsTable = forwardRef<HTMLTableElement, FormationsTableProps>(
             <Table.Head>Start</Table.Head>
             <Table.Head>End</Table.Head>
             <Table.Head className="text-right">Last Update</Table.Head>
+            <Table.Head className="w-[1%] text-right">Actions</Table.Head>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -75,6 +98,12 @@ const FormationsTable = forwardRef<HTMLTableElement, FormationsTableProps>(
                   hour: '2-digit',
                   minute: '2-digit',
                 })}
+              </Table.Cell>
+              <Table.Cell className="text-right">
+                <DeleteButton
+                  name={formation.name}
+                  handleConfirm={() => deleteFormation.mutate(formation.id)}
+                />
               </Table.Cell>
             </Table.Row>
           ))}

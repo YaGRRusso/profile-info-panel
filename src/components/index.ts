@@ -33,6 +33,9 @@ export type * from './AlertDialog'
 export { default as Tooltip } from './Tooltip'
 export type * from './Tooltip'
 
+export { default as Skeleton } from './Skeleton'
+export type * from './Skeleton'
+
 export { default as IconText } from './IconText'
 export type * from './IconText'
 

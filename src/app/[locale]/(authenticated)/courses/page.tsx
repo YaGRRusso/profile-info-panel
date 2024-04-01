@@ -1,8 +1,7 @@
 import CoursesTable from './components/Table'
 
-import { Button, TitleDesc } from '@/components'
+import { CreateButton, TitleDesc } from '@/components'
 
-import { Plus } from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
@@ -17,10 +16,7 @@ export default function Courses() {
           title={tSidebar('courses')}
           description={tHome('underDevelopment')}
         />
-        <Button variant="outline">
-          <Plus />
-          Add Course
-        </Button>
+        <CreateButton isLoading name="Course" />
       </div>
       <CoursesTable />
     </main>

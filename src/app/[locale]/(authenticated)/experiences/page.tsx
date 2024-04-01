@@ -1,8 +1,7 @@
 import ExperiencesTable from './components/Table'
 
-import { TitleDesc, Button } from '@/components'
+import { TitleDesc, CreateButton } from '@/components'
 
-import { Plus } from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
@@ -17,10 +16,7 @@ export default function Experiences() {
           title={tSidebar('experiences')}
           description={tHome('underDevelopment')}
         />
-        <Button variant="outline">
-          <Plus />
-          Add Experience
-        </Button>
+        <CreateButton isLoading name="Experience" />
       </div>
       <ExperiencesTable />
     </main>

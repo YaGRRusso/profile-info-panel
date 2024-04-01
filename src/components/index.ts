@@ -50,3 +50,6 @@ export type * from './TitleDesc'
 
 export { default as DeleteButton } from './DeleteButton'
 export type * from './DeleteButton'
+
+export { default as CreateButton } from './CreateButton'
+export type * from './CreateButton'

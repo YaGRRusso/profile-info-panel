@@ -1,8 +1,7 @@
 import FormationsTable from './components/Table'
 
-import { TitleDesc, Button } from '@/components'
+import { TitleDesc, CreateButton } from '@/components'
 
-import { Plus } from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
@@ -17,10 +16,7 @@ export default function Formations() {
           title={tSidebar('formations')}
           description={tHome('underDevelopment')}
         />
-        <Button variant="outline">
-          <Plus />
-          Add Formation
-        </Button>
+        <CreateButton isLoading name="Formation" />
       </div>
       <FormationsTable />
     </main>

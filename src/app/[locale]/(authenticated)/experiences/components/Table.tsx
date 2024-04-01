@@ -1,10 +1,11 @@
 'use client'
 
-import { Table, TableRootProps } from '@/components'
+import { DeleteButton, Table, TableRootProps, useToast } from '@/components'
 import { formatDate } from '@/helpers/date'
 import { useExperiences } from '@/sdk'
 
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { forwardRef } from 'react'
 
 export interface ExperiencesTableProps extends TableRootProps {}
@@ -12,10 +13,31 @@ export interface ExperiencesTableProps extends TableRootProps {}
 const ExperiencesTable = forwardRef<HTMLTableElement, ExperiencesTableProps>(
   ({ ...rest }, ref) => {
     const experiences = useExperiences()
+    const queryClient = useQueryClient()
+    const { toast } = useToast()
 
     const { data, isFetching } = useQuery({
       queryKey: ['experiences'],
       queryFn: () => experiences.experiencesControllerFindAll(),
+    })
+
+    const deleteExperience = useMutation({
+      mutationFn: experiences.experiencesControllerRemove.bind(experiences),
+      mutationKey: ['experiencesControllerRemove'],
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['experiences'] })
+        toast({
+          title: 'Success',
+          description: 'Removed successfully',
+        })
+      },
+      onError: ({ response }: AxiosError<any>) => {
+        toast({
+          title: response?.data.name,
+          description: response?.data.message,
+          variant: 'destructive',
+        })
+      },
     })
 
     return (
@@ -33,6 +55,7 @@ const ExperiencesTable = forwardRef<HTMLTableElement, ExperiencesTableProps>(
             <Table.Head>Start</Table.Head>
             <Table.Head>End</Table.Head>
             <Table.Head className="text-right">Last Update</Table.Head>
+            <Table.Head className="w-[1%] text-right">Actions</Table.Head>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -62,6 +85,12 @@ const ExperiencesTable = forwardRef<HTMLTableElement, ExperiencesTableProps>(
                   hour: '2-digit',
                   minute: '2-digit',
                 })}
+              </Table.Cell>
+              <Table.Cell className="text-right">
+                <DeleteButton
+                  name={experience.role}
+                  handleConfirm={() => deleteExperience.mutate(experience.id)}
+                />
               </Table.Cell>
             </Table.Row>
           ))}

@@ -1,5 +1,6 @@
 'use client'
 
+import { Tooltip } from '@/components'
 import { useThemeContext } from '@/contexts/theme'
 
 import { MoonStars, Sun } from '@phosphor-icons/react'
@@ -13,9 +14,14 @@ const ThemeChanger = forwardRef<HTMLButtonElement, ThemeChangerProps>(
     const { theme, toggleTheme } = useThemeContext()
 
     return (
-      <button onClick={() => toggleTheme()} ref={ref} {...rest}>
-        {theme === 'light' ? <Sun /> : <MoonStars />}
-      </button>
+      <Tooltip.Root>
+        <Tooltip.Trigger asChild>
+          <button onClick={() => toggleTheme()} ref={ref} {...rest}>
+            {theme === 'light' ? <Sun /> : <MoonStars />}
+          </button>
+        </Tooltip.Trigger>
+        <Tooltip.Content>Change Theme</Tooltip.Content>
+      </Tooltip.Root>
     )
   },
 )

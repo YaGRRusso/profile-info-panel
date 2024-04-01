@@ -1,10 +1,11 @@
 'use client'
 
-import { Table, TableRootProps } from '@/components'
+import { DeleteButton, Table, TableRootProps, useToast } from '@/components'
 import { formatDate } from '@/helpers/date'
 import { useProjects } from '@/sdk'
 
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import Link from 'next/link'
 import { forwardRef } from 'react'
 
@@ -13,10 +14,31 @@ export interface ProjectsTableProps extends TableRootProps {}
 const ProjectsTable = forwardRef<HTMLTableElement, ProjectsTableProps>(
   ({ ...rest }, ref) => {
     const projects = useProjects()
+    const queryClient = useQueryClient()
+    const { toast } = useToast()
 
     const { data, isFetching } = useQuery({
       queryKey: ['projects'],
       queryFn: () => projects.projectsControllerFindAll(),
+    })
+
+    const deleteProject = useMutation({
+      mutationFn: projects.projectsControllerRemove.bind(projects),
+      mutationKey: ['projectsControllerRemove'],
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['projects'] })
+        toast({
+          title: 'Success',
+          description: 'Removed successfully',
+        })
+      },
+      onError: ({ response }: AxiosError<any>) => {
+        toast({
+          title: response?.data.name,
+          description: response?.data.message,
+          variant: 'destructive',
+        })
+      },
     })
 
     return (
@@ -33,6 +55,7 @@ const ProjectsTable = forwardRef<HTMLTableElement, ProjectsTableProps>(
             <Table.Head>Image</Table.Head>
             <Table.Head>Link</Table.Head>
             <Table.Head className="text-right">Last Update</Table.Head>
+            <Table.Head className="w-[1%] text-right">Actions</Table.Head>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -57,6 +80,12 @@ const ProjectsTable = forwardRef<HTMLTableElement, ProjectsTableProps>(
                   hour: '2-digit',
                   minute: '2-digit',
                 })}
+              </Table.Cell>
+              <Table.Cell className="text-right">
+                <DeleteButton
+                  name={project.name}
+                  handleConfirm={() => deleteProject.mutate(project.id)}
+                />
               </Table.Cell>
             </Table.Row>
           ))}

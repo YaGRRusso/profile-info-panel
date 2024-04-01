@@ -1,10 +1,11 @@
 'use client'
 
-import { Table, TableRootProps } from '@/components'
+import { DeleteButton, Table, TableRootProps, useToast } from '@/components'
 import { formatDate } from '@/helpers/date'
 import { useSkills } from '@/sdk'
 
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { forwardRef } from 'react'
 
 export interface SkillsTableProps extends TableRootProps {}
@@ -12,10 +13,31 @@ export interface SkillsTableProps extends TableRootProps {}
 const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(
   ({ ...rest }, ref) => {
     const skills = useSkills()
+    const queryClient = useQueryClient()
+    const { toast } = useToast()
 
     const { data, isFetching } = useQuery({
       queryKey: ['skills'],
       queryFn: () => skills.skillsControllerFindAll(),
+    })
+
+    const deleteSkill = useMutation({
+      mutationFn: skills.skillsControllerRemove.bind(skills),
+      mutationKey: ['skillsControllerRemove'],
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['skills'] })
+        toast({
+          title: 'Success',
+          description: 'Removed successfully',
+        })
+      },
+      onError: ({ response }: AxiosError<any>) => {
+        toast({
+          title: response?.data.name,
+          description: response?.data.message,
+          variant: 'destructive',
+        })
+      },
     })
 
     return (
@@ -30,6 +52,7 @@ const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(
             <Table.Head>Name</Table.Head>
             <Table.Head>Category</Table.Head>
             <Table.Head className="text-right">Last Update</Table.Head>
+            <Table.Head className="w-[1%] text-right">Actions</Table.Head>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -44,6 +67,12 @@ const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(
                   hour: '2-digit',
                   minute: '2-digit',
                 })}
+              </Table.Cell>
+              <Table.Cell className="text-right">
+                <DeleteButton
+                  name={skill.name}
+                  handleConfirm={() => deleteSkill.mutate(skill.id)}
+                />
               </Table.Cell>
             </Table.Row>
           ))}

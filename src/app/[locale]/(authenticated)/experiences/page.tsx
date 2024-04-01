@@ -1,7 +1,8 @@
 import ExperiencesTable from './components/Table'
 
-import { TitleDesc } from '@/components'
+import { TitleDesc, Button } from '@/components'
 
+import { Plus } from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
@@ -11,10 +12,16 @@ export default function Experiences() {
 
   return (
     <main className="flex h-full w-full flex-col gap-8">
-      <TitleDesc
-        title={tSidebar('experiences')}
-        description={tHome('underDevelopment')}
-      />
+      <div className="flex items-end justify-between">
+        <TitleDesc
+          title={tSidebar('experiences')}
+          description={tHome('underDevelopment')}
+        />
+        <Button variant="outline">
+          <Plus />
+          Add Experience
+        </Button>
+      </div>
       <ExperiencesTable />
     </main>
   )

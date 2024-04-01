@@ -1,7 +1,8 @@
 import CoursesTable from './components/Table'
 
-import { TitleDesc } from '@/components'
+import { Button, TitleDesc } from '@/components'
 
+import { Plus } from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
@@ -11,10 +12,16 @@ export default function Courses() {
 
   return (
     <main className="flex h-full w-full flex-col gap-8">
-      <TitleDesc
-        title={tSidebar('courses')}
-        description={tHome('underDevelopment')}
-      />
+      <div className="flex items-end justify-between">
+        <TitleDesc
+          title={tSidebar('courses')}
+          description={tHome('underDevelopment')}
+        />
+        <Button variant="outline">
+          <Plus />
+          Add Course
+        </Button>
+      </div>
       <CoursesTable />
     </main>
   )

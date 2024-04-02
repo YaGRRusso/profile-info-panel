@@ -1,12 +1,22 @@
 'use client'
 
-import { Button, Form, Input } from '@/components'
+import { Button, Form, Input, Select } from '@/components'
+import { CreateSkillDtoCategoryEnum } from '@/sdk'
 import { CommonFormValuesProps } from '@/types/common-form'
+import { CommonSelectValuesProps } from '@/types/common-select'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormHTMLAttributes, forwardRef, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+
+const categoryOptions: CommonSelectValuesProps<CreateSkillDtoCategoryEnum> = [
+  { value: 'LANGUAGE', label: 'Language' },
+  { value: 'LIBRARY', label: 'Library' },
+  { value: 'OTHER', label: 'Other' },
+  { value: 'SYSTEM', label: 'System' },
+  { value: 'TOOL', label: 'Tool' },
+]
 
 const formSchema = z.object({
   name: z.string().min(1, 'required'),
@@ -60,11 +70,21 @@ const SkillsCommonForm = forwardRef<HTMLFormElement, SkillsCommonFormProps>(
         </Form.Group>
         <Form.Group>
           <Form.Label>Category</Form.Label>
-          <Input
-            onChange={(ev) => setValue('category', ev.target.value)}
+          <Select.Root
+            onValueChange={(ev) => setValue('category', ev)}
             value={watch('category')}
-            placeholder="Language"
-          />
+          >
+            <Select.Trigger>
+              <Select.Value placeholder="Select" />
+            </Select.Trigger>
+            <Select.Content>
+              {categoryOptions.map(({ value, label }) => (
+                <Select.Item key={value} value={value}>
+                  {label}
+                </Select.Item>
+              ))}
+            </Select.Content>
+          </Select.Root>
           <Form.Message>{errors.category?.message}</Form.Message>
         </Form.Group>
         <Button type="submit" className="mt-2" disabled={isLoading}>

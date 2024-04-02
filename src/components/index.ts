@@ -51,5 +51,5 @@ export type * from './TitleDesc'
 export { default as DeleteButton } from './DeleteButton'
 export type * from './DeleteButton'
 
-export { default as CreateButton } from './CreateButton'
-export type * from './CreateButton'
+export { default as FloatingForm } from './FloatingForm'
+export type * from './FloatingForm'

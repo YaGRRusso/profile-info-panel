@@ -21,6 +21,9 @@ export type * from './Table'
 export { default as Input } from './Input'
 export type * from './Input'
 
+export { default as Select } from './Select'
+export type * from './Select'
+
 export { default as Checkbox } from './Checkbox'
 export type * from './Checkbox'
 

@@ -1,6 +1,7 @@
+import SkillsForm from './components/Form'
 import SkillsTable from './components/Table'
 
-import { CreateButton, TitleDesc } from '@/components'
+import { TitleDesc } from '@/components'
 
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
@@ -16,7 +17,7 @@ export default function Skills() {
           title={tSidebar('skills')}
           description={tHome('underDevelopment')}
         />
-        <CreateButton isLoading name="Skill" />
+        <SkillsForm />
       </div>
       <SkillsTable />
     </main>

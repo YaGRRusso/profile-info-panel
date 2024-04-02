@@ -12,7 +12,7 @@ export default function Skills() {
 
   return (
     <main className="flex h-full w-full flex-col gap-8">
-      <div className="flex items-end justify-between">
+      <div className="flex justify-between gap-4 max-xs:flex-col">
         <TitleDesc
           title={tSidebar('skills')}
           description={tHome('underDevelopment')}

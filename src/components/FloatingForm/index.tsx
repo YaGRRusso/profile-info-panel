@@ -8,11 +8,11 @@ export interface FloatingFormProps extends DialogProps {
   description: ReactNode
 }
 
-const FloatingForm = forwardRef<DialogProps, FloatingFormProps>(
-  ({ title, description, children, ...rest }) => {
+const FloatingForm = forwardRef<HTMLDivElement, FloatingFormProps>(
+  ({ title, description, children, ...rest }, ref) => {
     return (
       <Dialog.Root {...rest}>
-        <Dialog.Content>
+        <Dialog.Content ref={ref}>
           <Dialog.Header>
             <Dialog.Title>{title}</Dialog.Title>
             <Dialog.Description>{description}</Dialog.Description>

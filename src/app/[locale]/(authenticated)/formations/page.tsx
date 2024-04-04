@@ -1,6 +1,6 @@
 import FormationsTable from './components/Table'
 
-import { TitleDesc, CreateButton } from '@/components'
+import { TitleDesc } from '@/components'
 
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
@@ -16,7 +16,6 @@ export default function Formations() {
           title={tSidebar('formations')}
           description={tHome('underDevelopment')}
         />
-        <CreateButton isLoading name="Formation" />
       </div>
       <FormationsTable />
     </main>

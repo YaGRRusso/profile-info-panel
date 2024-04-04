@@ -1,6 +1,6 @@
 import CoursesTable from './components/Table'
 
-import { CreateButton, TitleDesc } from '@/components'
+import { TitleDesc } from '@/components'
 
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
@@ -16,7 +16,6 @@ export default function Courses() {
           title={tSidebar('courses')}
           description={tHome('underDevelopment')}
         />
-        <CreateButton isLoading name="Course" />
       </div>
       <CoursesTable />
     </main>

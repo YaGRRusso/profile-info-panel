@@ -1,6 +1,7 @@
 'use client'
 
 import { Button, Form, Input, Select, Textarea } from '@/components'
+import { CreateCourseDtoStatusEnum } from '@/sdk'
 import { CommonFormValuesProps } from '@/types/common-form'
 import { CommonSelectValuesProps } from '@/types/common-select'
 
@@ -9,10 +10,9 @@ import { FormHTMLAttributes, forwardRef, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-const statusOptions: CommonSelectValuesProps<
-  'COMPLETE' | 'PAUSED' | 'PROGRESS'
-> = [
+const statusOptions: CommonSelectValuesProps<CreateCourseDtoStatusEnum> = [
   { value: 'COMPLETE', label: 'Completo' },
+  { value: 'INCOMPLETE', label: 'Incompleto' },
   { value: 'PAUSED', label: 'Pausado' },
   { value: 'PROGRESS', label: 'Em andamento' },
 ]
@@ -22,7 +22,7 @@ const formSchema = z.object({
   school: z.string().min(1, 'required'),
   description: z.string().min(1, 'required'),
   status: z.string().min(1, 'required'),
-  certificate: z.string().min(1, 'required'),
+  certificate: z.string().optional(),
   hours: z.number().min(1, 'required'),
   skills: z.array(z.string()),
 })

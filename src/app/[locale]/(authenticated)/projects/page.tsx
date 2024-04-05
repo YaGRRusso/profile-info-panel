@@ -1,3 +1,4 @@
+import ProjectsForm from './components/Form'
 import ProjectsTable from './components/Table'
 
 import { TitleDesc } from '@/components'
@@ -11,10 +12,13 @@ export default function Projects() {
 
   return (
     <main className="flex h-full w-full flex-col gap-8">
-      <TitleDesc
-        title={tSidebar('projects')}
-        description={tHome('underDevelopment')}
-      />
+      <div className="flex justify-between gap-4 max-xs:flex-col">
+        <TitleDesc
+          title={tSidebar('projects')}
+          description={tHome('underDevelopment')}
+        />
+        <ProjectsForm />
+      </div>
       <ProjectsTable />
     </main>
   )

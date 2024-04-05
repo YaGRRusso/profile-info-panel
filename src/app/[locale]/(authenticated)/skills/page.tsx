@@ -1,3 +1,4 @@
+import SkillsForm from './components/Form'
 import SkillsTable from './components/Table'
 
 import { TitleDesc } from '@/components'
@@ -11,10 +12,13 @@ export default function Skills() {
 
   return (
     <main className="flex h-full w-full flex-col gap-8">
-      <TitleDesc
-        title={tSidebar('skills')}
-        description={tHome('underDevelopment')}
-      />
+      <div className="flex justify-between gap-4 max-xs:flex-col">
+        <TitleDesc
+          title={tSidebar('skills')}
+          description={tHome('underDevelopment')}
+        />
+        <SkillsForm />
+      </div>
       <SkillsTable />
     </main>
   )

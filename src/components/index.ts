@@ -21,6 +21,9 @@ export type * from './Table'
 export { default as Input } from './Input'
 export type * from './Input'
 
+export { default as Select } from './Select'
+export type * from './Select'
+
 export { default as Checkbox } from './Checkbox'
 export type * from './Checkbox'
 
@@ -29,6 +32,9 @@ export type * from './Textarea'
 
 export { default as AlertDialog } from './AlertDialog'
 export type * from './AlertDialog'
+
+export { default as Dialog } from './Dialog'
+export type * from './Dialog'
 
 export { default as Tooltip } from './Tooltip'
 export type * from './Tooltip'
@@ -47,3 +53,6 @@ export type * from './TitleDesc'
 
 export { default as DeleteButton } from './DeleteButton'
 export type * from './DeleteButton'
+
+export { default as FloatingForm } from './FloatingForm'
+export type * from './FloatingForm'

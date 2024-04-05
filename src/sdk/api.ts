@@ -58,13 +58,13 @@ export interface CourseDto {
      * @type {string}
      * @memberof CourseDto
      */
-    'status': string;
+    'status': CourseDtoStatusEnum;
     /**
      * 
      * @type {string}
      * @memberof CourseDto
      */
-    'certificate': string;
+    'certificate'?: string;
     /**
      * 
      * @type {number}
@@ -96,6 +96,16 @@ export interface CourseDto {
      */
     'userId': string;
 }
+
+export const CourseDtoStatusEnum = {
+    Complete: 'COMPLETE',
+    Incomplete: 'INCOMPLETE',
+    Paused: 'PAUSED',
+    Progress: 'PROGRESS'
+} as const;
+
+export type CourseDtoStatusEnum = typeof CourseDtoStatusEnum[keyof typeof CourseDtoStatusEnum];
+
 /**
  * 
  * @export
@@ -125,13 +135,13 @@ export interface CreateCourseDto {
      * @type {string}
      * @memberof CreateCourseDto
      */
-    'status': string;
+    'status': CreateCourseDtoStatusEnum;
     /**
      * 
      * @type {string}
      * @memberof CreateCourseDto
      */
-    'certificate': string;
+    'certificate'?: string;
     /**
      * 
      * @type {number}
@@ -145,6 +155,16 @@ export interface CreateCourseDto {
      */
     'skills'?: Array<string>;
 }
+
+export const CreateCourseDtoStatusEnum = {
+    Complete: 'COMPLETE',
+    Incomplete: 'INCOMPLETE',
+    Paused: 'PAUSED',
+    Progress: 'PROGRESS'
+} as const;
+
+export type CreateCourseDtoStatusEnum = typeof CreateCourseDtoStatusEnum[keyof typeof CreateCourseDtoStatusEnum];
+
 /**
  * 
  * @export
@@ -217,13 +237,13 @@ export interface CreateFormationDto {
      * @type {string}
      * @memberof CreateFormationDto
      */
-    'status': string;
+    'status': CreateFormationDtoStatusEnum;
     /**
      * 
      * @type {string}
      * @memberof CreateFormationDto
      */
-    'certificate': string;
+    'certificate'?: string;
     /**
      * 
      * @type {string}
@@ -243,6 +263,16 @@ export interface CreateFormationDto {
      */
     'skills'?: Array<string>;
 }
+
+export const CreateFormationDtoStatusEnum = {
+    Complete: 'COMPLETE',
+    Incomplete: 'INCOMPLETE',
+    Paused: 'PAUSED',
+    Progress: 'PROGRESS'
+} as const;
+
+export type CreateFormationDtoStatusEnum = typeof CreateFormationDtoStatusEnum[keyof typeof CreateFormationDtoStatusEnum];
+
 /**
  * 
  * @export
@@ -491,13 +521,13 @@ export interface FormationDto {
      * @type {string}
      * @memberof FormationDto
      */
-    'status': string;
+    'status': FormationDtoStatusEnum;
     /**
      * 
      * @type {string}
      * @memberof FormationDto
      */
-    'certificate': string;
+    'certificate'?: string;
     /**
      * 
      * @type {string}
@@ -535,6 +565,16 @@ export interface FormationDto {
      */
     'userId': string;
 }
+
+export const FormationDtoStatusEnum = {
+    Complete: 'COMPLETE',
+    Incomplete: 'INCOMPLETE',
+    Paused: 'PAUSED',
+    Progress: 'PROGRESS'
+} as const;
+
+export type FormationDtoStatusEnum = typeof FormationDtoStatusEnum[keyof typeof FormationDtoStatusEnum];
+
 /**
  * 
  * @export
@@ -683,7 +723,7 @@ export interface SearchCourseDto {
      * @type {string}
      * @memberof SearchCourseDto
      */
-    'status'?: string;
+    'status'?: SearchCourseDtoStatusEnum;
     /**
      * 
      * @type {string}
@@ -703,6 +743,16 @@ export interface SearchCourseDto {
      */
     'skills'?: Array<string>;
 }
+
+export const SearchCourseDtoStatusEnum = {
+    Complete: 'COMPLETE',
+    Incomplete: 'INCOMPLETE',
+    Paused: 'PAUSED',
+    Progress: 'PROGRESS'
+} as const;
+
+export type SearchCourseDtoStatusEnum = typeof SearchCourseDtoStatusEnum[keyof typeof SearchCourseDtoStatusEnum];
+
 /**
  * 
  * @export
@@ -775,7 +825,7 @@ export interface SearchFormationDto {
      * @type {string}
      * @memberof SearchFormationDto
      */
-    'status'?: string;
+    'status'?: SearchFormationDtoStatusEnum;
     /**
      * 
      * @type {string}
@@ -801,6 +851,16 @@ export interface SearchFormationDto {
      */
     'skills'?: Array<string>;
 }
+
+export const SearchFormationDtoStatusEnum = {
+    Complete: 'COMPLETE',
+    Incomplete: 'INCOMPLETE',
+    Paused: 'PAUSED',
+    Progress: 'PROGRESS'
+} as const;
+
+export type SearchFormationDtoStatusEnum = typeof SearchFormationDtoStatusEnum[keyof typeof SearchFormationDtoStatusEnum];
+
 /**
  * 
  * @export
@@ -1030,7 +1090,7 @@ export interface UpdateCourseDto {
      * @type {string}
      * @memberof UpdateCourseDto
      */
-    'status'?: string;
+    'status'?: UpdateCourseDtoStatusEnum;
     /**
      * 
      * @type {string}
@@ -1050,6 +1110,16 @@ export interface UpdateCourseDto {
      */
     'skills'?: Array<string>;
 }
+
+export const UpdateCourseDtoStatusEnum = {
+    Complete: 'COMPLETE',
+    Incomplete: 'INCOMPLETE',
+    Paused: 'PAUSED',
+    Progress: 'PROGRESS'
+} as const;
+
+export type UpdateCourseDtoStatusEnum = typeof UpdateCourseDtoStatusEnum[keyof typeof UpdateCourseDtoStatusEnum];
+
 /**
  * 
  * @export
@@ -1122,7 +1192,7 @@ export interface UpdateFormationDto {
      * @type {string}
      * @memberof UpdateFormationDto
      */
-    'status'?: string;
+    'status'?: UpdateFormationDtoStatusEnum;
     /**
      * 
      * @type {string}
@@ -1148,6 +1218,16 @@ export interface UpdateFormationDto {
      */
     'skills'?: Array<string>;
 }
+
+export const UpdateFormationDtoStatusEnum = {
+    Complete: 'COMPLETE',
+    Incomplete: 'INCOMPLETE',
+    Paused: 'PAUSED',
+    Progress: 'PROGRESS'
+} as const;
+
+export type UpdateFormationDtoStatusEnum = typeof UpdateFormationDtoStatusEnum[keyof typeof UpdateFormationDtoStatusEnum];
+
 /**
  * 
  * @export

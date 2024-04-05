@@ -1,3 +1,4 @@
+import ExperiencesForm from './components/Form'
 import ExperiencesTable from './components/Table'
 
 import { TitleDesc } from '@/components'
@@ -11,11 +12,12 @@ export default function Experiences() {
 
   return (
     <main className="flex h-full w-full flex-col gap-8">
-      <div className="flex items-end justify-between">
+      <div className="flex justify-between gap-4 max-xs:flex-col">
         <TitleDesc
           title={tSidebar('experiences')}
           description={tHome('underDevelopment')}
         />
+        <ExperiencesForm />
       </div>
       <ExperiencesTable />
     </main>

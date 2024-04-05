@@ -67,9 +67,9 @@ const CoursesTable = forwardRef<HTMLTableElement, CoursesTableProps>(
               <Table.Cell>{course.school}</Table.Cell>
               <Table.Cell>{course.description}</Table.Cell>
               <Table.Cell>{course.status}</Table.Cell>
-              <Table.Cell>
+              <Table.Cell aria-disabled={!course.certificate}>
                 <Link
-                  href={course.certificate}
+                  href={course?.certificate ?? '#'}
                   target="_blank"
                   className="emphasis"
                 >

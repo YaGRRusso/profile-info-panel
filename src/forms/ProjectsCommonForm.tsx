@@ -1,29 +1,18 @@
 'use client'
 
-import { Button, Form, Input, Select, Textarea } from '@/components'
+import { Button, Form, Input, Textarea } from '@/components'
 import { CommonFormValuesProps } from '@/types/common-form'
-import { CommonSelectValuesProps } from '@/types/common-select'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormHTMLAttributes, forwardRef, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-const statusOptions: CommonSelectValuesProps<
-  'COMPLETE' | 'PAUSED' | 'PROGRESS'
-> = [
-  { value: 'COMPLETE', label: 'Completo' },
-  { value: 'PAUSED', label: 'Pausado' },
-  { value: 'PROGRESS', label: 'Em andamento' },
-]
-
 const formSchema = z.object({
   name: z.string().min(1, 'required'),
-  school: z.string().min(1, 'required'),
   description: z.string().min(1, 'required'),
-  status: z.string().min(1, 'required'),
-  certificate: z.string().min(1, 'required'),
-  hours: z.number().min(1, 'required'),
+  image: z.string().min(1, 'required'),
+  link: z.string().min(1, 'required'),
   skills: z.array(z.string()),
 })
 
@@ -49,12 +38,10 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
       resolver: zodResolver(formSchema),
       defaultValues: {
         name: '',
-        certificate: '',
         description: '',
-        hours: undefined,
-        school: '',
+        image: '',
+        link: '',
         skills: [],
-        status: '',
         ...defaultValues,
       },
     })
@@ -78,15 +65,6 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           <Form.Message>{errors.name?.message}</Form.Message>
         </Form.Group>
         <Form.Group>
-          <Form.Label>School</Form.Label>
-          <Input
-            onChange={(ev) => setValue('school', ev.target.value)}
-            value={watch('school')}
-            placeholder="School"
-          />
-          <Form.Message>{errors.school?.message}</Form.Message>
-        </Form.Group>
-        <Form.Group>
           <Form.Label>Description</Form.Label>
           <Textarea
             onChange={(ev) => setValue('description', ev.target.value)}
@@ -96,43 +74,22 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           <Form.Message>{errors.description?.message}</Form.Message>
         </Form.Group>
         <Form.Group>
-          <Form.Label>Status</Form.Label>
-          <Select.Root
-            onValueChange={(ev) => setValue('status', ev)}
-            value={watch('status')}
-          >
-            <Select.Trigger>
-              <Select.Value placeholder="Select" />
-            </Select.Trigger>
-            <Select.Content>
-              {statusOptions.map(({ value, label }) => (
-                <Select.Item key={value} value={value}>
-                  {label}
-                </Select.Item>
-              ))}
-            </Select.Content>
-          </Select.Root>
-          <Form.Message>{errors.status?.message}</Form.Message>
+          <Form.Label>Image</Form.Label>
+          <Input
+            onChange={(ev) => setValue('image', ev.target.value)}
+            value={watch('image')}
+            placeholder="Image"
+          />
+          <Form.Message>{errors.image?.message}</Form.Message>
         </Form.Group>
         <Form.Group>
-          <Form.Label>Certificate</Form.Label>
+          <Form.Label>Link</Form.Label>
           <Input
-            onChange={(ev) => setValue('certificate', ev.target.value)}
-            value={watch('certificate')}
-            placeholder="Certificate"
+            onChange={(ev) => setValue('link', ev.target.value)}
+            value={watch('link') ?? '  '}
+            placeholder="Link"
           />
-          <Form.Message>{errors.certificate?.message}</Form.Message>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Hours</Form.Label>
-          <Input
-            onChange={(ev) => setValue('hours', Number(ev.target.value))}
-            value={watch('hours') ?? '  '}
-            placeholder="Hours"
-            min={1}
-            type="number"
-          />
-          <Form.Message>{errors.hours?.message}</Form.Message>
+          <Form.Message>{errors.link?.message}</Form.Message>
         </Form.Group>
         <Button type="submit" className="mt-2" disabled={isLoading}>
           Concluir

@@ -77,7 +77,6 @@ const FormationsCommonForm = forwardRef<
 
     return (
       <Form.Root ref={ref} onSubmit={handleSubmit(onSub)} {...rest}>
-        <button onClick={() => console.log(errors)}>xxx</button>
         <Form.Group>
           <Form.Label>Name</Form.Label>
           <Input

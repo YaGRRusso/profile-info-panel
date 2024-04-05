@@ -51,12 +51,13 @@ $ npm run test:cov
 - [x] Dark and White Theme (tailwind)
 - [x] i18n (next-intl)
 - [x] Error Boundary (Client)
-- [ ] Error Boundary (Server)
+- [x] Error Boundary (Server)
 - [x] SDK From API
 - [x] Roles (User and Admin)
 - [x] Protected Pages (Public, Authenticated and By Role)
 - [x] Multi Users (Protected)
 - [x] Helpers Tests
+- [ ] Translate Everything
 - [x] [Deploy](https://profile-info-panel.vercel.app) 🚀
 
 ## Resources (Pages, Management, Tables and more...)
@@ -64,11 +65,11 @@ $ npm run test:cov
 - [x] Auth
 - [x] Home
 - [x] Users
-- [ ] Skills
-- [ ] Projects
-- [ ] Formations
-- [ ] Courses
-- [ ] Experiences
+- [x] Skills
+- [x] Projects
+- [x] Formations
+- [x] Courses
+- [x] Experiences
 
 ## License
 

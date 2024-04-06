@@ -39,6 +39,12 @@ export type * from './Dialog'
 export { default as Tooltip } from './Tooltip'
 export type * from './Tooltip'
 
+export { default as Divider } from './Divider'
+export type * from './Divider'
+
+export { default as ScrollArea } from './ScrollArea'
+export type * from './ScrollArea'
+
 export { default as Skeleton } from './Skeleton'
 export type * from './Skeleton'
 

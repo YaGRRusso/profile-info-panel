@@ -11,7 +11,7 @@ export interface SelectSearchProps
 const SelectSearch = forwardRef<HTMLInputElement, SelectSearchProps>(
   ({ className, ...rest }, ref) => {
     return (
-      <div className="flex items-center gap-2 border-b border-gray-200 pl-8 pr-2 focus-within:ring dark:border-gray-800">
+      <div className="focus-within:interactive flex items-center gap-2 border-b border-gray-200 pl-8 pr-2 dark:border-gray-800">
         <MagnifyingGlass />
         <input
           className={cn(

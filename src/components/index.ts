@@ -9,6 +9,9 @@ export type * from './MessagePage'
 export { default as Button, buttonVariants } from './Button'
 export type { ButtonProps } from './Button'
 
+export { default as Badge, badgeVariants } from './Badge'
+export type { BadgeProps } from './Badge'
+
 export { default as Label } from './Label'
 export type * from './Label'
 
@@ -38,6 +41,12 @@ export type * from './Dialog'
 
 export { default as Tooltip } from './Tooltip'
 export type * from './Tooltip'
+
+export { default as Popover } from './Popover'
+export type * from './Popover'
+
+export { default as Command } from './Command'
+export type * from './Command'
 
 export { default as Divider } from './Divider'
 export type * from './Divider'

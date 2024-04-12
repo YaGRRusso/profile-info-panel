@@ -6,11 +6,11 @@ export type * from './Logos'
 export { default as MessagePage } from './MessagePage'
 export type * from './MessagePage'
 
-export { default as Button, buttonVariants } from './Button'
-export type { ButtonProps } from './Button'
+export { default as Button } from './Button'
+export type * from './Button'
 
-export { default as Badge, badgeVariants } from './Badge'
-export type { BadgeProps } from './Badge'
+export { default as Badge } from './Badge'
+export type * from './Badge'
 
 export { default as Label } from './Label'
 export type * from './Label'

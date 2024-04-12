@@ -3,14 +3,14 @@
 import { Button, Form, Input, Select, Textarea } from '@/components'
 import { CreateCourseDtoStatusEnum } from '@/sdk'
 import { CommonFormValuesProps } from '@/types/common-form'
-import { CommonSelectValuesProps } from '@/types/common-select'
+import { CommonSelectValueProps } from '@/types/common-select'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormHTMLAttributes, forwardRef, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-const statusOptions: CommonSelectValuesProps<CreateCourseDtoStatusEnum> = [
+const statusOptions: CommonSelectValueProps<CreateCourseDtoStatusEnum>[] = [
   { value: 'COMPLETE', label: 'Completo' },
   { value: 'INCOMPLETE', label: 'Incompleto' },
   { value: 'PAUSED', label: 'Pausado' },

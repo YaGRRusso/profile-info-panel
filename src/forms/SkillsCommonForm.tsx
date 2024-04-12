@@ -3,14 +3,14 @@
 import { Button, Form, Input, Select } from '@/components'
 import { CreateSkillDtoCategoryEnum } from '@/sdk'
 import { CommonFormValuesProps } from '@/types/common-form'
-import { CommonSelectValuesProps } from '@/types/common-select'
+import { CommonSelectValueProps } from '@/types/common-select'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormHTMLAttributes, forwardRef, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-const categoryOptions: CommonSelectValuesProps<CreateSkillDtoCategoryEnum> = [
+const categoryOptions: CommonSelectValueProps<CreateSkillDtoCategoryEnum>[] = [
   { value: 'LANGUAGE', label: 'Language' },
   { value: 'LIBRARY', label: 'Library' },
   { value: 'OTHER', label: 'Other' },

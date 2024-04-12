@@ -71,3 +71,6 @@ export type * from './DeleteButton'
 
 export { default as FloatingForm } from './FloatingForm'
 export type * from './FloatingForm'
+
+export { default as TagList } from './TagList'
+export type * from './TagList'

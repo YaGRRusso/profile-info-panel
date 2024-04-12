@@ -9,6 +9,7 @@ const BadgeButton = forwardRef<HTMLButtonElement, BadgeButtonProps>(
   ({ className, children, ...rest }, ref) => {
     return (
       <button
+        type="button"
         className={cn('opacity-50 hover:opacity-100', className)}
         ref={ref}
         {...rest}

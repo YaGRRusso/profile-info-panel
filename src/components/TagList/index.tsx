@@ -29,9 +29,7 @@ const TagList = forwardRef<HTMLDivElement, TagListProps>(
             </Badge.Root>
           ))
         ) : (
-          <span className="text-xs font-medium uppercase opacity-25">
-            {placeholder}
-          </span>
+          <span className="text-xs font-medium opacity-15">{placeholder}</span>
         ),
       [onRemove, placeholder, tags],
     )

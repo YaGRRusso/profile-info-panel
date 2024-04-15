@@ -1,20 +1,10 @@
 'use client'
 
-import {
-  Button,
-  Command,
-  Form,
-  Input,
-  Popover,
-  Select,
-  TagList,
-  Textarea,
-} from '@/components'
+import { Button, Form, Input, Select, TagList, Textarea } from '@/components'
 import { useSkills } from '@/sdk'
 import { CommonFormValuesProps } from '@/types/common-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { MagnifyingGlass } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import {
   FormHTMLAttributes,
@@ -144,6 +134,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           >
             <Select.Root
               value=""
+              disabled={skillsControllerFindAll.isLoading}
               onValueChange={(ev) =>
                 setValue('skills', [...getValues('skills'), ev])
               }
@@ -168,41 +159,6 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
                 ))}
               </Select.Content>
             </Select.Root>
-            <Popover.Root>
-              <Popover.Trigger asChild>
-                <Button
-                  variant="outline"
-                  className="w-full justify-between"
-                  type="button"
-                >
-                  Select Skills
-                  <MagnifyingGlass />
-                </Button>
-              </Popover.Trigger>
-              <Popover.Content className="w-[var(--radix-popover-trigger-width)]">
-                <Command.Root>
-                  <Command.Input placeholder="Search skill..." />
-                  <Command.Empty>Empty list.</Command.Empty>
-                  <Command.List>
-                    {filteredSkills?.map((skill) => (
-                      <Command.Item
-                        key={skill.id}
-                        value={skill.id}
-                        disabled={watch('skills').includes(skill.id)}
-                        onSelect={(currentValue) => {
-                          setValue('skills', [
-                            ...getValues('skills'),
-                            currentValue,
-                          ])
-                        }}
-                      >
-                        {skill.name}
-                      </Command.Item>
-                    ))}
-                  </Command.List>
-                </Command.Root>
-              </Popover.Content>
-            </Popover.Root>
           </TagList>
           <Form.Message>{errors.skills?.message}</Form.Message>
         </Form.Group>

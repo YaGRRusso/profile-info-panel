@@ -1,8 +1,6 @@
 'use client'
 
-import { buttonVariants } from '..'
-
-import { cn } from '@/lib/utils'
+import { Button } from '..'
 
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
@@ -14,15 +12,9 @@ const AlertDialogCancel = forwardRef<
   ElementRef<typeof AlertDialogPrimitive.Cancel>,
   AlertDialogCancelProps
 >(({ className, ...rest }, ref) => (
-  <AlertDialogPrimitive.Cancel
-    ref={ref}
-    className={cn(
-      buttonVariants({ variant: 'outline' }),
-      'mt-2 sm:mt-0',
-      className,
-    )}
-    {...rest}
-  />
+  <Button asChild className={className} variant="outline">
+    <AlertDialogPrimitive.Cancel ref={ref} {...rest} />
+  </Button>
 ))
 AlertDialogCancel.displayName = AlertDialogPrimitive.Cancel.displayName
 

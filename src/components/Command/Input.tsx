@@ -13,13 +13,16 @@ const CommandInput = forwardRef<
   ElementRef<typeof CommandPrimitive.Input>,
   CommandInputProps
 >(({ className, ...rest }, ref) => (
-  // eslint-disable-next-line react/no-unknown-property
-  <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
-    <MagnifyingGlass className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+  <div
+    // eslint-disable-next-line react/no-unknown-property
+    cmdk-input-wrapper=""
+    className="flex items-center gap-2 border-b border-gray-200 dark:border-gray-800"
+  >
+    <MagnifyingGlass />
     <CommandPrimitive.Input
       ref={ref}
       className={cn(
-        'flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-gray-500 disabled:cursor-not-allowed disabled:opacity-50 dark:placeholder:text-gray-400',
+        'flex h-10 w-full bg-transparent py-2 text-sm outline-none placeholder:text-gray-500 disabled:cursor-not-allowed disabled:opacity-50 dark:placeholder:text-gray-400',
         className,
       )}
       {...rest}

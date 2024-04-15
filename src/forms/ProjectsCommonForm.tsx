@@ -6,6 +6,7 @@ import {
   Form,
   Input,
   Popover,
+  Select,
   TagList,
   Textarea,
 } from '@/components'
@@ -13,6 +14,7 @@ import { useSkills } from '@/sdk'
 import { CommonFormValuesProps } from '@/types/common-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { MagnifyingGlass } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import {
   FormHTMLAttributes,
@@ -132,7 +134,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
                 ({ id }) => id === skill,
               )?.name,
             }))}
-            placeholder="None Selected"
+            placeholder="Empty"
             onRemove={(tag) =>
               setValue(
                 'skills',
@@ -140,7 +142,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
               )
             }
           >
-            {/* <Select.Root
+            <Select.Root
               value=""
               onValueChange={(ev) =>
                 setValue('skills', [...getValues('skills'), ev])
@@ -165,17 +167,22 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
                   </Select.Item>
                 ))}
               </Select.Content>
-            </Select.Root> */}
+            </Select.Root>
             <Popover.Root>
               <Popover.Trigger asChild>
-                <Button variant="outline" className="w-full" type="button">
+                <Button
+                  variant="outline"
+                  className="w-full justify-between"
+                  type="button"
+                >
                   Select Skills
+                  <MagnifyingGlass />
                 </Button>
               </Popover.Trigger>
-              <Popover.Content>
+              <Popover.Content className="w-[var(--radix-popover-trigger-width)]">
                 <Command.Root>
                   <Command.Input placeholder="Search skill..." />
-                  <Command.Empty>No framework found.</Command.Empty>
+                  <Command.Empty>Empty list.</Command.Empty>
                   <Command.List>
                     {filteredSkills?.map((skill) => (
                       <Command.Item

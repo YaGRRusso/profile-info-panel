@@ -1,6 +1,14 @@
 'use client'
 
-import { Button, Form, Input, Select, TagList, Textarea } from '@/components'
+import {
+  Button,
+  Command,
+  Form,
+  Input,
+  Popover,
+  TagList,
+  Textarea,
+} from '@/components'
 import { useSkills } from '@/sdk'
 import { CommonFormValuesProps } from '@/types/common-form'
 
@@ -132,7 +140,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
               )
             }
           >
-            <Select.Root
+            {/* <Select.Root
               value=""
               onValueChange={(ev) =>
                 setValue('skills', [...getValues('skills'), ev])
@@ -157,7 +165,37 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
                   </Select.Item>
                 ))}
               </Select.Content>
-            </Select.Root>
+            </Select.Root> */}
+            <Popover.Root>
+              <Popover.Trigger asChild>
+                <Button variant="outline" className="w-full" type="button">
+                  Select Skills
+                </Button>
+              </Popover.Trigger>
+              <Popover.Content>
+                <Command.Root>
+                  <Command.Input placeholder="Search skill..." />
+                  <Command.Empty>No framework found.</Command.Empty>
+                  <Command.List>
+                    {filteredSkills?.map((skill) => (
+                      <Command.Item
+                        key={skill.id}
+                        value={skill.id}
+                        disabled={watch('skills').includes(skill.id)}
+                        onSelect={(currentValue) => {
+                          setValue('skills', [
+                            ...getValues('skills'),
+                            currentValue,
+                          ])
+                        }}
+                      >
+                        {skill.name}
+                      </Command.Item>
+                    ))}
+                  </Command.List>
+                </Command.Root>
+              </Popover.Content>
+            </Popover.Root>
           </TagList>
           <Form.Message>{errors.skills?.message}</Form.Message>
         </Form.Group>

@@ -1,11 +1,10 @@
 'use client'
 
-import { Button, Form, Input, Select, Textarea } from '@/components'
+import { Button, Form, Input, Select, TagList, Textarea } from '@/components'
 import { useSkills } from '@/sdk'
 import { CommonFormValuesProps } from '@/types/common-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { X } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import {
   FormHTMLAttributes,
@@ -118,52 +117,49 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
         </Form.Group>
         <Form.Group>
           <Form.Label>Skills</Form.Label>
-          <Select.Root
-            onValueChange={(ev) =>
-              setValue('skills', [...getValues('skills'), ev])
+          <TagList
+            tags={watch('skills').map((skill) => ({
+              value: skill,
+              label: skillsControllerFindAll.data?.data.find(
+                ({ id }) => id === skill,
+              )?.name,
+            }))}
+            placeholder="None Selected"
+            onRemove={(tag) =>
+              setValue(
+                'skills',
+                getValues('skills').filter((skill) => skill !== tag),
+              )
             }
           >
-            <Select.Trigger>
-              <Select.Value placeholder="Select" />
-            </Select.Trigger>
-            <Select.Content>
-              <Select.Search
-                placeholder="Search"
-                value={searchSkills}
-                onChange={(ev) => setSearchSkills(ev.target.value)}
-              />
-              {filteredSkills?.map(({ id, name }) => (
-                <Select.Item key={id} value={id}>
-                  {name}
-                </Select.Item>
-              ))}
-            </Select.Content>
-          </Select.Root>
-          <Form.Message>{errors.skills?.message}</Form.Message>
-          {watch('skills') && (
-            <ul>
-              {watch('skills').map((skill) => (
-                <li
-                  key={skill}
-                  className="flex items-center justify-between gap-2 border-b border-gray-200 py-2 last:border-none dark:border-gray-800"
-                >
-                  <span>{skill}</span>
-                  <button
-                    onClick={() =>
-                      setValue(
-                        'skills',
-                        getValues('skills').filter(
-                          (oldSkill) => oldSkill !== skill,
-                        ),
-                      )
-                    }
+            <Select.Root
+              value=""
+              onValueChange={(ev) =>
+                setValue('skills', [...getValues('skills'), ev])
+              }
+            >
+              <Select.Trigger>
+                <Select.Value placeholder="Select" />
+              </Select.Trigger>
+              <Select.Content>
+                <Select.Search
+                  placeholder="Search"
+                  value={searchSkills}
+                  onChange={(ev) => setSearchSkills(ev.target.value)}
+                />
+                {filteredSkills?.map(({ id, name }) => (
+                  <Select.Item
+                    key={id}
+                    value={id}
+                    disabled={watch('skills').includes(id)}
                   >
-                    <X />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
+                    {name}
+                  </Select.Item>
+                ))}
+              </Select.Content>
+            </Select.Root>
+          </TagList>
+          <Form.Message>{errors.skills?.message}</Form.Message>
         </Form.Group>
         <Button type="submit" className="mt-2" disabled={isLoading}>
           Concluir

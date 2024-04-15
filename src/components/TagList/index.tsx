@@ -7,15 +7,35 @@ import { cn } from '@/lib/utils'
 import { CommonSelectValueProps } from '@/types/common-select'
 
 import { X } from '@phosphor-icons/react'
-import { HTMLAttributes, forwardRef } from 'react'
+import { HTMLAttributes, forwardRef, useMemo } from 'react'
 
 export interface TagListProps extends HTMLAttributes<HTMLDivElement> {
   tags?: CommonSelectValueProps[]
-  onRemove?: (tag: CommonSelectValueProps) => void
+  onRemove?: (tag: string) => void
+  placeholder?: string
 }
 
 const TagList = forwardRef<HTMLDivElement, TagListProps>(
-  ({ tags, onRemove, className, children, ...rest }, ref) => {
+  ({ tags, onRemove, placeholder, className, children, ...rest }, ref) => {
+    const tagsList = useMemo(
+      () =>
+        tags && tags.length > 0 ? (
+          tags.map((tag) => (
+            <Badge.Root key={tag.value}>
+              {tag?.label ?? tag.value}
+              <Badge.Button onClick={() => onRemove?.(tag.value)}>
+                <X />
+              </Badge.Button>
+            </Badge.Root>
+          ))
+        ) : (
+          <span className="text-xs font-medium uppercase text-gray-500">
+            {placeholder}
+          </span>
+        ),
+      [onRemove, placeholder, tags],
+    )
+
     return (
       <div
         className={cn(
@@ -26,14 +46,7 @@ const TagList = forwardRef<HTMLDivElement, TagListProps>(
         {...rest}
       >
         <ScrollArea className="flex max-h-24 max-w-full flex-wrap items-stretch rounded-t-md p-2">
-          {tags?.map((tag) => (
-            <Badge.Root key={tag.value}>
-              {tag?.label ?? tag.value}
-              <Badge.Button onClick={() => onRemove?.(tag)}>
-                <X />
-              </Badge.Button>
-            </Badge.Root>
-          ))}
+          {tagsList}
         </ScrollArea>
         <div className="rounded-b-md [&>*]:bg-white [&>*]:dark:bg-gray-950">
           {children}

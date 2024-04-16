@@ -11,11 +11,17 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 const categoryOptions: CommonSelectValueProps<CreateSkillDtoCategoryEnum>[] = [
+  { value: 'DATABASE', label: 'Database' },
+  { value: 'DEVOPS', label: 'DevOPS' },
+  { value: 'FRAMEWORK', label: 'Framework' },
   { value: 'LANGUAGE', label: 'Language' },
   { value: 'LIBRARY', label: 'Library' },
-  { value: 'OTHER', label: 'Other' },
+  { value: 'PATTERN', label: 'Pattern' },
   { value: 'SYSTEM', label: 'System' },
+  { value: 'TESTING', label: 'Testing' },
   { value: 'TOOL', label: 'Tool' },
+  { value: 'SOFT', label: 'Soft' },
+  { value: 'OTHER', label: 'Other' },
 ]
 
 const formSchema = z.object({

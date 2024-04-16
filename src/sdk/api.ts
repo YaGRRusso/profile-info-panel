@@ -333,8 +333,14 @@ export interface CreateSkillDto {
 export const CreateSkillDtoCategoryEnum = {
     Language: 'LANGUAGE',
     Library: 'LIBRARY',
+    Framework: 'FRAMEWORK',
+    Database: 'DATABASE',
     Tool: 'TOOL',
     System: 'SYSTEM',
+    Testing: 'TESTING',
+    Pattern: 'PATTERN',
+    Devops: 'DEVOPS',
+    Soft: 'SOFT',
     Other: 'OTHER'
 } as const;
 
@@ -921,8 +927,14 @@ export interface SearchSkillDto {
 export const SearchSkillDtoCategoryEnum = {
     Language: 'LANGUAGE',
     Library: 'LIBRARY',
+    Framework: 'FRAMEWORK',
+    Database: 'DATABASE',
     Tool: 'TOOL',
     System: 'SYSTEM',
+    Testing: 'TESTING',
+    Pattern: 'PATTERN',
+    Devops: 'DEVOPS',
+    Soft: 'SOFT',
     Other: 'OTHER'
 } as const;
 
@@ -1054,8 +1066,14 @@ export interface SkillDto {
 export const SkillDtoCategoryEnum = {
     Language: 'LANGUAGE',
     Library: 'LIBRARY',
+    Framework: 'FRAMEWORK',
+    Database: 'DATABASE',
     Tool: 'TOOL',
     System: 'SYSTEM',
+    Testing: 'TESTING',
+    Pattern: 'PATTERN',
+    Devops: 'DEVOPS',
+    Soft: 'SOFT',
     Other: 'OTHER'
 } as const;
 
@@ -1288,8 +1306,14 @@ export interface UpdateSkillDto {
 export const UpdateSkillDtoCategoryEnum = {
     Language: 'LANGUAGE',
     Library: 'LIBRARY',
+    Framework: 'FRAMEWORK',
+    Database: 'DATABASE',
     Tool: 'TOOL',
     System: 'SYSTEM',
+    Testing: 'TESTING',
+    Pattern: 'PATTERN',
+    Devops: 'DEVOPS',
+    Soft: 'SOFT',
     Other: 'OTHER'
 } as const;
 

@@ -1,6 +1,14 @@
 'use client'
 
-import { Button, Form, Input, Select, Textarea, TagList } from '@/components'
+import {
+  Button,
+  Form,
+  Input,
+  Select,
+  Textarea,
+  TagList,
+  Datepicker,
+} from '@/components'
 import { CreateFormationDtoStatusEnum, useSkills } from '@/sdk'
 import { CommonFormValuesProps } from '@/types/common-form'
 import { CommonSelectValueProps } from '@/types/common-select'
@@ -30,8 +38,8 @@ const formSchema = z.object({
   description: z.string().min(1, 'required'),
   status: z.string().min(1, 'required'),
   certificate: z.string().optional(),
-  start: z.string().min(1, 'required'),
-  end: z.string().optional(),
+  start: z.date(),
+  end: z.date().optional(),
   skills: z.array(z.string()),
 })
 
@@ -73,8 +81,8 @@ const FormationsCommonForm = forwardRef<
         school: '',
         status: '',
         description: '',
-        start: '',
-        end: '',
+        start: undefined,
+        end: undefined,
         skills: [],
         ...defaultValues,
       },
@@ -82,10 +90,6 @@ const FormationsCommonForm = forwardRef<
 
     const onSub = useCallback(
       (data: FormSchemaProps) => {
-        data.start = new Date(data.start).toISOString()
-        data.end
-          ? (data.end = new Date(data.end).toISOString())
-          : (data.end = undefined)
         onSubmit({ ...data, ...customValues })
       },
       [customValues, onSubmit],
@@ -157,19 +161,19 @@ const FormationsCommonForm = forwardRef<
         </Form.Group>
         <Form.Group>
           <Form.Label>Start</Form.Label>
-          <Input
-            onChange={(ev) => setValue('start', ev.target.value)}
-            value={watch('start')}
-            type="date"
+          <Datepicker
+            onSelect={(ev) => ev && setValue('start', ev)}
+            selected={watch('start')}
+            placeholder="00/00/0000"
           />
           <Form.Message>{errors.start?.message}</Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>End</Form.Label>
-          <Input
-            onChange={(ev) => setValue('end', ev.target.value)}
-            value={watch('end')}
-            type="date"
+          <Datepicker
+            onSelect={(ev) => setValue('end', ev)}
+            selected={watch('end')}
+            placeholder="00/00/0000"
           />
           <Form.Message>{errors.end?.message}</Form.Message>
         </Form.Group>

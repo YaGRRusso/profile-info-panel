@@ -1,6 +1,13 @@
 'use client'
 
-import { Button, Form, Input, Checkbox, Textarea } from '@/components'
+import {
+  Button,
+  Form,
+  Input,
+  Checkbox,
+  Textarea,
+  Datepicker,
+} from '@/components'
 import { mask } from '@/helpers/mask'
 import { CommonFormValuesProps } from '@/types/common-form'
 
@@ -13,18 +20,18 @@ import { z } from 'zod'
 
 const formSchema = z
   .object({
-    name: z.string().min(1),
-    birth: z.string().min(1),
-    description: z.string().min(1),
-    email: z.string().min(1).email(),
-    password: z.string().min(1),
-    nickname: z.string().min(1),
-    phone: z.string().min(1),
+    name: z.string().min(1, 'required'),
+    birth: z.date(),
+    description: z.string().min(1, 'required'),
+    email: z.string().min(1, 'required').email('invalid'),
+    password: z.string().min(1, 'required'),
+    nickname: z.string().min(1, 'required'),
+    phone: z.string().min(1, 'required'),
     picture: z.string(),
-    postal: z.string().min(1),
-    address: z.string().min(1),
-    title: z.string().min(1),
-    passwordConfirm: z.string().min(1).optional(),
+    postal: z.string().min(1, 'required'),
+    address: z.string().min(1, 'required'),
+    title: z.string().min(1, 'required'),
+    passwordConfirm: z.string().min(1, 'required').optional(),
   })
   .refine((data) => data.password === data.passwordConfirm, {
     message: 'sameValue',
@@ -57,7 +64,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
       resolver: zodResolver(formSchema),
       defaultValues: {
         address: '',
-        birth: '',
+        birth: undefined,
         description: '',
         email: '',
         name: '',
@@ -75,7 +82,6 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
     const onSub = useCallback(
       (data: FormSchemaProps) => {
         delete data.passwordConfirm
-        data.birth = new Date(data.birth).toISOString()
         onSubmit({ ...data, ...customValues })
       },
       [customValues, onSubmit],
@@ -127,10 +133,10 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
           </Form.Group>
           <Form.Group>
             <Form.Label>Birth</Form.Label>
-            <Input
-              onChange={(ev) => setValue('birth', ev.target.value)}
-              value={watch('birth')}
-              type="date"
+            <Datepicker
+              onSelect={(ev) => ev && setValue('birth', ev)}
+              selected={watch('birth')}
+              placeholder="00/00/0000"
             />
             <Form.Message>{errors.birth?.message}</Form.Message>
           </Form.Group>

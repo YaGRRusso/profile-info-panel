@@ -3,7 +3,7 @@
 import { Link } from '@/common/navigation'
 import { useToast } from '@/components'
 import UsersCommonForm from '@/forms/UsersCommonForm'
-import { CreateUserDto, useUsers } from '@/sdk'
+import { useUsers } from '@/sdk'
 
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
@@ -36,7 +36,7 @@ const SignUpForm: FC<SignUpFormProps> = () => {
     <>
       <UsersCommonForm
         isLoading={createUser.isPending}
-        handleSubmit={(data) => createUser.mutate(data as CreateUserDto)}
+        handleSubmit={(data) => createUser.mutate(data as any)}
       />
       <span className='text-gray-300" text-sm'>
         {tSignUp('alreadyHaveAccount')}{' '}

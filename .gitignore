@@ -11,3 +11,6 @@ node_modules/
 
 # Jest
 coverage/
+
+# Misc
+src/components/ui

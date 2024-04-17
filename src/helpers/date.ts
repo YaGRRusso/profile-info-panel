@@ -14,5 +14,5 @@ export const formatDate = (
     ...options,
   }
 
-  return date && new Date(date).toLocaleString(language ?? 'pt-BR', opt)
+  return date && new Date(date).toLocaleString(language, opt)
 }

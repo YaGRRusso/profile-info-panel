@@ -4,7 +4,7 @@ import SessionInfo from './components/Buttons/SessionInfo'
 import ToastInfo from './components/Buttons/ToastInfo'
 
 import { Link } from '@/common/navigation'
-import { Logos, ThemeChanger } from '@/components'
+import { Divider, Logos, ThemeChanger } from '@/components'
 
 import {
   CircleNotch,
@@ -23,7 +23,7 @@ export default function Home() {
       <div className="flex items-center justify-center gap-4 text-xl text-gray-800 dark:text-gray-400 [&_*:disabled]:opacity-50">
         <ApiInfo />
         <SessionInfo />
-        <div className="mx-2 h-4 border-x border-gray-800 opacity-15 dark:border-gray-400 max-sm:hidden" />
+        <Divider className="h-4" orientation="vertical" />
         <Link href="https://github.com/YaGRRusso" target="_blank">
           <GithubLogo />
         </Link>
@@ -31,7 +31,7 @@ export default function Home() {
         <Link href="/" locale={locale === 'pt' ? 'en' : 'pt'}>
           <Translate />
         </Link>
-        <div className="mx-2 h-4 border-x border-gray-800 opacity-15 dark:border-gray-400 max-sm:hidden" />
+        <Divider className="h-4" orientation="vertical" />
         <ToastInfo />
         <DialogInfo />
       </div>

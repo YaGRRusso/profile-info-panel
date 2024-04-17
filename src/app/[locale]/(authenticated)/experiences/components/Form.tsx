@@ -2,7 +2,7 @@
 
 import { Button, ButtonProps, FloatingForm, useToast } from '@/components'
 import ExperiencesCommonForm from '@/forms/ExperiencesCommonForm'
-import { CreateExperienceDto, useExperiences } from '@/sdk'
+import { useExperiences } from '@/sdk'
 
 import { Plus } from '@phosphor-icons/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -57,9 +57,7 @@ const ExperiencesForm = forwardRef<HTMLButtonElement, ExperiencesFormProps>(
         >
           <ExperiencesCommonForm
             isLoading={createExperience.isPending}
-            handleSubmit={(data) =>
-              createExperience.mutate(data as CreateExperienceDto)
-            }
+            handleSubmit={(data) => createExperience.mutate(data as any)}
           />
         </FloatingForm>
       </>

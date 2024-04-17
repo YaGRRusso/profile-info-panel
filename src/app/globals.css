@@ -4,7 +4,7 @@
 
 @layer utilities {
   .interactive {
-    @apply focus-visible:ring-1 focus-visible:ring-sky-600 dark:focus-visible:ring-sky-400;
+    @apply outline-none ring-offset-white ring-2 ring-gray-950 ring-offset-2 dark:ring-offset-gray-950 dark:ring-gray-300;
   }
 
   .ellipsis {

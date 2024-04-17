@@ -2,7 +2,7 @@
 
 import { Button, ButtonProps, FloatingForm, useToast } from '@/components'
 import FormationsCommonForm from '@/forms/FormationsCommonForm'
-import { CreateFormationDto, useFormations } from '@/sdk'
+import { useFormations } from '@/sdk'
 
 import { Plus } from '@phosphor-icons/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -57,9 +57,7 @@ const FormationsForm = forwardRef<HTMLButtonElement, FormationsFormProps>(
         >
           <FormationsCommonForm
             isLoading={createFormation.isPending}
-            handleSubmit={(data) =>
-              createFormation.mutate(data as CreateFormationDto)
-            }
+            handleSubmit={(data) => createFormation.mutate(data as any)}
           />
         </FloatingForm>
       </>

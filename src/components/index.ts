@@ -45,6 +45,12 @@ export type * from './Tooltip'
 export { default as Popover } from './Popover'
 export type * from './Popover'
 
+export { default as Calendar } from './Calendar'
+export type * from './Calendar'
+
+export { default as Datepicker } from './Datepicker'
+export type * from './Datepicker'
+
 export { default as Command } from './Command'
 export type * from './Command'
 

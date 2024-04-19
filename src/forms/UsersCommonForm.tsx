@@ -40,6 +40,18 @@ const formSchema = z
 
 type FormSchemaProps = z.infer<typeof formSchema>
 
+const editFormSchema = z.object({
+  name: z.string(),
+  birth: z.date(),
+  description: z.string(),
+  nickname: z.string(),
+  phone: z.string(),
+  picture: z.string(),
+  postal: z.string(),
+  address: z.string(),
+  title: z.string(),
+})
+
 export interface UsersCommonFormProps
   extends FormHTMLAttributes<HTMLFormElement>,
     CommonFormValuesProps<FormSchemaProps> {
@@ -48,11 +60,17 @@ export interface UsersCommonFormProps
 
 const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
   (
-    { handleSubmit: onSubmit, isLoading, defaultValues, customValues, ...rest },
+    {
+      handleSubmit: onSubmit,
+      isLoading,
+      defaultValues,
+      customValues,
+      isEditing,
+      ...rest
+    },
     ref,
   ) => {
     const [isShowingPassword, setIsShowingPassword] = useState(false)
-    const tSignUp = useTranslations('signUp')
     const tForm = useTranslations('form')
 
     const {
@@ -61,10 +79,9 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
       handleSubmit,
       formState: { errors },
     } = useForm<FormSchemaProps>({
-      resolver: zodResolver(formSchema),
+      resolver: zodResolver(isEditing ? editFormSchema : formSchema),
       defaultValues: {
         address: '',
-        birth: undefined,
         description: '',
         email: '',
         name: '',
@@ -76,6 +93,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
         postal: '',
         title: '',
         ...defaultValues,
+        birth: defaultValues?.birth && new Date(defaultValues.birth),
       },
     })
 
@@ -89,7 +107,8 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
 
     return (
       <Form.Root ref={ref} onSubmit={handleSubmit(onSub)} {...rest}>
-        <div className="grid grid-cols-[repeat(auto-fit,_minmax(180px,1fr))] gap-x-6 gap-y-4">
+        {/* <div className="grid grid-cols-[repeat(auto-fit,_minmax(180px,1fr))] gap-x-6 gap-y-4"> */}
+        <div className="grid grid-cols-2 gap-x-6 gap-y-4 max-md:grid-cols-1">
           <Form.Group className="col-span-full">
             <Form.Label>Name</Form.Label>
             <Input
@@ -149,42 +168,50 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
             />
             <Form.Message>{errors.description?.message}</Form.Message>
           </Form.Group>
-          <Form.Group className="col-span-full">
-            <Form.Label>Email</Form.Label>
-            <Input
-              onChange={(ev) => setValue('email', ev.target.value)}
-              value={watch('email')}
-              placeholder="johndoe@email.com"
-            />
-            <Form.Message>{errors.email?.message}</Form.Message>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Password</Form.Label>
-            <Input
-              onChange={(ev) => setValue('password', ev.target.value)}
-              value={watch('password')}
-              type={isShowingPassword ? 'text' : 'password'}
-              placeholder="Strong password here"
-            />
-            <Form.Message>{errors.password?.message}</Form.Message>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Password Confirm</Form.Label>
-            <Input
-              onChange={(ev) => setValue('passwordConfirm', ev.target.value)}
-              value={watch('passwordConfirm')}
-              type={isShowingPassword ? 'text' : 'password'}
-              placeholder="Strong password here"
-            />
-            <Form.Message>{errors.passwordConfirm?.message}</Form.Message>
-          </Form.Group>
-          <Form.Group className="col-span-full">
-            <Checkbox
-              onCheckedChange={() => setIsShowingPassword(!isShowingPassword)}
-              checked={isShowingPassword}
-              placeholder={tForm('showPassword')}
-            />
-          </Form.Group>
+          {!isEditing && (
+            <>
+              <Form.Group className="col-span-full">
+                <Form.Label>Email</Form.Label>
+                <Input
+                  onChange={(ev) => setValue('email', ev.target.value)}
+                  value={watch('email')}
+                  placeholder="johndoe@email.com"
+                />
+                <Form.Message>{errors.email?.message}</Form.Message>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Password</Form.Label>
+                <Input
+                  onChange={(ev) => setValue('password', ev.target.value)}
+                  value={watch('password')}
+                  type={isShowingPassword ? 'text' : 'password'}
+                  placeholder="Strong password here"
+                />
+                <Form.Message>{errors.password?.message}</Form.Message>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Password Confirm</Form.Label>
+                <Input
+                  onChange={(ev) =>
+                    setValue('passwordConfirm', ev.target.value)
+                  }
+                  value={watch('passwordConfirm')}
+                  type={isShowingPassword ? 'text' : 'password'}
+                  placeholder="Strong password here"
+                />
+                <Form.Message>{errors.passwordConfirm?.message}</Form.Message>
+              </Form.Group>
+              <Form.Group className="col-span-full">
+                <Checkbox
+                  onCheckedChange={() =>
+                    setIsShowingPassword(!isShowingPassword)
+                  }
+                  checked={isShowingPassword}
+                  placeholder={tForm('showPassword')}
+                />
+              </Form.Group>
+            </>
+          )}
           <Form.Group>
             <Form.Label>Address</Form.Label>
             <Input
@@ -211,7 +238,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
         </div>
         <Button type="submit" className="mt-2" disabled={isLoading}>
           <UserPlus />
-          {tSignUp('signUp')}
+          Concluir
         </Button>
       </Form.Root>
     )

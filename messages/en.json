@@ -1,7 +1,9 @@
 {
   "form": {
-    "writeHere": "Write here...",
-    "showPassword": "Show password"
+    "required": "Required",
+    "tooSmall": "Too short",
+    "tooBig": "Too long",
+    "invalid": "Invalid"
   },
   "sidebar": {
     "home": "Home",

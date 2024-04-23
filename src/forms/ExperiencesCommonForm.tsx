@@ -14,6 +14,7 @@ import { CommonFormValuesProps } from '@/types/common-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQuery } from '@tanstack/react-query'
+import { useTranslations } from 'next-intl'
 import {
   FormHTMLAttributes,
   forwardRef,
@@ -49,6 +50,7 @@ const ExperiencesCommonForm = forwardRef<
     { handleSubmit: onSubmit, isLoading, defaultValues, customValues, ...rest },
     ref,
   ) => {
+    const tForm = useTranslations('form')
     const [searchSkills, setSearchSkills] = useState('')
     const skills = useSkills()
 
@@ -95,7 +97,9 @@ const ExperiencesCommonForm = forwardRef<
             value={watch('role') ?? ''}
             placeholder="Role"
           />
-          <Form.Message>{errors.role?.message}</Form.Message>
+          <Form.Message>
+            {errors.role && tForm(errors.role?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Organization</Form.Label>
@@ -104,7 +108,9 @@ const ExperiencesCommonForm = forwardRef<
             value={watch('organization') ?? ''}
             placeholder="Organization"
           />
-          <Form.Message>{errors.organization?.message}</Form.Message>
+          <Form.Message>
+            {errors.organization && tForm(errors.organization?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Description</Form.Label>
@@ -113,7 +119,9 @@ const ExperiencesCommonForm = forwardRef<
             value={watch('description') ?? ''}
             placeholder="Description"
           />
-          <Form.Message>{errors.description?.message}</Form.Message>
+          <Form.Message>
+            {errors.description && tForm(errors.description?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Start</Form.Label>
@@ -122,7 +130,9 @@ const ExperiencesCommonForm = forwardRef<
             selected={watch('start')}
             placeholder="00/00/0000"
           />
-          <Form.Message>{errors.start?.message}</Form.Message>
+          <Form.Message>
+            {errors.start && tForm(errors.start?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>End</Form.Label>
@@ -131,7 +141,9 @@ const ExperiencesCommonForm = forwardRef<
             selected={watch('end')}
             placeholder="00/00/0000"
           />
-          <Form.Message>{errors.end?.message}</Form.Message>
+          <Form.Message>
+            {errors.end && tForm(errors.end?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Skills</Form.Label>
@@ -178,7 +190,9 @@ const ExperiencesCommonForm = forwardRef<
               </Select.Content>
             </Select.Root>
           </TagList>
-          <Form.Message>{errors.skills?.message}</Form.Message>
+          <Form.Message>
+            {errors.skills && tForm(errors.skills?.message)}
+          </Form.Message>
         </Form.Group>
         <Button type="submit" className="mt-2" disabled={isLoading}>
           Concluir

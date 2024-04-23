@@ -6,6 +6,7 @@ import { CommonFormValuesProps } from '@/types/common-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQuery } from '@tanstack/react-query'
+import { useTranslations } from 'next-intl'
 import {
   FormHTMLAttributes,
   forwardRef,
@@ -37,6 +38,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
     { handleSubmit: onSubmit, isLoading, defaultValues, customValues, ...rest },
     ref,
   ) => {
+    const tForm = useTranslations('form')
     const [searchSkills, setSearchSkills] = useState('')
     const skills = useSkills()
 
@@ -81,7 +83,9 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
             value={watch('name') ?? ''}
             placeholder="Name"
           />
-          <Form.Message>{errors.name?.message}</Form.Message>
+          <Form.Message>
+            {errors.name && tForm(errors.name?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Description</Form.Label>
@@ -90,7 +94,9 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
             value={watch('description') ?? ''}
             placeholder="Description"
           />
-          <Form.Message>{errors.description?.message}</Form.Message>
+          <Form.Message>
+            {errors.description && tForm(errors.description?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Image</Form.Label>
@@ -99,7 +105,9 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
             value={watch('image') ?? ''}
             placeholder="Image"
           />
-          <Form.Message>{errors.image?.message}</Form.Message>
+          <Form.Message>
+            {errors.image && tForm(errors.image?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Link</Form.Label>
@@ -108,7 +116,9 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
             value={watch('link') ?? ''}
             placeholder="Link"
           />
-          <Form.Message>{errors.link?.message}</Form.Message>
+          <Form.Message>
+            {errors.link && tForm(errors.link?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Skills</Form.Label>
@@ -155,7 +165,9 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
               </Select.Content>
             </Select.Root>
           </TagList>
-          <Form.Message>{errors.skills?.message}</Form.Message>
+          <Form.Message>
+            {errors.skills && tForm(errors.skills?.message)}
+          </Form.Message>
         </Form.Group>
         <Button type="submit" className="mt-2" disabled={isLoading}>
           Concluir

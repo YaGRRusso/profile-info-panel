@@ -6,6 +6,7 @@ import { CommonFormValuesProps } from '@/types/common-form'
 import { CommonSelectValueProps } from '@/types/common-select'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useTranslations } from 'next-intl'
 import { FormHTMLAttributes, forwardRef, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -42,6 +43,8 @@ const SkillsCommonForm = forwardRef<HTMLFormElement, SkillsCommonFormProps>(
     { handleSubmit: onSubmit, isLoading, defaultValues, customValues, ...rest },
     ref,
   ) => {
+    const tForm = useTranslations('form')
+
     const {
       watch,
       setValue,
@@ -70,7 +73,9 @@ const SkillsCommonForm = forwardRef<HTMLFormElement, SkillsCommonFormProps>(
             value={watch('name') ?? ''}
             placeholder="Javascript"
           />
-          <Form.Message>{errors.name?.message}</Form.Message>
+          <Form.Message>
+            {errors.name && tForm(errors.name?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Category</Form.Label>
@@ -89,7 +94,9 @@ const SkillsCommonForm = forwardRef<HTMLFormElement, SkillsCommonFormProps>(
               ))}
             </Select.Content>
           </Select.Root>
-          <Form.Message>{errors.category?.message}</Form.Message>
+          <Form.Message>
+            {errors.category && tForm(errors.category?.message)}
+          </Form.Message>
         </Form.Group>
         <Button type="submit" className="mt-2" disabled={isLoading}>
           Concluir

@@ -13,6 +13,7 @@ import { CommonFormValuesProps } from '@/types/common-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserPlus } from '@phosphor-icons/react'
+import { useTranslations } from 'next-intl'
 import { FormHTMLAttributes, forwardRef, useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -66,6 +67,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
     },
     ref,
   ) => {
+    const tForm = useTranslations('form')
     const [isShowingPassword, setIsShowingPassword] = useState(false)
 
     const {
@@ -101,7 +103,9 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               value={watch('name') ?? ''}
               placeholder="John Doe"
             />
-            <Form.Message>{errors.name?.message}</Form.Message>
+            <Form.Message>
+              {errors.name && tForm(errors.name?.message)}
+            </Form.Message>
           </Form.Group>
           <Form.Group>
             <Form.Label>Nickname</Form.Label>
@@ -110,7 +114,9 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               value={watch('nickname') ?? ''}
               placeholder="JohnDoe123"
             />
-            <Form.Message>{errors.nickname?.message}</Form.Message>
+            <Form.Message>
+              {errors.nickname && tForm(errors.nickname?.message)}
+            </Form.Message>
           </Form.Group>
           <Form.Group>
             <Form.Label>Title</Form.Label>
@@ -119,7 +125,9 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               value={watch('title') ?? ''}
               placeholder="Full Stack Developer"
             />
-            <Form.Message>{errors.title?.message}</Form.Message>
+            <Form.Message>
+              {errors.title && tForm(errors.title?.message)}
+            </Form.Message>
           </Form.Group>
           <Form.Group>
             <Form.Label>Phone</Form.Label>
@@ -133,7 +141,9 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
                 )
               }
             />
-            <Form.Message>{errors.phone?.message}</Form.Message>
+            <Form.Message>
+              {errors.phone && tForm(errors.phone?.message)}
+            </Form.Message>
           </Form.Group>
           <Form.Group>
             <Form.Label>Birth</Form.Label>
@@ -142,7 +152,9 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               selected={watch('birth') ?? ''}
               placeholder="00/00/0000"
             />
-            <Form.Message>{errors.birth?.message}</Form.Message>
+            <Form.Message>
+              {errors.birth && tForm(errors.birth?.message)}
+            </Form.Message>
           </Form.Group>
           <Form.Group className="col-span-full">
             <Form.Label>Description</Form.Label>
@@ -151,7 +163,9 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               value={watch('description') ?? ''}
               placeholder="Description about you"
             />
-            <Form.Message>{errors.description?.message}</Form.Message>
+            <Form.Message>
+              {errors.description && tForm(errors.description?.message)}
+            </Form.Message>
           </Form.Group>
           {!isEditing && (
             <>
@@ -162,7 +176,9 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
                   value={watch('email') ?? ''}
                   placeholder="johndoe@email.com"
                 />
-                <Form.Message>{errors.email?.message}</Form.Message>
+                <Form.Message>
+                  {errors.email && tForm(errors.email?.message)}
+                </Form.Message>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Password</Form.Label>
@@ -172,7 +188,9 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
                   type={isShowingPassword ? 'text' : 'password'}
                   placeholder="Strong password here"
                 />
-                <Form.Message>{errors.password?.message}</Form.Message>
+                <Form.Message>
+                  {errors.password && tForm(errors.password?.message)}
+                </Form.Message>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Password Confirm</Form.Label>
@@ -184,7 +202,10 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
                   type={isShowingPassword ? 'text' : 'password'}
                   placeholder="Strong password here"
                 />
-                <Form.Message>{errors.passwordConfirm?.message}</Form.Message>
+                <Form.Message>
+                  {errors.passwordConfirm &&
+                    tForm(errors.passwordConfirm?.message)}
+                </Form.Message>
               </Form.Group>
               <Form.Group className="col-span-full">
                 <Checkbox
@@ -204,7 +225,9 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               value={watch('address') ?? ''}
               placeholder="Brazil, SP"
             />
-            <Form.Message>{errors.address?.message}</Form.Message>
+            <Form.Message>
+              {errors.address && tForm(errors.address?.message)}
+            </Form.Message>
           </Form.Group>
           <Form.Group>
             <Form.Label>Postal Code</Form.Label>
@@ -218,7 +241,9 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
                 )
               }
             />
-            <Form.Message>{errors.postal?.message}</Form.Message>
+            <Form.Message>
+              {errors.postal && tForm(errors.postal?.message)}
+            </Form.Message>
           </Form.Group>
         </div>
         <Button type="submit" className="mt-2" disabled={isLoading}>

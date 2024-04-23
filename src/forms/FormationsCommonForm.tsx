@@ -15,6 +15,7 @@ import { CommonSelectValueProps } from '@/types/common-select'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQuery } from '@tanstack/react-query'
+import { useTranslations } from 'next-intl'
 import {
   FormHTMLAttributes,
   forwardRef,
@@ -59,6 +60,7 @@ const FormationsCommonForm = forwardRef<
     { handleSubmit: onSubmit, isLoading, defaultValues, customValues, ...rest },
     ref,
   ) => {
+    const tForm = useTranslations('form')
     const [searchSkills, setSearchSkills] = useState('')
     const skills = useSkills()
 
@@ -105,7 +107,9 @@ const FormationsCommonForm = forwardRef<
             value={watch('name') ?? ''}
             placeholder="Name"
           />
-          <Form.Message>{errors.name?.message}</Form.Message>
+          <Form.Message>
+            {errors.name && tForm(errors.name?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>School</Form.Label>
@@ -114,7 +118,9 @@ const FormationsCommonForm = forwardRef<
             value={watch('school') ?? ''}
             placeholder="School"
           />
-          <Form.Message>{errors.school?.message}</Form.Message>
+          <Form.Message>
+            {errors.school && tForm(errors.school?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Description</Form.Label>
@@ -123,7 +129,9 @@ const FormationsCommonForm = forwardRef<
             value={watch('description') ?? ''}
             placeholder="Description"
           />
-          <Form.Message>{errors.description?.message}</Form.Message>
+          <Form.Message>
+            {errors.description && tForm(errors.description?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Status</Form.Label>
@@ -142,7 +150,9 @@ const FormationsCommonForm = forwardRef<
               ))}
             </Select.Content>
           </Select.Root>
-          <Form.Message>{errors.status?.message}</Form.Message>
+          <Form.Message>
+            {errors.status && tForm(errors.status?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Certificate</Form.Label>
@@ -151,7 +161,9 @@ const FormationsCommonForm = forwardRef<
             value={watch('certificate') ?? ''}
             placeholder="Certificate"
           />
-          <Form.Message>{errors.certificate?.message}</Form.Message>
+          <Form.Message>
+            {errors.certificate && tForm(errors.certificate?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Start</Form.Label>
@@ -160,7 +172,9 @@ const FormationsCommonForm = forwardRef<
             selected={watch('start')}
             placeholder="00/00/0000"
           />
-          <Form.Message>{errors.start?.message}</Form.Message>
+          <Form.Message>
+            {errors.start && tForm(errors.start?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>End</Form.Label>
@@ -169,7 +183,9 @@ const FormationsCommonForm = forwardRef<
             selected={watch('end')}
             placeholder="00/00/0000"
           />
-          <Form.Message>{errors.end?.message}</Form.Message>
+          <Form.Message>
+            {errors.end && tForm(errors.end?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Skills</Form.Label>
@@ -216,7 +232,9 @@ const FormationsCommonForm = forwardRef<
               </Select.Content>
             </Select.Root>
           </TagList>
-          <Form.Message>{errors.skills?.message}</Form.Message>
+          <Form.Message>
+            {errors.skills && tForm(errors.skills?.message)}
+          </Form.Message>
         </Form.Group>
         <Button type="submit" className="mt-2" disabled={isLoading}>
           Concluir

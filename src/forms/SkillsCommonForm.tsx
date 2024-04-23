@@ -25,8 +25,8 @@ const categoryOptions: CommonSelectValueProps<CreateSkillDtoCategoryEnum>[] = [
 ]
 
 const formSchema = z.object({
-  name: z.string().min(1, 'required'),
-  category: z.string().min(1, 'required'),
+  name: z.string().min(1),
+  category: z.string().min(1),
 })
 
 type FormSchemaProps = z.infer<typeof formSchema>
@@ -50,8 +50,6 @@ const SkillsCommonForm = forwardRef<HTMLFormElement, SkillsCommonFormProps>(
     } = useForm<FormSchemaProps>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-        name: '',
-        category: '',
         ...defaultValues,
       },
     })
@@ -69,7 +67,7 @@ const SkillsCommonForm = forwardRef<HTMLFormElement, SkillsCommonFormProps>(
           <Form.Label>Name</Form.Label>
           <Input
             onChange={(ev) => setValue('name', ev.target.value)}
-            value={watch('name')}
+            value={watch('name') ?? ''}
             placeholder="Javascript"
           />
           <Form.Message>{errors.name?.message}</Form.Message>
@@ -78,7 +76,7 @@ const SkillsCommonForm = forwardRef<HTMLFormElement, SkillsCommonFormProps>(
           <Form.Label>Category</Form.Label>
           <Select.Root
             onValueChange={(ev) => setValue('category', ev)}
-            value={watch('category')}
+            value={watch('category') ?? ''}
           >
             <Select.Trigger>
               <Select.Value placeholder="Select" />

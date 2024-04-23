@@ -17,10 +17,10 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 const formSchema = z.object({
-  name: z.string().min(1, 'required'),
-  description: z.string().min(1, 'required'),
-  image: z.string().min(1, 'required'),
-  link: z.string().min(1, 'required'),
+  name: z.string().min(1),
+  description: z.string().min(1),
+  image: z.string().min(1),
+  link: z.string().min(1),
   skills: z.array(z.string()),
 })
 
@@ -54,11 +54,6 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
     } = useForm<FormSchemaProps>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-        name: '',
-        description: '',
-        image: '',
-        link: '',
-        skills: [],
         ...defaultValues,
       },
     })
@@ -83,7 +78,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           <Form.Label>Name</Form.Label>
           <Input
             onChange={(ev) => setValue('name', ev.target.value)}
-            value={watch('name')}
+            value={watch('name') ?? ''}
             placeholder="Name"
           />
           <Form.Message>{errors.name?.message}</Form.Message>
@@ -92,7 +87,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           <Form.Label>Description</Form.Label>
           <Textarea
             onChange={(ev) => setValue('description', ev.target.value)}
-            value={watch('description')}
+            value={watch('description') ?? ''}
             placeholder="Description"
           />
           <Form.Message>{errors.description?.message}</Form.Message>
@@ -101,7 +96,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           <Form.Label>Image</Form.Label>
           <Input
             onChange={(ev) => setValue('image', ev.target.value)}
-            value={watch('image')}
+            value={watch('image') ?? ''}
             placeholder="Image"
           />
           <Form.Message>{errors.image?.message}</Form.Message>
@@ -110,7 +105,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           <Form.Label>Link</Form.Label>
           <Input
             onChange={(ev) => setValue('link', ev.target.value)}
-            value={watch('link') ?? '  '}
+            value={watch('link') ?? ''}
             placeholder="Link"
           />
           <Form.Message>{errors.link?.message}</Form.Message>
@@ -118,7 +113,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
         <Form.Group>
           <Form.Label>Skills</Form.Label>
           <TagList
-            tags={watch('skills').map((skill) => ({
+            tags={watch('skills')?.map((skill) => ({
               value: skill,
               label: skillsControllerFindAll.data?.data.find(
                 ({ id }) => id === skill,
@@ -136,7 +131,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
               value=""
               disabled={skillsControllerFindAll.isLoading}
               onValueChange={(ev) =>
-                setValue('skills', [...getValues('skills'), ev])
+                setValue('skills', [...(getValues('skills') ?? []), ev])
               }
             >
               <Select.Trigger>
@@ -152,7 +147,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
                   <Select.Item
                     key={id}
                     value={id}
-                    disabled={watch('skills').includes(id)}
+                    disabled={watch('skills')?.includes(id)}
                   >
                     {name}
                   </Select.Item>

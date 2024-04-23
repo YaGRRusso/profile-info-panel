@@ -33,10 +33,10 @@ const statusOptions: CommonSelectValueProps<CreateFormationDtoStatusEnum>[] = [
 ]
 
 const formSchema = z.object({
-  name: z.string().min(1, 'required'),
-  school: z.string().min(1, 'required'),
-  description: z.string().min(1, 'required'),
-  status: z.string().min(1, 'required'),
+  name: z.string().min(1),
+  school: z.string().min(1),
+  description: z.string().min(1),
+  status: z.string().min(1),
   certificate: z.string().optional(),
   start: z.date(),
   end: z.date().optional(),
@@ -76,15 +76,9 @@ const FormationsCommonForm = forwardRef<
     } = useForm<FormSchemaProps>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-        name: '',
-        certificate: '',
-        school: '',
-        status: '',
-        description: '',
-        start: undefined,
-        end: undefined,
-        skills: [],
         ...defaultValues,
+        start: defaultValues?.start && new Date(defaultValues.start),
+        end: defaultValues?.end && new Date(defaultValues.end),
       },
     })
 
@@ -108,7 +102,7 @@ const FormationsCommonForm = forwardRef<
           <Form.Label>Name</Form.Label>
           <Input
             onChange={(ev) => setValue('name', ev.target.value)}
-            value={watch('name')}
+            value={watch('name') ?? ''}
             placeholder="Name"
           />
           <Form.Message>{errors.name?.message}</Form.Message>
@@ -117,7 +111,7 @@ const FormationsCommonForm = forwardRef<
           <Form.Label>School</Form.Label>
           <Input
             onChange={(ev) => setValue('school', ev.target.value)}
-            value={watch('school')}
+            value={watch('school') ?? ''}
             placeholder="School"
           />
           <Form.Message>{errors.school?.message}</Form.Message>
@@ -126,7 +120,7 @@ const FormationsCommonForm = forwardRef<
           <Form.Label>Description</Form.Label>
           <Textarea
             onChange={(ev) => setValue('description', ev.target.value)}
-            value={watch('description')}
+            value={watch('description') ?? ''}
             placeholder="Description"
           />
           <Form.Message>{errors.description?.message}</Form.Message>
@@ -135,7 +129,7 @@ const FormationsCommonForm = forwardRef<
           <Form.Label>Status</Form.Label>
           <Select.Root
             onValueChange={(ev) => setValue('status', ev)}
-            value={watch('status')}
+            value={watch('status') ?? ''}
           >
             <Select.Trigger>
               <Select.Value placeholder="Select" />
@@ -154,7 +148,7 @@ const FormationsCommonForm = forwardRef<
           <Form.Label>Certificate</Form.Label>
           <Input
             onChange={(ev) => setValue('certificate', ev.target.value)}
-            value={watch('certificate')}
+            value={watch('certificate') ?? ''}
             placeholder="Certificate"
           />
           <Form.Message>{errors.certificate?.message}</Form.Message>
@@ -180,7 +174,7 @@ const FormationsCommonForm = forwardRef<
         <Form.Group>
           <Form.Label>Skills</Form.Label>
           <TagList
-            tags={watch('skills').map((skill) => ({
+            tags={watch('skills')?.map((skill) => ({
               value: skill,
               label: skillsControllerFindAll.data?.data.find(
                 ({ id }) => id === skill,
@@ -198,7 +192,7 @@ const FormationsCommonForm = forwardRef<
               value=""
               disabled={skillsControllerFindAll.isLoading}
               onValueChange={(ev) =>
-                setValue('skills', [...getValues('skills'), ev])
+                setValue('skills', [...(getValues('skills') ?? []), ev])
               }
             >
               <Select.Trigger>
@@ -214,7 +208,7 @@ const FormationsCommonForm = forwardRef<
                   <Select.Item
                     key={id}
                     value={id}
-                    disabled={watch('skills').includes(id)}
+                    disabled={watch('skills')?.includes(id)}
                   >
                     {name}
                   </Select.Item>

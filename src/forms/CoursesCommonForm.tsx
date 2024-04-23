@@ -25,12 +25,12 @@ const statusOptions: CommonSelectValueProps<CreateCourseDtoStatusEnum>[] = [
 ]
 
 const formSchema = z.object({
-  name: z.string().min(1, 'required'),
-  school: z.string().min(1, 'required'),
-  description: z.string().min(1, 'required'),
-  status: z.string().min(1, 'required'),
+  name: z.string().min(1),
+  school: z.string().min(1),
+  description: z.string().min(1),
+  status: z.string().min(1),
   certificate: z.string().optional(),
-  hours: z.number().min(1, 'required'),
+  hours: z.number().min(1),
   skills: z.array(z.string()),
 })
 
@@ -64,13 +64,6 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
     } = useForm<FormSchemaProps>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-        name: '',
-        certificate: '',
-        description: '',
-        hours: undefined,
-        school: '',
-        skills: [],
-        status: '',
         ...defaultValues,
       },
     })
@@ -95,7 +88,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           <Form.Label>Name</Form.Label>
           <Input
             onChange={(ev) => setValue('name', ev.target.value)}
-            value={watch('name')}
+            value={watch('name') ?? ''}
             placeholder="Name"
           />
           <Form.Message>{errors.name?.message}</Form.Message>
@@ -104,7 +97,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           <Form.Label>School</Form.Label>
           <Input
             onChange={(ev) => setValue('school', ev.target.value)}
-            value={watch('school')}
+            value={watch('school') ?? ''}
             placeholder="School"
           />
           <Form.Message>{errors.school?.message}</Form.Message>
@@ -113,7 +106,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           <Form.Label>Description</Form.Label>
           <Textarea
             onChange={(ev) => setValue('description', ev.target.value)}
-            value={watch('description')}
+            value={watch('description') ?? ''}
             placeholder="Description"
           />
           <Form.Message>{errors.description?.message}</Form.Message>
@@ -122,7 +115,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           <Form.Label>Status</Form.Label>
           <Select.Root
             onValueChange={(ev) => setValue('status', ev)}
-            value={watch('status')}
+            value={watch('status') ?? ''}
           >
             <Select.Trigger>
               <Select.Value placeholder="Select" />
@@ -141,7 +134,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           <Form.Label>Certificate</Form.Label>
           <Input
             onChange={(ev) => setValue('certificate', ev.target.value)}
-            value={watch('certificate')}
+            value={watch('certificate') ?? ''}
             placeholder="Certificate"
           />
           <Form.Message>{errors.certificate?.message}</Form.Message>
@@ -150,7 +143,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           <Form.Label>Hours</Form.Label>
           <Input
             onChange={(ev) => setValue('hours', Number(ev.target.value))}
-            value={watch('hours') ?? '  '}
+            value={watch('hours') ?? ''}
             placeholder="Hours"
             min={1}
             type="number"
@@ -160,7 +153,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
         <Form.Group>
           <Form.Label>Skills</Form.Label>
           <TagList
-            tags={watch('skills').map((skill) => ({
+            tags={watch('skills')?.map((skill) => ({
               value: skill,
               label: skillsControllerFindAll.data?.data.find(
                 ({ id }) => id === skill,
@@ -178,7 +171,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
               value=""
               disabled={skillsControllerFindAll.isLoading}
               onValueChange={(ev) =>
-                setValue('skills', [...getValues('skills'), ev])
+                setValue('skills', [...(getValues('skills') ?? []), ev])
               }
             >
               <Select.Trigger>
@@ -194,7 +187,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
                   <Select.Item
                     key={id}
                     value={id}
-                    disabled={watch('skills').includes(id)}
+                    disabled={watch('skills')?.includes(id)}
                   >
                     {name}
                   </Select.Item>

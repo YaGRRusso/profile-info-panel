@@ -13,24 +13,23 @@ import { CommonFormValuesProps } from '@/types/common-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserPlus } from '@phosphor-icons/react'
-import { useTranslations } from 'next-intl'
 import { FormHTMLAttributes, forwardRef, useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 const formSchema = z.object({
-  name: z.string().min(1, 'required'),
+  name: z.string().min(1),
   birth: z.date(),
-  description: z.string().min(1, 'required'),
-  email: z.string().min(1, 'required').email('invalid'),
-  password: z.string().min(1, 'required'),
-  nickname: z.string().min(1, 'required'),
-  phone: z.string().min(1, 'required'),
+  description: z.string().min(1),
+  email: z.string().min(1).email(),
+  password: z.string().min(1),
+  nickname: z.string().min(1),
+  phone: z.string().min(1),
   picture: z.string(),
-  postal: z.string().min(1, 'required'),
-  address: z.string().min(1, 'required'),
-  title: z.string().min(1, 'required'),
-  passwordConfirm: z.string().min(1, 'required').optional(),
+  postal: z.string().min(1),
+  address: z.string().min(1),
+  title: z.string().min(1),
+  passwordConfirm: z.string().min(1).optional(),
 })
 
 type FormSchemaProps = z.infer<typeof formSchema>
@@ -68,7 +67,6 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
     ref,
   ) => {
     const [isShowingPassword, setIsShowingPassword] = useState(false)
-    const tForm = useTranslations('form')
 
     const {
       watch,
@@ -78,17 +76,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
     } = useForm<FormSchemaProps>({
       resolver: zodResolver(isEditing ? editFormSchema : createFormSchema),
       defaultValues: {
-        address: '',
-        description: '',
-        email: '',
-        name: '',
-        nickname: '',
-        password: '',
-        passwordConfirm: '',
-        phone: '',
         picture: 'https://picsum.photos/60',
-        postal: '',
-        title: '',
         ...defaultValues,
         birth: defaultValues?.birth && new Date(defaultValues.birth),
       },
@@ -110,7 +98,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
             <Form.Label>Name</Form.Label>
             <Input
               onChange={(ev) => setValue('name', ev.target.value)}
-              value={watch('name')}
+              value={watch('name') ?? ''}
               placeholder="John Doe"
             />
             <Form.Message>{errors.name?.message}</Form.Message>
@@ -119,7 +107,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
             <Form.Label>Nickname</Form.Label>
             <Input
               onChange={(ev) => setValue('nickname', ev.target.value)}
-              value={watch('nickname')}
+              value={watch('nickname') ?? ''}
               placeholder="JohnDoe123"
             />
             <Form.Message>{errors.nickname?.message}</Form.Message>
@@ -128,7 +116,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
             <Form.Label>Title</Form.Label>
             <Input
               onChange={(ev) => setValue('title', ev.target.value)}
-              value={watch('title')}
+              value={watch('title') ?? ''}
               placeholder="Full Stack Developer"
             />
             <Form.Message>{errors.title?.message}</Form.Message>
@@ -137,7 +125,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
             <Form.Label>Phone</Form.Label>
             <Input
               placeholder="(00) 00000-0000"
-              value={mask('(00) 00000-0000', watch('phone')).value}
+              value={mask('(00) 00000-0000', watch('phone') ?? '').value}
               onChange={(ev) =>
                 setValue(
                   'phone',
@@ -151,7 +139,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
             <Form.Label>Birth</Form.Label>
             <Datepicker
               onSelect={(ev) => ev && setValue('birth', ev)}
-              selected={watch('birth')}
+              selected={watch('birth') ?? ''}
               placeholder="00/00/0000"
             />
             <Form.Message>{errors.birth?.message}</Form.Message>
@@ -160,7 +148,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
             <Form.Label>Description</Form.Label>
             <Textarea
               onChange={(ev) => setValue('description', ev.target.value)}
-              value={watch('description')}
+              value={watch('description') ?? ''}
               placeholder="Description about you"
             />
             <Form.Message>{errors.description?.message}</Form.Message>
@@ -171,7 +159,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
                 <Form.Label>Email</Form.Label>
                 <Input
                   onChange={(ev) => setValue('email', ev.target.value)}
-                  value={watch('email')}
+                  value={watch('email') ?? ''}
                   placeholder="johndoe@email.com"
                 />
                 <Form.Message>{errors.email?.message}</Form.Message>
@@ -180,7 +168,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
                 <Form.Label>Password</Form.Label>
                 <Input
                   onChange={(ev) => setValue('password', ev.target.value)}
-                  value={watch('password')}
+                  value={watch('password') ?? ''}
                   type={isShowingPassword ? 'text' : 'password'}
                   placeholder="Strong password here"
                 />
@@ -192,7 +180,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
                   onChange={(ev) =>
                     setValue('passwordConfirm', ev.target.value)
                   }
-                  value={watch('passwordConfirm')}
+                  value={watch('passwordConfirm') ?? ''}
                   type={isShowingPassword ? 'text' : 'password'}
                   placeholder="Strong password here"
                 />
@@ -204,7 +192,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
                     setIsShowingPassword(!isShowingPassword)
                   }
                   checked={isShowingPassword}
-                  placeholder={tForm('showPassword')}
+                  placeholder={'Show password'}
                 />
               </Form.Group>
             </>
@@ -213,7 +201,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
             <Form.Label>Address</Form.Label>
             <Input
               onChange={(ev) => setValue('address', ev.target.value)}
-              value={watch('address')}
+              value={watch('address') ?? ''}
               placeholder="Brazil, SP"
             />
             <Form.Message>{errors.address?.message}</Form.Message>
@@ -222,7 +210,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
             <Form.Label>Postal Code</Form.Label>
             <Input
               placeholder="00000-000"
-              value={mask('00000-000', watch('postal')).value}
+              value={mask('00000-000', watch('postal') ?? '').value}
               onChange={(ev) =>
                 setValue(
                   'postal',

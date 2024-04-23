@@ -18,38 +18,35 @@ import { FormHTMLAttributes, forwardRef, useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-const formSchema = z
-  .object({
-    name: z.string().min(1, 'required'),
-    birth: z.date(),
-    description: z.string().min(1, 'required'),
-    email: z.string().min(1, 'required').email('invalid'),
-    password: z.string().min(1, 'required'),
-    nickname: z.string().min(1, 'required'),
-    phone: z.string().min(1, 'required'),
-    picture: z.string(),
-    postal: z.string().min(1, 'required'),
-    address: z.string().min(1, 'required'),
-    title: z.string().min(1, 'required'),
-    passwordConfirm: z.string().min(1, 'required').optional(),
-  })
-  .refine((data) => data.password === data.passwordConfirm, {
-    message: 'sameValue',
-    path: ['passwordConfirm'],
-  })
+const formSchema = z.object({
+  name: z.string().min(1, 'required'),
+  birth: z.date(),
+  description: z.string().min(1, 'required'),
+  email: z.string().min(1, 'required').email('invalid'),
+  password: z.string().min(1, 'required'),
+  nickname: z.string().min(1, 'required'),
+  phone: z.string().min(1, 'required'),
+  picture: z.string(),
+  postal: z.string().min(1, 'required'),
+  address: z.string().min(1, 'required'),
+  title: z.string().min(1, 'required'),
+  passwordConfirm: z.string().min(1, 'required').optional(),
+})
 
 type FormSchemaProps = z.infer<typeof formSchema>
 
-const editFormSchema = z.object({
-  name: z.string(),
-  birth: z.date(),
-  description: z.string(),
-  nickname: z.string(),
-  phone: z.string(),
-  picture: z.string(),
-  postal: z.string(),
-  address: z.string(),
-  title: z.string(),
+const createFormSchema = formSchema.refine(
+  (data) => data.password === data.passwordConfirm,
+  {
+    message: 'sameValue',
+    path: ['passwordConfirm'],
+  },
+)
+
+const editFormSchema = formSchema.omit({
+  password: true,
+  passwordConfirm: true,
+  email: true,
 })
 
 export interface UsersCommonFormProps
@@ -79,7 +76,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
       handleSubmit,
       formState: { errors },
     } = useForm<FormSchemaProps>({
-      resolver: zodResolver(isEditing ? editFormSchema : formSchema),
+      resolver: zodResolver(isEditing ? editFormSchema : createFormSchema),
       defaultValues: {
         address: '',
         description: '',

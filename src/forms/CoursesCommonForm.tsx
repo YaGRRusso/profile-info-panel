@@ -7,6 +7,7 @@ import { CommonSelectValueProps } from '@/types/common-select'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQuery } from '@tanstack/react-query'
+import { useTranslations } from 'next-intl'
 import {
   FormHTMLAttributes,
   forwardRef,
@@ -25,12 +26,12 @@ const statusOptions: CommonSelectValueProps<CreateCourseDtoStatusEnum>[] = [
 ]
 
 const formSchema = z.object({
-  name: z.string().min(1, 'required'),
-  school: z.string().min(1, 'required'),
-  description: z.string().min(1, 'required'),
-  status: z.string().min(1, 'required'),
+  name: z.string().min(1),
+  school: z.string().min(1),
+  description: z.string().min(1),
+  status: z.string().min(1),
   certificate: z.string().optional(),
-  hours: z.number().min(1, 'required'),
+  hours: z.number().min(1),
   skills: z.array(z.string()),
 })
 
@@ -47,6 +48,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
     { handleSubmit: onSubmit, isLoading, defaultValues, customValues, ...rest },
     ref,
   ) => {
+    const tForm = useTranslations('form')
     const [searchSkills, setSearchSkills] = useState('')
     const skills = useSkills()
 
@@ -64,13 +66,6 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
     } = useForm<FormSchemaProps>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-        name: '',
-        certificate: '',
-        description: '',
-        hours: undefined,
-        school: '',
-        skills: [],
-        status: '',
         ...defaultValues,
       },
     })
@@ -95,34 +90,40 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
           <Form.Label>Name</Form.Label>
           <Input
             onChange={(ev) => setValue('name', ev.target.value)}
-            value={watch('name')}
+            value={watch('name') ?? ''}
             placeholder="Name"
           />
-          <Form.Message>{errors.name?.message}</Form.Message>
+          <Form.Message>
+            {errors.name && tForm(errors.name?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>School</Form.Label>
           <Input
             onChange={(ev) => setValue('school', ev.target.value)}
-            value={watch('school')}
+            value={watch('school') ?? ''}
             placeholder="School"
           />
-          <Form.Message>{errors.school?.message}</Form.Message>
+          <Form.Message>
+            {errors.school && tForm(errors.school?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Description</Form.Label>
           <Textarea
             onChange={(ev) => setValue('description', ev.target.value)}
-            value={watch('description')}
+            value={watch('description') ?? ''}
             placeholder="Description"
           />
-          <Form.Message>{errors.description?.message}</Form.Message>
+          <Form.Message>
+            {errors.description && tForm(errors.description?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Status</Form.Label>
           <Select.Root
             onValueChange={(ev) => setValue('status', ev)}
-            value={watch('status')}
+            value={watch('status') ?? ''}
           >
             <Select.Trigger>
               <Select.Value placeholder="Select" />
@@ -135,32 +136,38 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
               ))}
             </Select.Content>
           </Select.Root>
-          <Form.Message>{errors.status?.message}</Form.Message>
+          <Form.Message>
+            {errors.status && tForm(errors.status?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Certificate</Form.Label>
           <Input
             onChange={(ev) => setValue('certificate', ev.target.value)}
-            value={watch('certificate')}
+            value={watch('certificate') ?? ''}
             placeholder="Certificate"
           />
-          <Form.Message>{errors.certificate?.message}</Form.Message>
+          <Form.Message>
+            {errors.certificate && tForm(errors.certificate?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Hours</Form.Label>
           <Input
             onChange={(ev) => setValue('hours', Number(ev.target.value))}
-            value={watch('hours') ?? '  '}
+            value={watch('hours') ?? ''}
             placeholder="Hours"
             min={1}
             type="number"
           />
-          <Form.Message>{errors.hours?.message}</Form.Message>
+          <Form.Message>
+            {errors.hours && tForm(errors.hours?.message)}
+          </Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Skills</Form.Label>
           <TagList
-            tags={watch('skills').map((skill) => ({
+            tags={watch('skills')?.map((skill) => ({
               value: skill,
               label: skillsControllerFindAll.data?.data.find(
                 ({ id }) => id === skill,
@@ -178,7 +185,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
               value=""
               disabled={skillsControllerFindAll.isLoading}
               onValueChange={(ev) =>
-                setValue('skills', [...getValues('skills'), ev])
+                setValue('skills', [...(getValues('skills') ?? []), ev])
               }
             >
               <Select.Trigger>
@@ -194,7 +201,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
                   <Select.Item
                     key={id}
                     value={id}
-                    disabled={watch('skills').includes(id)}
+                    disabled={watch('skills')?.includes(id)}
                   >
                     {name}
                   </Select.Item>
@@ -202,7 +209,9 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
               </Select.Content>
             </Select.Root>
           </TagList>
-          <Form.Message>{errors.skills?.message}</Form.Message>
+          <Form.Message>
+            {errors.skills && tForm(errors.skills?.message)}
+          </Form.Message>
         </Form.Group>
         <Button type="submit" className="mt-2" disabled={isLoading}>
           Concluir

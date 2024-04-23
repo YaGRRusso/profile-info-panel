@@ -1,4 +1,7 @@
-import { CircleNotch } from '@phosphor-icons/react/dist/ssr'
+import ProfileForm from './components/components/Form'
+
+import { TitleDesc } from '@/components'
+
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
@@ -7,12 +10,12 @@ export default function Profile() {
   const tSidebar = useTranslations('sidebar')
 
   return (
-    <main className="flex h-full w-full flex-col items-center justify-center gap-8">
-      <h1 className="text-5xl">{tSidebar('profile')}</h1>
-      <div className="flex animate-pulse items-center justify-center gap-4 text-center dark:text-gray-300">
-        <CircleNotch className="animate-spin" />
-        <span>{tHome('underDevelopment')}</span>
-      </div>
+    <main className="mx-auto flex h-full w-full max-w-3xl flex-col gap-8">
+      <TitleDesc
+        title={tSidebar('profile')}
+        description={tHome('underDevelopment')}
+      />
+      <ProfileForm />
     </main>
   )
 }

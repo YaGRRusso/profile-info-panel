@@ -1,7 +1,9 @@
 {
   "form": {
-    "writeHere": "Digite aqui...",
-    "showPassword": "Visualizar senha"
+    "required": "Obrigatório",
+    "tooSmall": "Muito curto",
+    "tooBig": "Muito longo",
+    "invalid": "Inválido"
   },
   "sidebar": {
     "home": "Home",

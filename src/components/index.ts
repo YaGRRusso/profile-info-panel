@@ -57,6 +57,9 @@ export type * from './Command'
 export { default as Divider } from './Divider'
 export type * from './Divider'
 
+export { default as Drawer } from './Drawer'
+export type * from './Drawer'
+
 export { default as ScrollArea } from './ScrollArea'
 export type * from './ScrollArea'
 

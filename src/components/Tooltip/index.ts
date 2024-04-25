@@ -4,6 +4,9 @@ import TooltipRoot from './Root'
 import TooltipTrigger from './Trigger'
 
 export type * from './Content'
+export type * from './Provider'
+export type * from './Root'
+export type * from './Trigger'
 
 const Tooltip = {
   Content: TooltipContent,

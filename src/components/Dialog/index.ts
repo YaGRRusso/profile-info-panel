@@ -9,12 +9,16 @@ import DialogRoot from './Root'
 import DialogTitle from './Title'
 import DialogTrigger from './Trigger'
 
+export type * from './Close'
 export type * from './Content'
 export type * from './Description'
 export type * from './Footer'
 export type * from './Header'
 export type * from './Overlay'
+export type * from './Portal'
+export type * from './Root'
 export type * from './Title'
+export type * from './Trigger'
 
 const Dialog = {
   Close: DialogClose,

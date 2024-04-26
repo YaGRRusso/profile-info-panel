@@ -7,12 +7,14 @@ import { CreateCourseDto, useCourses } from '@/sdk'
 import { Plus } from '@phosphor-icons/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import { useTranslations } from 'next-intl'
 import { forwardRef, useState } from 'react'
 
 export interface CoursesFormProps extends ButtonProps {}
 
 const CoursesForm = forwardRef<HTMLButtonElement, CoursesFormProps>(
   ({ ...rest }, ref) => {
+    const tCourses = useTranslations('courses')
     const courses = useCourses()
     const queryClient = useQueryClient()
     const { toast } = useToast()
@@ -47,7 +49,7 @@ const CoursesForm = forwardRef<HTMLButtonElement, CoursesFormProps>(
           {...rest}
         >
           <Plus />
-          Add Course
+          {tCourses('add')}
         </Button>
         <FloatingForm
           description="Fill the form below"

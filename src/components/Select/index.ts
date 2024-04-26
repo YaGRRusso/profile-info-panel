@@ -11,13 +11,16 @@ import SelectTrigger from './Trigger'
 import SelectValue from './Value'
 
 export type * from './Content'
+export type * from './Group'
 export type * from './Item'
 export type * from './Label'
+export type * from './Root'
 export type * from './ScrollDown'
 export type * from './ScrollUp'
+export type * from './Search'
 export type * from './Separator'
 export type * from './Trigger'
-export type * from './Search'
+export type * from './Value'
 
 const Select = {
   Content: SelectContent,

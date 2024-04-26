@@ -7,12 +7,14 @@ import { CreateSkillDto, useSkills } from '@/sdk'
 import { Plus } from '@phosphor-icons/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import { useTranslations } from 'next-intl'
 import { forwardRef, useState } from 'react'
 
 export interface SkillsFormProps extends ButtonProps {}
 
 const SkillsForm = forwardRef<HTMLButtonElement, SkillsFormProps>(
   ({ ...rest }, ref) => {
+    const tSkills = useTranslations('skills')
     const skills = useSkills()
     const queryClient = useQueryClient()
     const { toast } = useToast()
@@ -47,7 +49,7 @@ const SkillsForm = forwardRef<HTMLButtonElement, SkillsFormProps>(
           {...rest}
         >
           <Plus />
-          Add Skill
+          {tSkills('add')}
         </Button>
         <FloatingForm
           description="Fill the form below"

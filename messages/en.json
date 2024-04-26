@@ -18,7 +18,38 @@
     "signUp": "Sign Up"
   },
   "home": {
-    "underDevelopment": "Under development..."
+    "title": "Home",
+    "description": "Under development..."
+  },
+  "skills": {
+    "title": "Skills",
+    "description": "Register your skills here",
+    "add": "Add Skill"
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "Register your projects here",
+    "add": "Add Project"
+  },
+  "formations": {
+    "title": "Formations",
+    "description": "Register your formations here",
+    "add": "Add Formation"
+  },
+  "experiences": {
+    "title": "Experiences",
+    "description": "Register your experiences here",
+    "add": "Add Experience"
+  },
+  "courses": {
+    "title": "Courses",
+    "description": "Register your courses here",
+    "add": "Add Course"
+  },
+  "profile": {
+    "title": "Profile",
+    "description": "Register your personal information here",
+    "edit": "Edit Profile"
   },
   "signIn": {
     "welcome": "Welcome!",

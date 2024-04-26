@@ -7,12 +7,14 @@ import { useFormations } from '@/sdk'
 import { Plus } from '@phosphor-icons/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import { useTranslations } from 'next-intl'
 import { forwardRef, useState } from 'react'
 
 export interface FormationsFormProps extends ButtonProps {}
 
 const FormationsForm = forwardRef<HTMLButtonElement, FormationsFormProps>(
   ({ ...rest }, ref) => {
+    const tFormations = useTranslations('formations')
     const formations = useFormations()
     const queryClient = useQueryClient()
     const { toast } = useToast()
@@ -47,7 +49,7 @@ const FormationsForm = forwardRef<HTMLButtonElement, FormationsFormProps>(
           {...rest}
         >
           <Plus />
-          Add Formation
+          {tFormations('add')}
         </Button>
         <FloatingForm
           description="Fill the form below"

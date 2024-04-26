@@ -7,15 +7,14 @@ import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
 export default function Formations() {
-  const tHome = useTranslations('home')
-  const tSidebar = useTranslations('sidebar')
+  const tFormations = useTranslations('formations')
 
   return (
     <main className="flex h-full w-full flex-col gap-8">
       <div className="flex justify-between gap-4 max-xs:flex-col">
         <TitleDesc
-          title={tSidebar('formations')}
-          description={tHome('underDevelopment')}
+          title={tFormations('title')}
+          description={tFormations('description')}
         />
         <FormationsForm />
       </div>

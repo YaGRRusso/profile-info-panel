@@ -17,6 +17,10 @@ export type * from './Description'
 export type * from './Footer'
 export type * from './Header'
 export type * from './Overlay'
+export type * from './Portal'
+export type * from './Root'
+export type * from './Title'
+export type * from './Trigger'
 
 const AlertDialog = {
   Action: AlertDialogAction,

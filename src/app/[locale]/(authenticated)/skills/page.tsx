@@ -7,15 +7,14 @@ import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 
 export default function Skills() {
-  const tHome = useTranslations('home')
-  const tSidebar = useTranslations('sidebar')
+  const tSkills = useTranslations('skills')
 
   return (
     <main className="flex h-full w-full flex-col gap-8">
       <div className="flex justify-between gap-4 max-xs:flex-col">
         <TitleDesc
-          title={tSidebar('skills')}
-          description={tHome('underDevelopment')}
+          title={tSkills('title')}
+          description={tSkills('description')}
         />
         <SkillsForm />
       </div>

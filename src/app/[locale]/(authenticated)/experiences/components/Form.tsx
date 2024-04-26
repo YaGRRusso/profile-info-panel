@@ -7,12 +7,14 @@ import { useExperiences } from '@/sdk'
 import { Plus } from '@phosphor-icons/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import { useTranslations } from 'next-intl'
 import { forwardRef, useState } from 'react'
 
 export interface ExperiencesFormProps extends ButtonProps {}
 
 const ExperiencesForm = forwardRef<HTMLButtonElement, ExperiencesFormProps>(
   ({ ...rest }, ref) => {
+    const tExperiences = useTranslations('experiences')
     const experiences = useExperiences()
     const queryClient = useQueryClient()
     const { toast } = useToast()
@@ -47,7 +49,7 @@ const ExperiencesForm = forwardRef<HTMLButtonElement, ExperiencesFormProps>(
           {...rest}
         >
           <Plus />
-          Add Experience
+          {tExperiences('add')}
         </Button>
         <FloatingForm
           description="Fill the form below"

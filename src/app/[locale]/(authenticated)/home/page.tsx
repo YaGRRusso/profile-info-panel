@@ -44,7 +44,7 @@ export default function Home() {
       </div>
       <div className="flex animate-pulse items-center justify-center gap-4 text-center dark:text-gray-300">
         <CircleNotch className="animate-spin" />
-        <span>{tHome('underDevelopment')}</span>
+        <span>{tHome('description')}</span>
       </div>
     </main>
   )

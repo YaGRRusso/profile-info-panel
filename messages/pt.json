@@ -18,7 +18,38 @@
     "signUp": "Cadastrar"
   },
   "home": {
-    "underDevelopment": "Em desenvolvimento..."
+    "title": "Home",
+    "description": "Em desenvolvimento..."
+  },
+  "skills": {
+    "title": "Skills",
+    "description": "Cadastre aqui suas habilidades",
+    "add": "Adicionar Skill"
+  },
+  "projects": {
+    "title": "Projetos",
+    "description": "Cadastre aqui seus projetos",
+    "add": "Adicionar Projeto"
+  },
+  "formations": {
+    "title": "Formações",
+    "description": "Cadastre aqui suas formações",
+    "add": "Adicionar Formação"
+  },
+  "experiences": {
+    "title": "Experiências",
+    "description": "Cadastre aqui suas experiências",
+    "add": "Adicionar Experiência"
+  },
+  "courses": {
+    "title": "Cursos",
+    "description": "Cadastre aqui seus cursos",
+    "add": "Adicionar Curso"
+  },
+  "profile": {
+    "title": "Perfil",
+    "description": "Cadastre aqui suas informações pessoais",
+    "edit": "Editar Perfil"
   },
   "signIn": {
     "welcome": "Bem-vindo!",

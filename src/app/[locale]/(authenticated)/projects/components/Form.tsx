@@ -7,12 +7,14 @@ import { CreateProjectDto, useProjects } from '@/sdk'
 import { Plus } from '@phosphor-icons/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import { useTranslations } from 'next-intl'
 import { forwardRef, useState } from 'react'
 
 export interface ProjectsFormProps extends ButtonProps {}
 
 const ProjectsForm = forwardRef<HTMLButtonElement, ProjectsFormProps>(
   ({ ...rest }, ref) => {
+    const tProjects = useTranslations('projects')
     const projects = useProjects()
     const queryClient = useQueryClient()
     const { toast } = useToast()
@@ -47,7 +49,7 @@ const ProjectsForm = forwardRef<HTMLButtonElement, ProjectsFormProps>(
           {...rest}
         >
           <Plus />
-          Add Project
+          {tProjects('add')}
         </Button>
         <FloatingForm
           description="Fill the form below"

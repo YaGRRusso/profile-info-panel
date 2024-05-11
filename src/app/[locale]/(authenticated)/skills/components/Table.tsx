@@ -6,15 +6,12 @@ import {
   FloatingForm,
   Table,
   TableRootProps,
-  useToast,
 } from '@/components'
 import SkillsCommonForm from '@/forms/SkillsCommonForm'
 import { formatDate } from '@/helpers/date'
-import { useSkillsFindAll } from '@/hooks'
-import { SkillDto, useSkills } from '@/sdk'
+import { useSkillsFindAll, useSkillsRemove, useSkillsUpdate } from '@/hooks'
+import { SkillDto } from '@/sdk'
 
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
 import { forwardRef, useState } from 'react'
 
 export interface SkillsTableProps extends TableRootProps {}
@@ -22,51 +19,9 @@ export interface SkillsTableProps extends TableRootProps {}
 const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(
   ({ ...rest }, ref) => {
     const [editingSkill, setEditingSkill] = useState<SkillDto>()
-    const skills = useSkills()
-    const queryClient = useQueryClient()
-    const { toast } = useToast()
-
     const { data, isFetching } = useSkillsFindAll()
-
-    const updateSkill = useMutation({
-      mutationFn: ({ id, ...skill }: SkillDto) =>
-        skills.skillsControllerUpdate(id, skill),
-      mutationKey: ['skillsControllerUpdate'],
-      onSuccess: () => {
-        setEditingSkill(undefined)
-        queryClient.invalidateQueries({ queryKey: ['skills'] })
-        toast({
-          title: 'Success',
-          description: 'Updated successfully',
-        })
-      },
-      onError: ({ response }: AxiosError<any>) => {
-        toast({
-          title: response?.data.name,
-          description: response?.data.message,
-          variant: 'destructive',
-        })
-      },
-    })
-
-    const deleteSkill = useMutation({
-      mutationFn: skills.skillsControllerRemove.bind(skills),
-      mutationKey: ['skillsControllerRemove'],
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['skills'] })
-        toast({
-          title: 'Success',
-          description: 'Removed successfully',
-        })
-      },
-      onError: ({ response }: AxiosError<any>) => {
-        toast({
-          title: response?.data.name,
-          description: response?.data.message,
-          variant: 'destructive',
-        })
-      },
-    })
+    const updateSkill = useSkillsUpdate()
+    const deleteSkill = useSkillsRemove()
 
     return (
       <>
@@ -122,9 +77,13 @@ const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(
         >
           <SkillsCommonForm
             isLoading={updateSkill.isPending}
-            handleSubmit={(data: any) => updateSkill.mutate(data)}
             defaultValues={editingSkill}
             customValues={{ id: editingSkill?.id }}
+            handleSubmit={(data: any) =>
+              updateSkill.mutate(data, {
+                onSuccess: () => setEditingSkill(undefined),
+              })
+            }
           />
         </FloatingForm>
       </>

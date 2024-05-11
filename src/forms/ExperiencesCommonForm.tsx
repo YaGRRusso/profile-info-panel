@@ -63,8 +63,6 @@ const ExperiencesCommonForm = forwardRef<
       resolver: zodResolver(formSchema),
       defaultValues: {
         ...defaultValues,
-        start: defaultValues?.start && new Date(defaultValues.start),
-        end: defaultValues?.end && new Date(defaultValues.end),
       },
     })
 

@@ -10,9 +10,10 @@ import {
 } from '@/components'
 import SkillsCommonForm from '@/forms/SkillsCommonForm'
 import { formatDate } from '@/helpers/date'
+import { useSkillsFindAll } from '@/hooks'
 import { SkillDto, useSkills } from '@/sdk'
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { forwardRef, useState } from 'react'
 
@@ -25,10 +26,7 @@ const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(
     const queryClient = useQueryClient()
     const { toast } = useToast()
 
-    const { data, isFetching } = useQuery({
-      queryKey: ['skills'],
-      queryFn: () => skills.skillsControllerFindAll(),
-    })
+    const { data, isFetching } = useSkillsFindAll()
 
     const updateSkill = useMutation({
       mutationFn: ({ id, ...skill }: SkillDto) =>

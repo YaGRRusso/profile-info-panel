@@ -2,9 +2,10 @@
 
 import { DeleteButton, Table, TableRootProps, useToast } from '@/components'
 import { formatDate } from '@/helpers/date'
+import { useProjectsFindAll } from '@/hooks'
 import { useProjects } from '@/sdk'
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import Link from 'next/link'
 import { forwardRef } from 'react'
@@ -17,10 +18,7 @@ const ProjectsTable = forwardRef<HTMLTableElement, ProjectsTableProps>(
     const queryClient = useQueryClient()
     const { toast } = useToast()
 
-    const { data, isFetching } = useQuery({
-      queryKey: ['projects'],
-      queryFn: () => projects.projectsControllerFindAll(),
-    })
+    const { data, isFetching } = useProjectsFindAll()
 
     const deleteProject = useMutation({
       mutationFn: projects.projectsControllerRemove.bind(projects),

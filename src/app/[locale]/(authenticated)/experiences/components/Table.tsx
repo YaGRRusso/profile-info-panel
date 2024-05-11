@@ -2,9 +2,10 @@
 
 import { DeleteButton, Table, TableRootProps, useToast } from '@/components'
 import { formatDate } from '@/helpers/date'
+import { useExperiencesFindAll } from '@/hooks'
 import { useExperiences } from '@/sdk'
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { forwardRef } from 'react'
 
@@ -16,10 +17,7 @@ const ExperiencesTable = forwardRef<HTMLTableElement, ExperiencesTableProps>(
     const queryClient = useQueryClient()
     const { toast } = useToast()
 
-    const { data, isFetching } = useQuery({
-      queryKey: ['experiences'],
-      queryFn: () => experiences.experiencesControllerFindAll(),
-    })
+    const { data, isFetching } = useExperiencesFindAll()
 
     const deleteExperience = useMutation({
       mutationFn: experiences.experiencesControllerRemove.bind(experiences),

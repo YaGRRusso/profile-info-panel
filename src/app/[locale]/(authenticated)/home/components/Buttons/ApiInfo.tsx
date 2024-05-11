@@ -1,22 +1,16 @@
 'use client'
 
 import { Tooltip } from '@/components'
+import { useRootInfo } from '@/hooks/queries/root'
 import { cn } from '@/lib/utils'
-import { useRoot } from '@/sdk'
 
 import { CircleNotch, Question } from '@phosphor-icons/react'
-import { useQuery } from '@tanstack/react-query'
 import { ButtonHTMLAttributes, FC } from 'react'
 
 export interface ApiInfoProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const ApiInfo: FC<ApiInfoProps> = ({ ...rest }) => {
-  const root = useRoot()
-
-  const { data, isFetching } = useQuery({
-    queryKey: ['info'],
-    queryFn: async () => await root.appControllerGetHello(),
-  })
+  const { data, isFetching } = useRootInfo()
 
   return (
     <Tooltip.Root>

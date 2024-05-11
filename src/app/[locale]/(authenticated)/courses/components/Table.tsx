@@ -2,9 +2,10 @@
 
 import { DeleteButton, Table, TableRootProps, useToast } from '@/components'
 import { formatDate } from '@/helpers/date'
+import { useCoursesFindAll } from '@/hooks'
 import { useCourses } from '@/sdk'
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import Link from 'next/link'
 import { forwardRef } from 'react'
@@ -17,10 +18,7 @@ const CoursesTable = forwardRef<HTMLTableElement, CoursesTableProps>(
     const queryClient = useQueryClient()
     const { toast } = useToast()
 
-    const { data, isFetching } = useQuery({
-      queryKey: ['courses'],
-      queryFn: () => courses.coursesControllerFindAll(),
-    })
+    const { data, isFetching } = useCoursesFindAll()
 
     const deleteCourse = useMutation({
       mutationFn: courses.coursesControllerRemove.bind(courses),

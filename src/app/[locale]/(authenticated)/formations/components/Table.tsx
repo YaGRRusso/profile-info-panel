@@ -2,9 +2,10 @@
 
 import { DeleteButton, Table, TableRootProps, useToast } from '@/components'
 import { formatDate } from '@/helpers/date'
+import { useFormationsFindAll } from '@/hooks'
 import { useFormations } from '@/sdk'
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import Link from 'next/link'
 import { forwardRef } from 'react'
@@ -17,10 +18,7 @@ const FormationsTable = forwardRef<HTMLTableElement, FormationsTableProps>(
     const queryClient = useQueryClient()
     const { toast } = useToast()
 
-    const { data, isFetching } = useQuery({
-      queryKey: ['formations'],
-      queryFn: () => formations.formationsControllerFindAll(),
-    })
+    const { data, isFetching } = useFormationsFindAll()
 
     const deleteFormation = useMutation({
       mutationFn: formations.formationsControllerRemove.bind(formations),

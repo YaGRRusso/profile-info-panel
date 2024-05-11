@@ -2,9 +2,10 @@
 
 import { Skeleton, useToast } from '@/components'
 import UsersCommonForm, { UsersCommonFormProps } from '@/forms/UsersCommonForm'
+import { useUsersFindMe } from '@/hooks/queries/users'
 import { useUsers } from '@/sdk'
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { forwardRef } from 'react'
 
@@ -16,10 +17,7 @@ const ProfileForm = forwardRef<HTMLFormElement, ProfileFormProps>(
     const queryClient = useQueryClient()
     const { toast } = useToast()
 
-    const usersControllerFindMe = useQuery({
-      queryKey: ['me'],
-      queryFn: () => users.usersControllerFindMe(),
-    })
+    const usersControllerFindMe = useUsersFindMe()
 
     const usersControllerUpdate = useMutation({
       mutationKey: ['me'],

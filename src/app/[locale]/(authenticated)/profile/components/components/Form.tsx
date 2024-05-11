@@ -1,42 +1,17 @@
 'use client'
 
-import { Skeleton, useToast } from '@/components'
+import { Skeleton } from '@/components'
 import UsersCommonForm, { UsersCommonFormProps } from '@/forms/UsersCommonForm'
-import { useUsersFindMe } from '@/hooks/queries/users'
-import { useUsers } from '@/sdk'
+import { useUsersUpdate, useUsersFindMe } from '@/hooks'
 
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
 import { forwardRef } from 'react'
 
 export interface ProfileFormProps extends Partial<UsersCommonFormProps> {}
 
 const ProfileForm = forwardRef<HTMLFormElement, ProfileFormProps>(
   ({ ...rest }, ref) => {
-    const users = useUsers()
-    const queryClient = useQueryClient()
-    const { toast } = useToast()
-
     const usersControllerFindMe = useUsersFindMe()
-
-    const usersControllerUpdate = useMutation({
-      mutationKey: ['me'],
-      mutationFn: users.usersControllerUpdate.bind(users),
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['me'] })
-        toast({
-          title: 'Success',
-          description: 'Updated successfully',
-        })
-      },
-      onError: ({ response }: AxiosError<any>) => {
-        toast({
-          title: response?.data.name,
-          description: response?.data.message,
-          variant: 'destructive',
-        })
-      },
-    })
+    const usersControllerUpdate = useUsersUpdate()
 
     return usersControllerFindMe.isLoading ? (
       <Skeleton className="h-12 w-full" repeat={3} />

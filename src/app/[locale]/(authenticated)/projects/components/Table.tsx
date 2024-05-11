@@ -1,12 +1,9 @@
 'use client'
 
-import { DeleteButton, Table, TableRootProps, useToast } from '@/components'
+import { DeleteButton, Table, TableRootProps } from '@/components'
 import { formatDate } from '@/helpers/date'
-import { useProjectsFindAll } from '@/hooks'
-import { useProjects } from '@/sdk'
+import { useProjectsFindAll, useProjectsRemove } from '@/hooks'
 
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
 import Link from 'next/link'
 import { forwardRef } from 'react'
 
@@ -14,30 +11,8 @@ export interface ProjectsTableProps extends TableRootProps {}
 
 const ProjectsTable = forwardRef<HTMLTableElement, ProjectsTableProps>(
   ({ ...rest }, ref) => {
-    const projects = useProjects()
-    const queryClient = useQueryClient()
-    const { toast } = useToast()
-
     const { data, isFetching } = useProjectsFindAll()
-
-    const deleteProject = useMutation({
-      mutationFn: projects.projectsControllerRemove.bind(projects),
-      mutationKey: ['projectsControllerRemove'],
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['projects'] })
-        toast({
-          title: 'Success',
-          description: 'Removed successfully',
-        })
-      },
-      onError: ({ response }: AxiosError<any>) => {
-        toast({
-          title: response?.data.name,
-          description: response?.data.message,
-          variant: 'destructive',
-        })
-      },
-    })
+    const deleteProject = useProjectsRemove()
 
     return (
       <Table.Root

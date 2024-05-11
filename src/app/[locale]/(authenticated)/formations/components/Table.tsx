@@ -1,12 +1,9 @@
 'use client'
 
-import { DeleteButton, Table, TableRootProps, useToast } from '@/components'
+import { DeleteButton, Table, TableRootProps } from '@/components'
 import { formatDate } from '@/helpers/date'
-import { useFormationsFindAll } from '@/hooks'
-import { useFormations } from '@/sdk'
+import { useFormationsFindAll, useFormationsRemove } from '@/hooks'
 
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
 import Link from 'next/link'
 import { forwardRef } from 'react'
 
@@ -14,30 +11,8 @@ export interface FormationsTableProps extends TableRootProps {}
 
 const FormationsTable = forwardRef<HTMLTableElement, FormationsTableProps>(
   ({ ...rest }, ref) => {
-    const formations = useFormations()
-    const queryClient = useQueryClient()
-    const { toast } = useToast()
-
     const { data, isFetching } = useFormationsFindAll()
-
-    const deleteFormation = useMutation({
-      mutationFn: formations.formationsControllerRemove.bind(formations),
-      mutationKey: ['formationsControllerRemove'],
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['formations'] })
-        toast({
-          title: 'Success',
-          description: 'Removed successfully',
-        })
-      },
-      onError: ({ response }: AxiosError<any>) => {
-        toast({
-          title: response?.data.name,
-          description: response?.data.message,
-          variant: 'destructive',
-        })
-      },
-    })
+    const deleteFormation = useFormationsRemove()
 
     return (
       <Table.Root

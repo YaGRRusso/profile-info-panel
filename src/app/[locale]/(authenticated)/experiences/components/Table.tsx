@@ -1,42 +1,17 @@
 'use client'
 
-import { DeleteButton, Table, TableRootProps, useToast } from '@/components'
+import { DeleteButton, Table, TableRootProps } from '@/components'
 import { formatDate } from '@/helpers/date'
-import { useExperiencesFindAll } from '@/hooks'
-import { useExperiences } from '@/sdk'
+import { useExperiencesFindAll, useExperiencesRemove } from '@/hooks'
 
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
 import { forwardRef } from 'react'
 
 export interface ExperiencesTableProps extends TableRootProps {}
 
 const ExperiencesTable = forwardRef<HTMLTableElement, ExperiencesTableProps>(
   ({ ...rest }, ref) => {
-    const experiences = useExperiences()
-    const queryClient = useQueryClient()
-    const { toast } = useToast()
-
     const { data, isFetching } = useExperiencesFindAll()
-
-    const deleteExperience = useMutation({
-      mutationFn: experiences.experiencesControllerRemove.bind(experiences),
-      mutationKey: ['experiencesControllerRemove'],
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['experiences'] })
-        toast({
-          title: 'Success',
-          description: 'Removed successfully',
-        })
-      },
-      onError: ({ response }: AxiosError<any>) => {
-        toast({
-          title: response?.data.name,
-          description: response?.data.message,
-          variant: 'destructive',
-        })
-      },
-    })
+    const deleteExperience = useExperiencesRemove()
 
     return (
       <Table.Root

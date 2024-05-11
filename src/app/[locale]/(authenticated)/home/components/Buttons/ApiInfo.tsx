@@ -1,7 +1,7 @@
 'use client'
 
 import { Tooltip } from '@/components'
-import { useRootInfo } from '@/hooks/queries/root'
+import { useRootInfo } from '@/hooks'
 import { cn } from '@/lib/utils'
 
 import { CircleNotch, Question } from '@phosphor-icons/react'

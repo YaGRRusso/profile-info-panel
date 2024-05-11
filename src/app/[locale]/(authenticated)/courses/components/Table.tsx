@@ -1,12 +1,9 @@
 'use client'
 
-import { DeleteButton, Table, TableRootProps, useToast } from '@/components'
+import { DeleteButton, Table, TableRootProps } from '@/components'
 import { formatDate } from '@/helpers/date'
-import { useCoursesFindAll } from '@/hooks'
-import { useCourses } from '@/sdk'
+import { useCoursesFindAll, useCoursesRemove } from '@/hooks'
 
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
 import Link from 'next/link'
 import { forwardRef } from 'react'
 
@@ -14,30 +11,8 @@ export interface CoursesTableProps extends TableRootProps {}
 
 const CoursesTable = forwardRef<HTMLTableElement, CoursesTableProps>(
   ({ ...rest }, ref) => {
-    const courses = useCourses()
-    const queryClient = useQueryClient()
-    const { toast } = useToast()
-
     const { data, isFetching } = useCoursesFindAll()
-
-    const deleteCourse = useMutation({
-      mutationFn: courses.coursesControllerRemove.bind(courses),
-      mutationKey: ['coursesControllerRemove'],
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['courses'] })
-        toast({
-          title: 'Success',
-          description: 'Removed successfully',
-        })
-      },
-      onError: ({ response }: AxiosError<any>) => {
-        toast({
-          title: response?.data.name,
-          description: response?.data.message,
-          variant: 'destructive',
-        })
-      },
-    })
+    const deleteCourse = useCoursesRemove()
 
     return (
       <Table.Root

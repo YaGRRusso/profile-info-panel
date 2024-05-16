@@ -9,11 +9,10 @@ import {
   TagList,
   Datepicker,
 } from '@/components'
-import { useSkills } from '@/sdk'
+import { useSkillsFindAll } from '@/hooks'
 import { CommonFormValuesProps } from '@/types/common-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useQuery } from '@tanstack/react-query'
 import { useTranslations } from 'next-intl'
 import {
   FormHTMLAttributes,
@@ -52,12 +51,7 @@ const ExperiencesCommonForm = forwardRef<
   ) => {
     const tForm = useTranslations('form')
     const [searchSkills, setSearchSkills] = useState('')
-    const skills = useSkills()
-
-    const skillsControllerFindAll = useQuery({
-      queryKey: ['skills'],
-      queryFn: () => skills.skillsControllerFindAll(),
-    })
+    const skillsControllerFindAll = useSkillsFindAll()
 
     const {
       watch,
@@ -69,8 +63,6 @@ const ExperiencesCommonForm = forwardRef<
       resolver: zodResolver(formSchema),
       defaultValues: {
         ...defaultValues,
-        start: defaultValues?.start && new Date(defaultValues.start),
-        end: defaultValues?.end && new Date(defaultValues.end),
       },
     })
 

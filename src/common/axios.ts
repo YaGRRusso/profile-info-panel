@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getSession } from 'next-auth/react'
+import { getSession, signOut } from 'next-auth/react'
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -14,13 +14,17 @@ instance.interceptors.request.use(async (config) => {
   return config
 })
 
-// instance.interceptors.response.use(
-//   (response) => {
-//     return response
-//   },
-//   (error) => {
-//     return Promise.reject(error)
-//   },
-// )
+instance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.error(error)
+    switch (error.response.status) {
+      case 401:
+        return signOut()
+      default:
+        return Promise.reject(error)
+    }
+  },
+)
 
 export default instance

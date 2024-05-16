@@ -1,11 +1,10 @@
 'use client'
 
 import { Button, Form, Input, Select, TagList, Textarea } from '@/components'
-import { useSkills } from '@/sdk'
+import { useSkillsFindAll } from '@/hooks'
 import { CommonFormValuesProps } from '@/types/common-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useQuery } from '@tanstack/react-query'
 import { useTranslations } from 'next-intl'
 import {
   FormHTMLAttributes,
@@ -40,12 +39,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
   ) => {
     const tForm = useTranslations('form')
     const [searchSkills, setSearchSkills] = useState('')
-    const skills = useSkills()
-
-    const skillsControllerFindAll = useQuery({
-      queryKey: ['skills'],
-      queryFn: () => skills.skillsControllerFindAll(),
-    })
+    const skillsControllerFindAll = useSkillsFindAll()
 
     const {
       watch,

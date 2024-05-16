@@ -103,12 +103,14 @@ const ExperiencesTable = forwardRef<HTMLTableElement, ExperiencesTableProps>(
             isLoading={updateExperience.isPending}
             defaultValues={{
               ...editingExperience,
-              start: editingExperience?.start
-                ? new Date(editingExperience.start)
-                : undefined,
-              end: editingExperience?.end
-                ? new Date(editingExperience.end)
-                : undefined,
+              // start: editingExperience?.start
+              //   ? new Date(editingExperience.start)
+              //   : undefined,
+              // end: editingExperience?.end
+              //   ? new Date(editingExperience.end)
+              //   : undefined,
+              start: new Date(editingExperience?.start ?? ''),
+              end: new Date(editingExperience?.end ?? ''),
             }}
             customValues={{ id: editingExperience?.id }}
             handleSubmit={(data: any) =>

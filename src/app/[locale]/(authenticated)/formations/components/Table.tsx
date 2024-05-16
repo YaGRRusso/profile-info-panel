@@ -114,14 +114,12 @@ const FormationsTable = forwardRef<HTMLTableElement, FormationsTableProps>(
             isLoading={updateFormation.isPending}
             defaultValues={{
               ...editingFormation,
-              // start: editingFormation?.start
-              //   ? new Date(editingFormation.start)
-              //   : undefined,
-              // end: editingFormation?.end
-              //   ? new Date(editingFormation.end)
-              //   : undefined,
-              start: new Date(editingFormation?.start ?? ''),
-              end: new Date(editingFormation?.end ?? ''),
+              start: editingFormation?.start
+                ? new Date(editingFormation.start)
+                : undefined,
+              end: editingFormation?.end
+                ? new Date(editingFormation.end)
+                : undefined,
             }}
             customValues={{ id: editingFormation?.id }}
             handleSubmit={(data: any) =>

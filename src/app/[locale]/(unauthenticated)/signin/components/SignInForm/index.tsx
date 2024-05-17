@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
-import { FC, FormHTMLAttributes, useCallback } from 'react'
+import { FC, FormHTMLAttributes, useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -26,6 +26,7 @@ export interface SignInFormProps extends FormHTMLAttributes<HTMLFormElement> {
 const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
   const tForm = useTranslations('form')
   const tSignIn = useTranslations('signIn')
+  const [isLoading, setIsLoading] = useState(false)
   const { replace } = useRouter()
   const { toast } = useToast()
 
@@ -45,11 +46,13 @@ const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
 
   const onSubmit = useCallback(
     async (data: FormSchemaProps) => {
+      setIsLoading(true)
       const res = await signIn('credentials', {
         email: data.email,
         password: data.password,
         redirect: false,
       })
+      setIsLoading(false)
 
       if (!res?.ok)
         return toast({
@@ -94,7 +97,7 @@ const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
           {tSignIn('signUp')}
         </Link>
       </span>
-      <Button type="submit" className="mt-2">
+      <Button type="submit" className="mt-2" disabled={isLoading}>
         <SignIn />
         {tSignIn('signIn')}
       </Button>

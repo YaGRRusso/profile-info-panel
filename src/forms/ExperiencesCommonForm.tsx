@@ -8,6 +8,7 @@ import {
   Select,
   TagList,
   Datepicker,
+  Skeleton,
 } from '@/components'
 import { useSkillsFindAll } from '@/hooks'
 import { CommonFormValuesProps } from '@/types/common-form'
@@ -139,49 +140,53 @@ const ExperiencesCommonForm = forwardRef<
         </Form.Group>
         <Form.Group>
           <Form.Label>Skills</Form.Label>
-          <TagList
-            tags={watch('skills')?.map((skill) => ({
-              value: skill,
-              label: skillsControllerFindAll.data?.data.find(
-                ({ id }) => id === skill,
-              )?.name,
-            }))}
-            placeholder="Empty"
-            onRemove={(tag) =>
-              setValue(
-                'skills',
-                getValues('skills').filter((skill) => skill !== tag),
-              )
-            }
-          >
-            <Select.Root
-              value=""
-              disabled={skillsControllerFindAll.isLoading}
-              onValueChange={(ev) =>
-                setValue('skills', [...(getValues('skills') ?? []), ev])
+          {skillsControllerFindAll.isLoading ? (
+            <Skeleton className="h-20 w-full" />
+          ) : (
+            <TagList
+              tags={watch('skills')?.map((skill) => ({
+                value: skill,
+                label: skillsControllerFindAll.data?.data.find(
+                  ({ id }) => id === skill,
+                )?.name,
+              }))}
+              placeholder="Empty"
+              onRemove={(tag) =>
+                setValue(
+                  'skills',
+                  getValues('skills').filter((skill) => skill !== tag),
+                )
               }
             >
-              <Select.Trigger>
-                <Select.Value placeholder="Select" />
-              </Select.Trigger>
-              <Select.Content>
-                <Select.Search
-                  placeholder="Search"
-                  value={searchSkills}
-                  onChange={(ev) => setSearchSkills(ev.target.value)}
-                />
-                {filteredSkills?.map(({ id, name }) => (
-                  <Select.Item
-                    key={id}
-                    value={id}
-                    disabled={watch('skills')?.includes(id)}
-                  >
-                    {name}
-                  </Select.Item>
-                ))}
-              </Select.Content>
-            </Select.Root>
-          </TagList>
+              <Select.Root
+                value=""
+                disabled={skillsControllerFindAll.isLoading}
+                onValueChange={(ev) =>
+                  setValue('skills', [...(getValues('skills') ?? []), ev])
+                }
+              >
+                <Select.Trigger>
+                  <Select.Value placeholder="Select" />
+                </Select.Trigger>
+                <Select.Content>
+                  <Select.Search
+                    placeholder="Search"
+                    value={searchSkills}
+                    onChange={(ev) => setSearchSkills(ev.target.value)}
+                  />
+                  {filteredSkills?.map(({ id, name }) => (
+                    <Select.Item
+                      key={id}
+                      value={id}
+                      disabled={watch('skills')?.includes(id)}
+                    >
+                      {name}
+                    </Select.Item>
+                  ))}
+                </Select.Content>
+              </Select.Root>
+            </TagList>
+          )}
           <Form.Message>
             {errors.skills && tForm(errors.skills?.message)}
           </Form.Message>

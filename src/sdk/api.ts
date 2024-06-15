@@ -642,6 +642,68 @@ export type MeDtoRoleEnum = typeof MeDtoRoleEnum[keyof typeof MeDtoRoleEnum];
 /**
  * 
  * @export
+ * @interface PaginatedResponseDtoClass
+ */
+export interface PaginatedResponseDtoClass {
+    /**
+     * 
+     * @type {Array<CourseDto>}
+     * @memberof PaginatedResponseDtoClass
+     */
+    'data': Array<CourseDto>;
+    /**
+     * 
+     * @type {PaginationOutputDto}
+     * @memberof PaginatedResponseDtoClass
+     */
+    'pagination': PaginationOutputDto;
+}
+/**
+ * 
+ * @export
+ * @interface PaginationOutputDto
+ */
+export interface PaginationOutputDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof PaginationOutputDto
+     */
+    'totalRecords': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaginationOutputDto
+     */
+    'currentPage': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaginationOutputDto
+     */
+    'perPage': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaginationOutputDto
+     */
+    'nextPage'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaginationOutputDto
+     */
+    'prevPage'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaginationOutputDto
+     */
+    'totalPages': number;
+}
+/**
+ * 
+ * @export
  * @interface ProjectDto
  */
 export interface ProjectDto {
@@ -1840,11 +1902,13 @@ export const CoursesApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {string} [page] 
+         * @param {string} [limit] 
          * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        coursesControllerFindAll: async (authorization?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        coursesControllerFindAll: async (page?: string, limit?: string, authorization?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/courses`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1857,42 +1921,17 @@ export const CoursesApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
             if (authorization != null) {
                 localVarHeaderParameter['Authorization'] = String(authorization);
             }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        coursesControllerFindAllFromUser: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('coursesControllerFindAllFromUser', 'id', id)
-            const localVarPath = `/courses/from/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
 
     
@@ -2028,11 +2067,13 @@ export const CoursesApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @param {SearchCourseDto} searchCourseDto 
+         * @param {string} [page] 
+         * @param {string} [limit] 
          * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        coursesControllerSearchAll: async (searchCourseDto: SearchCourseDto, authorization?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        coursesControllerSearchAll: async (searchCourseDto: SearchCourseDto, page?: string, limit?: string, authorization?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'searchCourseDto' is not null or undefined
             assertParamExists('coursesControllerSearchAll', 'searchCourseDto', searchCourseDto)
             const localVarPath = `/courses/search`;
@@ -2047,48 +2088,17 @@ export const CoursesApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
             if (authorization != null) {
                 localVarHeaderParameter['Authorization'] = String(authorization);
             }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(searchCourseDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {SearchCourseDto} searchCourseDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        coursesControllerSearchAllFromUser: async (id: string, searchCourseDto: SearchCourseDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('coursesControllerSearchAllFromUser', 'id', id)
-            // verify required parameter 'searchCourseDto' is not null or undefined
-            assertParamExists('coursesControllerSearchAllFromUser', 'searchCourseDto', searchCourseDto)
-            const localVarPath = `/courses/from/{id}/search`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
 
     
@@ -2187,26 +2197,16 @@ export const CoursesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} [page] 
+         * @param {string} [limit] 
          * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async coursesControllerFindAll(authorization?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CourseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.coursesControllerFindAll(authorization, options);
+        async coursesControllerFindAll(page?: string, limit?: string, authorization?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedResponseDtoClass>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.coursesControllerFindAll(page, limit, authorization, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CoursesApi.coursesControllerFindAll']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async coursesControllerFindAllFromUser(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CourseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.coursesControllerFindAllFromUser(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CoursesApi.coursesControllerFindAllFromUser']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2252,27 +2252,16 @@ export const CoursesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {SearchCourseDto} searchCourseDto 
+         * @param {string} [page] 
+         * @param {string} [limit] 
          * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async coursesControllerSearchAll(searchCourseDto: SearchCourseDto, authorization?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CourseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.coursesControllerSearchAll(searchCourseDto, authorization, options);
+        async coursesControllerSearchAll(searchCourseDto: SearchCourseDto, page?: string, limit?: string, authorization?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedResponseDtoClass>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.coursesControllerSearchAll(searchCourseDto, page, limit, authorization, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CoursesApi.coursesControllerSearchAll']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {SearchCourseDto} searchCourseDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async coursesControllerSearchAllFromUser(id: string, searchCourseDto: SearchCourseDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CourseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.coursesControllerSearchAllFromUser(id, searchCourseDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CoursesApi.coursesControllerSearchAllFromUser']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2322,21 +2311,14 @@ export const CoursesApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @param {string} [page] 
+         * @param {string} [limit] 
          * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        coursesControllerFindAll(authorization?: string, options?: any): AxiosPromise<Array<CourseDto>> {
-            return localVarFp.coursesControllerFindAll(authorization, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        coursesControllerFindAllFromUser(id: string, options?: any): AxiosPromise<Array<CourseDto>> {
-            return localVarFp.coursesControllerFindAllFromUser(id, options).then((request) => request(axios, basePath));
+        coursesControllerFindAll(page?: string, limit?: string, authorization?: string, options?: any): AxiosPromise<PaginatedResponseDtoClass> {
+            return localVarFp.coursesControllerFindAll(page, limit, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2372,22 +2354,14 @@ export const CoursesApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @param {SearchCourseDto} searchCourseDto 
+         * @param {string} [page] 
+         * @param {string} [limit] 
          * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        coursesControllerSearchAll(searchCourseDto: SearchCourseDto, authorization?: string, options?: any): AxiosPromise<Array<CourseDto>> {
-            return localVarFp.coursesControllerSearchAll(searchCourseDto, authorization, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {SearchCourseDto} searchCourseDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        coursesControllerSearchAllFromUser(id: string, searchCourseDto: SearchCourseDto, options?: any): AxiosPromise<Array<CourseDto>> {
-            return localVarFp.coursesControllerSearchAllFromUser(id, searchCourseDto, options).then((request) => request(axios, basePath));
+        coursesControllerSearchAll(searchCourseDto: SearchCourseDto, page?: string, limit?: string, authorization?: string, options?: any): AxiosPromise<PaginatedResponseDtoClass> {
+            return localVarFp.coursesControllerSearchAll(searchCourseDto, page, limit, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2437,24 +2411,15 @@ export class CoursesApi extends BaseAPI {
 
     /**
      * 
+     * @param {string} [page] 
+     * @param {string} [limit] 
      * @param {string} [authorization] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CoursesApi
      */
-    public coursesControllerFindAll(authorization?: string, options?: RawAxiosRequestConfig) {
-        return CoursesApiFp(this.configuration).coursesControllerFindAll(authorization, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof CoursesApi
-     */
-    public coursesControllerFindAllFromUser(id: string, options?: RawAxiosRequestConfig) {
-        return CoursesApiFp(this.configuration).coursesControllerFindAllFromUser(id, options).then((request) => request(this.axios, this.basePath));
+    public coursesControllerFindAll(page?: string, limit?: string, authorization?: string, options?: RawAxiosRequestConfig) {
+        return CoursesApiFp(this.configuration).coursesControllerFindAll(page, limit, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2497,25 +2462,15 @@ export class CoursesApi extends BaseAPI {
     /**
      * 
      * @param {SearchCourseDto} searchCourseDto 
+     * @param {string} [page] 
+     * @param {string} [limit] 
      * @param {string} [authorization] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CoursesApi
      */
-    public coursesControllerSearchAll(searchCourseDto: SearchCourseDto, authorization?: string, options?: RawAxiosRequestConfig) {
-        return CoursesApiFp(this.configuration).coursesControllerSearchAll(searchCourseDto, authorization, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {SearchCourseDto} searchCourseDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof CoursesApi
-     */
-    public coursesControllerSearchAllFromUser(id: string, searchCourseDto: SearchCourseDto, options?: RawAxiosRequestConfig) {
-        return CoursesApiFp(this.configuration).coursesControllerSearchAllFromUser(id, searchCourseDto, options).then((request) => request(this.axios, this.basePath));
+    public coursesControllerSearchAll(searchCourseDto: SearchCourseDto, page?: string, limit?: string, authorization?: string, options?: RawAxiosRequestConfig) {
+        return CoursesApiFp(this.configuration).coursesControllerSearchAll(searchCourseDto, page, limit, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

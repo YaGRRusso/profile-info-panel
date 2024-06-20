@@ -77,7 +77,7 @@ const CoursesTable = forwardRef<HTMLTableElement, CoursesTableProps>(
                     />
                     <DeleteButton
                       name={course.name}
-                      handleConfirm={() => deleteCourse.mutate(course.id)}
+                      handleConfirm={() => deleteCourse.mutate([course.id])}
                     />
                   </div>
                 </Table.Cell>
@@ -96,8 +96,8 @@ const CoursesTable = forwardRef<HTMLTableElement, CoursesTableProps>(
             isLoading={updateCourse.isPending}
             defaultValues={editingCourse}
             customValues={{ id: editingCourse?.id }}
-            handleSubmit={(data: any) =>
-              updateCourse.mutate(data, {
+            handleSubmit={({ id, ...data }: any) =>
+              updateCourse.mutate([id, data], {
                 onSuccess: () => setEditingCourse(undefined),
               })
             }

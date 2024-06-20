@@ -83,7 +83,7 @@ const ExperiencesTable = forwardRef<HTMLTableElement, ExperiencesTableProps>(
                     <DeleteButton
                       name={experience.role}
                       handleConfirm={() =>
-                        deleteExperience.mutate(experience.id)
+                        deleteExperience.mutate([experience.id])
                       }
                     />
                   </div>
@@ -111,8 +111,8 @@ const ExperiencesTable = forwardRef<HTMLTableElement, ExperiencesTableProps>(
                 : undefined,
             }}
             customValues={{ id: editingExperience?.id }}
-            handleSubmit={(data: any) =>
-              updateExperience.mutate(data, {
+            handleSubmit={({ id, ...data }: any) =>
+              updateExperience.mutate([id, data], {
                 onSuccess: () => setEditingExperience(undefined),
               })
             }

@@ -3,7 +3,6 @@
 import { Button, ButtonProps, FloatingForm } from '@/components'
 import SkillsCommonForm from '@/forms/SkillsCommonForm'
 import { useSkillsCreate } from '@/hooks'
-import { CreateSkillDto } from '@/sdk'
 
 import { Plus } from '@phosphor-icons/react'
 import { useTranslations } from 'next-intl'
@@ -36,8 +35,8 @@ const SkillsForm = forwardRef<HTMLButtonElement, SkillsFormProps>(
         >
           <SkillsCommonForm
             isLoading={createSkill.isPending}
-            handleSubmit={({ ...data }) =>
-              createSkill.mutate([data as CreateSkillDto], {
+            handleSubmit={({ ...data }: any) =>
+              createSkill.mutate([data], {
                 onSuccess: () => setIsFormOpen(false),
               })
             }

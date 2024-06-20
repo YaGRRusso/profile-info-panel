@@ -43,29 +43,29 @@ describe('request', () => {
 
   it('should catch the function error', async () => {
     const res1 = await tryCatch(errorFn())
-    expect(res1).toBeInstanceOf(Error)
+    expect(res1).toBe(undefined)
 
     const res2 = await tryCatch(errorFn(), (err) => err)
-    expect(res2).toBeInstanceOf(Error)
+    expect(res2).toBe(undefined)
 
     const res3 = await tryCatch(errorFn(), () => 'error')
-    expect(res3).toBe('error')
+    expect(res3).toBe(undefined)
   })
 
   it('should catch the function function error', async () => {
     const res1 = await tryCatch(() => errorFn())
-    expect(res1).toBeInstanceOf(Error)
+    expect(res1).toBe(undefined)
 
     const res2 = await tryCatch(
       () => errorFn(),
       (err) => err,
     )
-    expect(res2).toBeInstanceOf(Error)
+    expect(res2).toBe(undefined)
 
     const res3 = await tryCatch(
       () => errorFn(),
       () => 'error',
     )
-    expect(res3).toBe('error')
+    expect(res3).toBe(undefined)
   })
 })

@@ -10,7 +10,7 @@ import {
 import SkillsCommonForm from '@/forms/SkillsCommonForm'
 import { formatDate } from '@/helpers/date'
 import { useSkillsFindAll, useSkillsRemove, useSkillsUpdate } from '@/hooks'
-import { SkillDto } from '@/sdk'
+import { SkillDto, UpdateSkillDto } from '@/sdk'
 
 import { forwardRef, useState } from 'react'
 
@@ -60,7 +60,7 @@ const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(
                     />
                     <DeleteButton
                       name={skill.name}
-                      handleConfirm={() => deleteSkill.mutate(skill.id)}
+                      handleConfirm={() => deleteSkill.mutate([skill.id])}
                     />
                   </div>
                 </Table.Cell>
@@ -79,8 +79,8 @@ const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(
             isLoading={updateSkill.isPending}
             defaultValues={editingSkill}
             customValues={{ id: editingSkill?.id }}
-            handleSubmit={(data: any) =>
-              updateSkill.mutate(data, {
+            handleSubmit={({ id, ...data }) =>
+              updateSkill.mutate([id, data as UpdateSkillDto], {
                 onSuccess: () => setEditingSkill(undefined),
               })
             }

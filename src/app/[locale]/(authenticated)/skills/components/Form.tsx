@@ -36,8 +36,8 @@ const SkillsForm = forwardRef<HTMLButtonElement, SkillsFormProps>(
         >
           <SkillsCommonForm
             isLoading={createSkill.isPending}
-            handleSubmit={(data) =>
-              createSkill.mutate(data as CreateSkillDto, {
+            handleSubmit={({ ...data }) =>
+              createSkill.mutate([data as CreateSkillDto], {
                 onSuccess: () => setIsFormOpen(false),
               })
             }

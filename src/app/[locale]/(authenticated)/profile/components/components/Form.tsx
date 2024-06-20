@@ -20,7 +20,7 @@ const ProfileForm = forwardRef<HTMLFormElement, ProfileFormProps>(
         ref={ref}
         handleSubmit={(data) => usersControllerUpdate.mutate(data as any)}
         className="max-w-3xl"
-        defaultValues={usersControllerFindMe.data?.data as any}
+        defaultValues={usersControllerFindMe.data as any}
         isLoading={usersControllerFindMe.isLoading}
         isEditing
         {...rest}

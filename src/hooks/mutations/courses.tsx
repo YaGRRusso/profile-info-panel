@@ -1,5 +1,7 @@
 import { useToast } from '@/components'
-import { CourseDto, useCourses } from '@/sdk'
+import { unwrap } from '@/helpers/response'
+import { useCourses } from '@/sdk'
+import { MutationDataProps } from '@/types/mutation-data'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
@@ -11,7 +13,9 @@ export const useCoursesCreate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: courses.coursesControllerCreate.bind(courses),
+    mutationFn: async (
+      data: MutationDataProps<typeof courses.coursesControllerCreate>,
+    ) => await courses.coursesControllerCreate(...data).then(unwrap),
     mutationKey: ['coursesControllerCreate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] })
@@ -37,7 +41,9 @@ export const useCoursesRemove = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: courses.coursesControllerRemove.bind(courses),
+    mutationFn: async (
+      data: MutationDataProps<typeof courses.coursesControllerRemove>,
+    ) => await courses.coursesControllerRemove(...data).then(unwrap),
     mutationKey: ['coursesControllerRemove'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] })
@@ -63,8 +69,9 @@ export const useCoursesUpdate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: ({ id, ...course }: CourseDto) =>
-      courses.coursesControllerUpdate(id, course),
+    mutationFn: async (
+      data: MutationDataProps<typeof courses.coursesControllerUpdate>,
+    ) => await courses.coursesControllerUpdate(...data).then(unwrap),
     mutationKey: ['coursesControllerUpdate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] })

@@ -1,5 +1,7 @@
 import { useToast } from '@/components'
-import { SkillDto, useSkills } from '@/sdk'
+import { unwrap } from '@/helpers/response'
+import { useSkills } from '@/sdk'
+import { MutationDataProps } from '@/types/mutation-data'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
@@ -11,7 +13,9 @@ export const useSkillsCreate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: skills.skillsControllerCreate.bind(skills),
+    mutationFn: async (
+      data: MutationDataProps<typeof skills.skillsControllerCreate>,
+    ) => await skills.skillsControllerCreate(...data).then(unwrap),
     mutationKey: ['skillsControllerCreate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['skills'] })
@@ -37,7 +41,9 @@ export const useSkillsRemove = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: skills.skillsControllerRemove.bind(skills),
+    mutationFn: async (
+      data: MutationDataProps<typeof skills.skillsControllerRemove>,
+    ) => await skills.skillsControllerRemove(...data).then(unwrap),
     mutationKey: ['skillsControllerRemove'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['skills'] })
@@ -63,8 +69,9 @@ export const useSkillsUpdate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: ({ id, ...skill }: SkillDto) =>
-      skills.skillsControllerUpdate(id, skill),
+    mutationFn: async (
+      data: MutationDataProps<typeof skills.skillsControllerUpdate>,
+    ) => await skills.skillsControllerUpdate(...data).then(unwrap),
     mutationKey: ['skillsControllerUpdate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['skills'] })

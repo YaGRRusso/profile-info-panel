@@ -1,6 +1,8 @@
 import { useRouter } from '@/common/navigation'
 import { useToast } from '@/components'
+import { unwrap } from '@/helpers/response'
 import { useUsers } from '@/sdk'
+import { MutationDataProps } from '@/types/mutation-data'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
@@ -12,8 +14,10 @@ export const useUsersUpdate = () => {
   const { toast } = useToast()
 
   return useMutation({
+    mutationFn: async (
+      data: MutationDataProps<typeof users.usersControllerUpdate>,
+    ) => await users.usersControllerUpdate(...data).then(unwrap),
     mutationKey: ['me'],
-    mutationFn: users.usersControllerUpdate.bind(users),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['me'] })
       toast({
@@ -38,7 +42,9 @@ export const useUsersCreate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: users.usersControllerCreate.bind(users),
+    mutationFn: async (
+      data: MutationDataProps<typeof users.usersControllerCreate>,
+    ) => await users.usersControllerCreate(...data).then(unwrap),
     mutationKey: ['usersControllerCreate'],
     onSuccess: () => replace('/signin'),
     onError: ({ response }: AxiosError<any>) => {

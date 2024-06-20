@@ -36,8 +36,8 @@ const ExperiencesForm = forwardRef<HTMLButtonElement, ExperiencesFormProps>(
         >
           <ExperiencesCommonForm
             isLoading={createExperience.isPending}
-            handleSubmit={(data) =>
-              createExperience.mutate(data as any, {
+            handleSubmit={({ ...data }: any) =>
+              createExperience.mutate([data], {
                 onSuccess: () => setIsFormOpen(false),
               })
             }

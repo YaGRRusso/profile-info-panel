@@ -95,7 +95,9 @@ const FormationsTable = forwardRef<HTMLTableElement, FormationsTableProps>(
                     />
                     <DeleteButton
                       name={formation.name}
-                      handleConfirm={() => deleteFormation.mutate(formation.id)}
+                      handleConfirm={() =>
+                        deleteFormation.mutate([formation.id])
+                      }
                     />
                   </div>
                 </Table.Cell>
@@ -122,8 +124,8 @@ const FormationsTable = forwardRef<HTMLTableElement, FormationsTableProps>(
                 : undefined,
             }}
             customValues={{ id: editingFormation?.id }}
-            handleSubmit={(data: any) =>
-              updateFormation.mutate(data, {
+            handleSubmit={({ id, ...data }: any) =>
+              updateFormation.mutate([id, data], {
                 onSuccess: () => setEditingFormation(undefined),
               })
             }

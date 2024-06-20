@@ -36,8 +36,8 @@ const CoursesForm = forwardRef<HTMLButtonElement, CoursesFormProps>(
         >
           <CoursesCommonForm
             isLoading={createCourse.isPending}
-            handleSubmit={(data) =>
-              createCourse.mutate(data as any, {
+            handleSubmit={({ ...data }: any) =>
+              createCourse.mutate([data], {
                 onSuccess: () => setIsFormOpen(false),
               })
             }

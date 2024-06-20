@@ -35,8 +35,8 @@ const FormationsForm = forwardRef<HTMLButtonElement, FormationsFormProps>(
         >
           <FormationsCommonForm
             isLoading={createFormation.isPending}
-            handleSubmit={(data) =>
-              createFormation.mutate(data as any, {
+            handleSubmit={({ ...data }: any) =>
+              createFormation.mutate([data], {
                 onSuccess: () => setIsFormOpen(false),
               })
             }

@@ -1,5 +1,7 @@
 import { useToast } from '@/components'
-import { ProjectDto, useProjects } from '@/sdk'
+import { unwrap } from '@/helpers/response'
+import { useProjects } from '@/sdk'
+import { MutationDataProps } from '@/types/mutation-data'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
@@ -11,7 +13,9 @@ export const useProjectsCreate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: projects.projectsControllerCreate.bind(projects),
+    mutationFn: async (
+      data: MutationDataProps<typeof projects.projectsControllerCreate>,
+    ) => await projects.projectsControllerCreate(...data).then(unwrap),
     mutationKey: ['projectsControllerCreate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['projects'] })
@@ -37,7 +41,9 @@ export const useProjectsRemove = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: projects.projectsControllerRemove.bind(projects),
+    mutationFn: async (
+      data: MutationDataProps<typeof projects.projectsControllerRemove>,
+    ) => await projects.projectsControllerRemove(...data).then(unwrap),
     mutationKey: ['projectsControllerRemove'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['projects'] })
@@ -63,8 +69,9 @@ export const useProjectsUpdate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: ({ id, ...project }: ProjectDto) =>
-      projects.projectsControllerUpdate(id, project),
+    mutationFn: async (
+      data: MutationDataProps<typeof projects.projectsControllerUpdate>,
+    ) => await projects.projectsControllerUpdate(...data).then(unwrap),
     mutationKey: ['projectsControllerUpdate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['projects'] })

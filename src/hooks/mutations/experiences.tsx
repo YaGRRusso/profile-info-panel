@@ -1,5 +1,7 @@
 import { useToast } from '@/components'
-import { ExperienceDto, useExperiences } from '@/sdk'
+import { unwrap } from '@/helpers/response'
+import { useExperiences } from '@/sdk'
+import { MutationDataProps } from '@/types/mutation-data'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
@@ -11,7 +13,9 @@ export const useExperiencesCreate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: experiences.experiencesControllerCreate.bind(experiences),
+    mutationFn: async (
+      data: MutationDataProps<typeof experiences.experiencesControllerCreate>,
+    ) => await experiences.experiencesControllerCreate(...data).then(unwrap),
     mutationKey: ['experiencesControllerCreate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['experiences'] })
@@ -37,7 +41,9 @@ export const useExperiencesRemove = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: experiences.experiencesControllerRemove.bind(experiences),
+    mutationFn: async (
+      data: MutationDataProps<typeof experiences.experiencesControllerRemove>,
+    ) => await experiences.experiencesControllerRemove(...data).then(unwrap),
     mutationKey: ['experiencesControllerRemove'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['experiences'] })
@@ -63,8 +69,9 @@ export const useExperiencesUpdate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: ({ id, ...experience }: ExperienceDto) =>
-      experiences.experiencesControllerUpdate(id, experience),
+    mutationFn: async (
+      data: MutationDataProps<typeof experiences.experiencesControllerUpdate>,
+    ) => await experiences.experiencesControllerUpdate(...data).then(unwrap),
     mutationKey: ['experiencesControllerUpdate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['experiences'] })

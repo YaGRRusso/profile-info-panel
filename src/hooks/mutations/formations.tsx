@@ -1,5 +1,7 @@
 import { useToast } from '@/components'
-import { FormationDto, useFormations } from '@/sdk'
+import { unwrap } from '@/helpers/response'
+import { useFormations } from '@/sdk'
+import { MutationDataProps } from '@/types/mutation-data'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
@@ -11,7 +13,9 @@ export const useFormationsCreate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: formations.formationsControllerCreate.bind(formations),
+    mutationFn: async (
+      data: MutationDataProps<typeof formations.formationsControllerCreate>,
+    ) => await formations.formationsControllerCreate(...data).then(unwrap),
     mutationKey: ['formationsControllerCreate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['formations'] })
@@ -37,7 +41,9 @@ export const useFormationsRemove = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: formations.formationsControllerRemove.bind(formations),
+    mutationFn: async (
+      data: MutationDataProps<typeof formations.formationsControllerRemove>,
+    ) => await formations.formationsControllerRemove(...data).then(unwrap),
     mutationKey: ['formationsControllerRemove'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['formations'] })
@@ -63,8 +69,9 @@ export const useFormationsUpdate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: ({ id, ...formation }: FormationDto) =>
-      formations.formationsControllerUpdate(id, formation),
+    mutationFn: async (
+      data: MutationDataProps<typeof formations.formationsControllerUpdate>,
+    ) => await formations.formationsControllerUpdate(...data).then(unwrap),
     mutationKey: ['formationsControllerUpdate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['formations'] })

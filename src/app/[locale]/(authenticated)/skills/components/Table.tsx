@@ -60,7 +60,7 @@ const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(
                     />
                     <DeleteButton
                       name={skill.name}
-                      handleConfirm={() => deleteSkill.mutate(skill.id)}
+                      handleConfirm={() => deleteSkill.mutate([skill.id])}
                     />
                   </div>
                 </Table.Cell>
@@ -79,8 +79,8 @@ const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(
             isLoading={updateSkill.isPending}
             defaultValues={editingSkill}
             customValues={{ id: editingSkill?.id }}
-            handleSubmit={(data: any) =>
-              updateSkill.mutate(data, {
+            handleSubmit={({ id, ...data }: any) =>
+              updateSkill.mutate([id, data], {
                 onSuccess: () => setEditingSkill(undefined),
               })
             }

@@ -35,8 +35,8 @@ const ProjectsForm = forwardRef<HTMLButtonElement, ProjectsFormProps>(
         >
           <ProjectsCommonForm
             isLoading={createProject.isPending}
-            handleSubmit={(data) =>
-              createProject.mutate(data as any, {
+            handleSubmit={({ ...data }: any) =>
+              createProject.mutate([data], {
                 onSuccess: () => setIsFormOpen(false),
               })
             }

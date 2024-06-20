@@ -1,4 +1,4 @@
-export type CommonSelectValueProps<T = any> = {
+export type CommonSelectValueProps<T> = {
   value: T
   icon?: ReactNode
   label?: string

@@ -85,7 +85,7 @@ const ProjectsTable = forwardRef<HTMLTableElement, ProjectsTableProps>(
                     />
                     <DeleteButton
                       name={project.name}
-                      handleConfirm={() => deleteProject.mutate(project.id)}
+                      handleConfirm={() => deleteProject.mutate([project.id])}
                     />
                   </div>
                 </Table.Cell>
@@ -104,8 +104,8 @@ const ProjectsTable = forwardRef<HTMLTableElement, ProjectsTableProps>(
             isLoading={updateProject.isPending}
             defaultValues={editingProject}
             customValues={{ id: editingProject?.id }}
-            handleSubmit={(data: any) =>
-              updateProject.mutate(data, {
+            handleSubmit={({ id, ...data }: any) =>
+              updateProject.mutate([id, data], {
                 onSuccess: () => setEditingProject(undefined),
               })
             }

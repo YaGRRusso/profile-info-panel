@@ -1,10 +1,11 @@
 import { unwrap } from '@/helpers/response'
 import { useProjects } from '@/sdk'
+import { QueryDataProps } from '@/types/query-data'
 
 import { useQuery } from '@tanstack/react-query'
 
 export const useProjectsFindAll = (
-  ...data: Parameters<typeof projects.projectsControllerFindAll>
+  ...data: QueryDataProps<typeof projects.projectsControllerFindAll>
 ) => {
   const projects = useProjects()
 

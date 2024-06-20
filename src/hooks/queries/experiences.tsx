@@ -1,10 +1,11 @@
 import { unwrap } from '@/helpers/response'
 import { useExperiences } from '@/sdk'
+import { QueryDataProps } from '@/types/query-data'
 
 import { useQuery } from '@tanstack/react-query'
 
 export const useExperiencesFindAll = (
-  ...data: Parameters<typeof experiences.experiencesControllerFindAll>
+  ...data: QueryDataProps<typeof experiences.experiencesControllerFindAll>
 ) => {
   const experiences = useExperiences()
 

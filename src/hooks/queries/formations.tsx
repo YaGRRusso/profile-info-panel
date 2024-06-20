@@ -1,10 +1,11 @@
 import { unwrap } from '@/helpers/response'
 import { useFormations } from '@/sdk'
+import { QueryDataProps } from '@/types/query-data'
 
 import { useQuery } from '@tanstack/react-query'
 
 export const useFormationsFindAll = (
-  ...data: Parameters<typeof formations.formationsControllerFindAll>
+  ...data: QueryDataProps<typeof formations.formationsControllerFindAll>
 ) => {
   const formations = useFormations()
 

@@ -1,10 +1,11 @@
 import { unwrap } from '@/helpers/response'
 import { useCourses } from '@/sdk'
+import { QueryDataProps } from '@/types/query-data'
 
 import { useQuery } from '@tanstack/react-query'
 
 export const useCoursesFindAll = (
-  ...data: Parameters<typeof courses.coursesControllerFindAll>
+  ...data: QueryDataProps<typeof courses.coursesControllerFindAll>
 ) => {
   const courses = useCourses()
 

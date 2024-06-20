@@ -1,10 +1,11 @@
 import { unwrap } from '@/helpers/response'
 import { useSkills } from '@/sdk'
+import { QueryDataProps } from '@/types/query-data'
 
 import { useQuery } from '@tanstack/react-query'
 
 export const useSkillsFindAll = (
-  ...data: Parameters<typeof skills.skillsControllerFindAll>
+  ...data: QueryDataProps<typeof skills.skillsControllerFindAll>
 ) => {
   const skills = useSkills()
 

@@ -27,9 +27,7 @@ export default async function RootLayout({
     <html lang={params.locale}>
       <Providers>
         <NextIntlClientProvider locale={params.locale} messages={messages}>
-          <Body.Root
-            className={cn('font-sans antialiased', montserrat.variable)}
-          >
+          <Body.Root className={cn('font-sans antialiased', montserrat.variable)}>
             <Body.Main>
               <main className="mx-auto flex max-w-xl flex-1 flex-col items-center justify-center gap-8 py-12">
                 <div className="flex w-full items-center gap-2 text-lg">

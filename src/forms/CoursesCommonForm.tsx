@@ -1,14 +1,6 @@
 'use client'
 
-import {
-  Button,
-  Form,
-  Input,
-  Select,
-  Skeleton,
-  TagList,
-  Textarea,
-} from '@/components'
+import { Button, Form, Input, Select, Skeleton, TagList, Textarea } from '@/components'
 import { useSkillsFindAll } from '@/hooks'
 import { CreateCourseDtoStatusEnum } from '@/sdk'
 import { CommonFormValuesProps } from '@/types/common-form'
@@ -16,13 +8,7 @@ import { CommonSelectValueProps } from '@/types/common-select'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
-import {
-  FormHTMLAttributes,
-  forwardRef,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react'
+import { FormHTMLAttributes, forwardRef, useCallback, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -52,10 +38,7 @@ export interface CoursesCommonFormProps
 }
 
 const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
-  (
-    { handleSubmit: onSubmit, isLoading, defaultValues, customValues, ...rest },
-    ref,
-  ) => {
+  ({ handleSubmit: onSubmit, isLoading, defaultValues, customValues, ...rest }, ref) => {
     const tForm = useTranslations('form')
     const [searchSkills, setSearchSkills] = useState('')
     const skillsControllerFindAll = useSkillsFindAll()
@@ -96,9 +79,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
             value={watch('name') ?? ''}
             placeholder="Name"
           />
-          <Form.Message>
-            {errors.name && tForm(errors.name?.message)}
-          </Form.Message>
+          <Form.Message>{errors.name && tForm(errors.name?.message)}</Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>School</Form.Label>
@@ -107,9 +88,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
             value={watch('school') ?? ''}
             placeholder="School"
           />
-          <Form.Message>
-            {errors.school && tForm(errors.school?.message)}
-          </Form.Message>
+          <Form.Message>{errors.school && tForm(errors.school?.message)}</Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Description</Form.Label>
@@ -118,16 +97,11 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
             value={watch('description') ?? ''}
             placeholder="Description"
           />
-          <Form.Message>
-            {errors.description && tForm(errors.description?.message)}
-          </Form.Message>
+          <Form.Message>{errors.description && tForm(errors.description?.message)}</Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Status</Form.Label>
-          <Select.Root
-            onValueChange={(ev) => setValue('status', ev)}
-            value={watch('status') ?? ''}
-          >
+          <Select.Root onValueChange={(ev) => setValue('status', ev)} value={watch('status') ?? ''}>
             <Select.Trigger>
               <Select.Value placeholder="Select" />
             </Select.Trigger>
@@ -139,9 +113,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
               ))}
             </Select.Content>
           </Select.Root>
-          <Form.Message>
-            {errors.status && tForm(errors.status?.message)}
-          </Form.Message>
+          <Form.Message>{errors.status && tForm(errors.status?.message)}</Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Certificate</Form.Label>
@@ -150,9 +122,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
             value={watch('certificate') ?? ''}
             placeholder="Certificate"
           />
-          <Form.Message>
-            {errors.certificate && tForm(errors.certificate?.message)}
-          </Form.Message>
+          <Form.Message>{errors.certificate && tForm(errors.certificate?.message)}</Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Hours</Form.Label>
@@ -163,9 +133,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
             min={1}
             type="number"
           />
-          <Form.Message>
-            {errors.hours && tForm(errors.hours?.message)}
-          </Form.Message>
+          <Form.Message>{errors.hours && tForm(errors.hours?.message)}</Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Skills</Form.Label>
@@ -175,9 +143,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
             <TagList
               tags={watch('skills')?.map((skill) => ({
                 value: skill,
-                label: skillsControllerFindAll.data?.data.find(
-                  ({ id }) => id === skill,
-                )?.name,
+                label: skillsControllerFindAll.data?.data.find(({ id }) => id === skill)?.name,
               }))}
               placeholder="Empty"
               onRemove={(tag) =>
@@ -190,9 +156,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
               <Select.Root
                 value=""
                 disabled={skillsControllerFindAll.isLoading}
-                onValueChange={(ev) =>
-                  setValue('skills', [...(getValues('skills') ?? []), ev])
-                }
+                onValueChange={(ev) => setValue('skills', [...(getValues('skills') ?? []), ev])}
               >
                 <Select.Trigger>
                   <Select.Value placeholder="Select" />
@@ -204,11 +168,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
                     onChange={(ev) => setSearchSkills(ev.target.value)}
                   />
                   {filteredSkills?.map(({ id, name }) => (
-                    <Select.Item
-                      key={id}
-                      value={id}
-                      disabled={watch('skills')?.includes(id)}
-                    >
+                    <Select.Item key={id} value={id} disabled={watch('skills')?.includes(id)}>
                       {name}
                     </Select.Item>
                   ))}
@@ -216,9 +176,7 @@ const CoursesCommonForm = forwardRef<HTMLFormElement, CoursesCommonFormProps>(
               </Select.Root>
             </TagList>
           )}
-          <Form.Message>
-            {errors.skills && tForm(errors.skills?.message)}
-          </Form.Message>
+          <Form.Message>{errors.skills && tForm(errors.skills?.message)}</Form.Message>
         </Form.Group>
         <Button type="submit" className="mt-2" disabled={isLoading}>
           Concluir

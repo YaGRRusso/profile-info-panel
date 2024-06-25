@@ -10,10 +10,7 @@ const Skeleton = ({ repeat = 1, className, ...rest }: SkeletonProps) =>
   [...Array(repeat)].map((item, index) => (
     <div
       key={index}
-      className={cn(
-        'animate-pulse rounded-md bg-gray-100 dark:bg-gray-800',
-        className,
-      )}
+      className={cn('animate-pulse rounded-md bg-gray-100 dark:bg-gray-800', className)}
       {...rest}
     />
   ))

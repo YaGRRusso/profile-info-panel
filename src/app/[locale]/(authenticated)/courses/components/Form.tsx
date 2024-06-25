@@ -10,43 +10,36 @@ import { forwardRef, useState } from 'react'
 
 export interface CoursesFormProps extends ButtonProps {}
 
-const CoursesForm = forwardRef<HTMLButtonElement, CoursesFormProps>(
-  ({ ...rest }, ref) => {
-    const tCourses = useTranslations('courses')
-    const [isFormOpen, setIsFormOpen] = useState(false)
+const CoursesForm = forwardRef<HTMLButtonElement, CoursesFormProps>(({ ...rest }, ref) => {
+  const tCourses = useTranslations('courses')
+  const [isFormOpen, setIsFormOpen] = useState(false)
 
-    const createCourse = useCoursesCreate()
+  const createCourse = useCoursesCreate()
 
-    return (
-      <>
-        <Button
-          ref={ref}
-          variant="outline"
-          onClick={() => setIsFormOpen(true)}
-          {...rest}
-        >
-          <Plus />
-          {tCourses('add')}
-        </Button>
-        <FloatingForm
-          description="Fill the form below"
-          title="Manage Course"
-          open={isFormOpen}
-          onOpenChange={setIsFormOpen}
-        >
-          <CoursesCommonForm
-            isLoading={createCourse.isPending}
-            handleSubmit={({ ...data }: any) =>
-              createCourse.mutate([data], {
-                onSuccess: () => setIsFormOpen(false),
-              })
-            }
-          />
-        </FloatingForm>
-      </>
-    )
-  },
-)
+  return (
+    <>
+      <Button ref={ref} variant="outline" onClick={() => setIsFormOpen(true)} {...rest}>
+        <Plus />
+        {tCourses('add')}
+      </Button>
+      <FloatingForm
+        description="Fill the form below"
+        title="Manage Course"
+        open={isFormOpen}
+        onOpenChange={setIsFormOpen}
+      >
+        <CoursesCommonForm
+          isLoading={createCourse.isPending}
+          handleSubmit={({ ...data }: any) =>
+            createCourse.mutate([data], {
+              onSuccess: () => setIsFormOpen(false),
+            })
+          }
+        />
+      </FloatingForm>
+    </>
+  )
+})
 CoursesForm.displayName = 'Form'
 
 export default CoursesForm

@@ -15,10 +15,7 @@ const SelectScrollUpButton = forwardRef<
 >(({ className, ...rest }, ref) => (
   <SelectPrimitive.ScrollUpButton
     ref={ref}
-    className={cn(
-      'flex cursor-default items-center justify-center py-1',
-      className,
-    )}
+    className={cn('flex cursor-default items-center justify-center py-1', className)}
     {...rest}
   >
     <CaretUp className="h-4 w-4" />

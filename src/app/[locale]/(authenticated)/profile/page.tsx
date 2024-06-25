@@ -10,10 +10,7 @@ export default function Profile() {
 
   return (
     <main className="mx-auto flex h-full w-full max-w-3xl flex-col gap-8">
-      <TitleDesc
-        title={tProfile('title')}
-        description={tProfile('description')}
-      />
+      <TitleDesc title={tProfile('title')} description={tProfile('description')} />
       <ProfileForm />
     </main>
   )

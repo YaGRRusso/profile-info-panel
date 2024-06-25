@@ -11,10 +11,7 @@ import { Calendar as CalendarIcon } from '@phosphor-icons/react'
 import { forwardRef, useMemo } from 'react'
 import { SelectSingleEventHandler } from 'react-day-picker'
 
-export type DatePickerProps = Omit<
-  CalendarProps,
-  'selected' | 'onSelect' | 'mode'
-> & {
+export type DatePickerProps = Omit<CalendarProps, 'selected' | 'onSelect' | 'mode'> & {
   placeholder?: string
   selected?: Date
   onSelect?: SelectSingleEventHandler
@@ -50,13 +47,7 @@ const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
           </Button>
         </Popover.Trigger>
         <Popover.Content className="w-auto p-0">
-          <Calendar
-            mode="single"
-            selected={selected}
-            onSelect={onSelect}
-            initialFocus
-            {...rest}
-          />
+          <Calendar mode="single" selected={selected} onSelect={onSelect} initialFocus {...rest} />
         </Popover.Content>
       </Popover.Root>
     )

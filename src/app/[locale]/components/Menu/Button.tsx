@@ -5,18 +5,14 @@ import { Link, locales } from '@/common/navigation'
 import { usePathname } from 'next/navigation'
 import { AnchorHTMLAttributes, FC, ReactNode, useMemo } from 'react'
 
-export interface MenuButtonProps
-  extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface MenuButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   icon: ReactNode
   text: string
   path?: string
 }
 
 const MenuButton: FC<MenuButtonProps> = ({ icon, text, path, ...rest }) => {
-  const regex = useMemo(
-    () => new RegExp(`^(/(${locales.join('|')}))?${path}$`),
-    [path],
-  )
+  const regex = useMemo(() => new RegExp(`^(/(${locales.join('|')}))?${path}$`), [path])
   const pathname = usePathname()
 
   return (

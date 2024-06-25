@@ -23,13 +23,7 @@ const Logos: FC<LogosProps> = ({ ...rest }) => {
         height={120}
         className="-mr-8 block dark:hidden"
       />
-      <Image
-        src="/yr-cor.svg"
-        alt="logo three"
-        width={120}
-        height={120}
-        className="-ml-8 block"
-      />
+      <Image src="/yr-cor.svg" alt="logo three" width={120} height={120} className="-ml-8 block" />
     </div>
   )
 }

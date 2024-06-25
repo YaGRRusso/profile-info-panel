@@ -10,10 +10,7 @@ export default async function SignIn() {
 
   return (
     <div className="flex w-full flex-col gap-4">
-      <TitleDesc
-        description={tSignIn('provideYourInfos')}
-        title={tSignIn('welcome')}
-      />
+      <TitleDesc description={tSignIn('provideYourInfos')} title={tSignIn('welcome')} />
       <SignInForm />
     </div>
   )

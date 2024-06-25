@@ -10,42 +10,35 @@ import { forwardRef, useState } from 'react'
 
 export interface FormationsFormProps extends ButtonProps {}
 
-const FormationsForm = forwardRef<HTMLButtonElement, FormationsFormProps>(
-  ({ ...rest }, ref) => {
-    const tFormations = useTranslations('formations')
-    const [isFormOpen, setIsFormOpen] = useState(false)
-    const createFormation = useFormationsCreate()
+const FormationsForm = forwardRef<HTMLButtonElement, FormationsFormProps>(({ ...rest }, ref) => {
+  const tFormations = useTranslations('formations')
+  const [isFormOpen, setIsFormOpen] = useState(false)
+  const createFormation = useFormationsCreate()
 
-    return (
-      <>
-        <Button
-          ref={ref}
-          variant="outline"
-          onClick={() => setIsFormOpen(true)}
-          {...rest}
-        >
-          <Plus />
-          {tFormations('add')}
-        </Button>
-        <FloatingForm
-          description="Fill the form below"
-          title="Manage Formation"
-          open={isFormOpen}
-          onOpenChange={setIsFormOpen}
-        >
-          <FormationsCommonForm
-            isLoading={createFormation.isPending}
-            handleSubmit={({ ...data }: any) =>
-              createFormation.mutate([data], {
-                onSuccess: () => setIsFormOpen(false),
-              })
-            }
-          />
-        </FloatingForm>
-      </>
-    )
-  },
-)
+  return (
+    <>
+      <Button ref={ref} variant="outline" onClick={() => setIsFormOpen(true)} {...rest}>
+        <Plus />
+        {tFormations('add')}
+      </Button>
+      <FloatingForm
+        description="Fill the form below"
+        title="Manage Formation"
+        open={isFormOpen}
+        onOpenChange={setIsFormOpen}
+      >
+        <FormationsCommonForm
+          isLoading={createFormation.isPending}
+          handleSubmit={({ ...data }: any) =>
+            createFormation.mutate([data], {
+              onSuccess: () => setIsFormOpen(false),
+            })
+          }
+        />
+      </FloatingForm>
+    </>
+  )
+})
 FormationsForm.displayName = 'Form'
 
 export default FormationsForm

@@ -11,7 +11,6 @@ export const useSkillsFindAll = (
 
   return useQuery({
     queryKey: ['skills'],
-    queryFn: async () =>
-      await skills.skillsControllerFindAll(...data).then(unwrap),
+    queryFn: async () => await skills.skillsControllerFindAll(...data).then(unwrap),
   })
 }

@@ -6,8 +6,7 @@ import { formatDate } from '@/helpers/date'
 import { Bell } from '@phosphor-icons/react'
 import { ButtonHTMLAttributes, FC } from 'react'
 
-export interface ToastInfoProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface ToastInfoProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const ToastInfo: FC<ToastInfoProps> = ({ ...rest }) => {
   const { toast } = useToast()

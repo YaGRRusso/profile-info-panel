@@ -8,12 +8,10 @@ export const badgeRootVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          'border-transparent bg-gray-900 text-gray-50  dark:bg-gray-50 dark:text-gray-900',
+        default: 'border-transparent bg-gray-900 text-gray-50  dark:bg-gray-50 dark:text-gray-900',
         secondary:
           'border-transparent bg-gray-100 text-gray-900  dark:bg-gray-800 dark:text-gray-50',
-        destructive:
-          'border-transparent bg-red-500 text-gray-50 dark:bg-red-900 dark:text-gray-50',
+        destructive: 'border-transparent bg-red-500 text-gray-50 dark:bg-red-900 dark:text-gray-50',
         outline: 'text-gray-950 dark:text-gray-50',
       },
     },
@@ -29,13 +27,7 @@ export interface BadgeRootProps
 
 const BadgeRoot = forwardRef<HTMLDivElement, BadgeRootProps>(
   ({ className, variant, ...rest }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(badgeRootVariants({ variant }), className)}
-        {...rest}
-      />
-    )
+    return <div ref={ref} className={cn(badgeRootVariants({ variant }), className)} {...rest} />
   },
 )
 BadgeRoot.displayName = 'BadgeRoot'

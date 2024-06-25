@@ -11,7 +11,6 @@ export const useExperiencesFindAll = (
 
   return useQuery({
     queryKey: ['experiences'],
-    queryFn: async () =>
-      await experiences.experiencesControllerFindAll(...data).then(unwrap),
+    queryFn: async () => await experiences.experiencesControllerFindAll(...data).then(unwrap),
   })
 }

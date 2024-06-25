@@ -1,27 +1,12 @@
 'use client'
 
-import {
-  Button,
-  Form,
-  Input,
-  Textarea,
-  Select,
-  TagList,
-  Datepicker,
-  Skeleton,
-} from '@/components'
+import { Button, Form, Input, Textarea, Select, TagList, Datepicker, Skeleton } from '@/components'
 import { useSkillsFindAll } from '@/hooks'
 import { CommonFormValuesProps } from '@/types/common-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
-import {
-  FormHTMLAttributes,
-  forwardRef,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react'
+import { FormHTMLAttributes, forwardRef, useCallback, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -42,14 +27,8 @@ export interface ExperiencesCommonFormProps
   isLoading?: boolean
 }
 
-const ExperiencesCommonForm = forwardRef<
-  HTMLFormElement,
-  ExperiencesCommonFormProps
->(
-  (
-    { handleSubmit: onSubmit, isLoading, defaultValues, customValues, ...rest },
-    ref,
-  ) => {
+const ExperiencesCommonForm = forwardRef<HTMLFormElement, ExperiencesCommonFormProps>(
+  ({ handleSubmit: onSubmit, isLoading, defaultValues, customValues, ...rest }, ref) => {
     const tForm = useTranslations('form')
     const [searchSkills, setSearchSkills] = useState('')
     const skillsControllerFindAll = useSkillsFindAll()
@@ -90,9 +69,7 @@ const ExperiencesCommonForm = forwardRef<
             value={watch('role') ?? ''}
             placeholder="Role"
           />
-          <Form.Message>
-            {errors.role && tForm(errors.role?.message)}
-          </Form.Message>
+          <Form.Message>{errors.role && tForm(errors.role?.message)}</Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Organization</Form.Label>
@@ -101,9 +78,7 @@ const ExperiencesCommonForm = forwardRef<
             value={watch('organization') ?? ''}
             placeholder="Organization"
           />
-          <Form.Message>
-            {errors.organization && tForm(errors.organization?.message)}
-          </Form.Message>
+          <Form.Message>{errors.organization && tForm(errors.organization?.message)}</Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Description</Form.Label>
@@ -112,9 +87,7 @@ const ExperiencesCommonForm = forwardRef<
             value={watch('description') ?? ''}
             placeholder="Description"
           />
-          <Form.Message>
-            {errors.description && tForm(errors.description?.message)}
-          </Form.Message>
+          <Form.Message>{errors.description && tForm(errors.description?.message)}</Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Start</Form.Label>
@@ -123,9 +96,7 @@ const ExperiencesCommonForm = forwardRef<
             selected={watch('start')}
             placeholder="00/00/0000"
           />
-          <Form.Message>
-            {errors.start && tForm(errors.start?.message)}
-          </Form.Message>
+          <Form.Message>{errors.start && tForm(errors.start?.message)}</Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>End</Form.Label>
@@ -134,9 +105,7 @@ const ExperiencesCommonForm = forwardRef<
             selected={watch('end')}
             placeholder="00/00/0000"
           />
-          <Form.Message>
-            {errors.end && tForm(errors.end?.message)}
-          </Form.Message>
+          <Form.Message>{errors.end && tForm(errors.end?.message)}</Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Skills</Form.Label>
@@ -146,9 +115,7 @@ const ExperiencesCommonForm = forwardRef<
             <TagList
               tags={watch('skills')?.map((skill) => ({
                 value: skill,
-                label: skillsControllerFindAll.data?.data.find(
-                  ({ id }) => id === skill,
-                )?.name,
+                label: skillsControllerFindAll.data?.data.find(({ id }) => id === skill)?.name,
               }))}
               placeholder="Empty"
               onRemove={(tag) =>
@@ -161,9 +128,7 @@ const ExperiencesCommonForm = forwardRef<
               <Select.Root
                 value=""
                 disabled={skillsControllerFindAll.isLoading}
-                onValueChange={(ev) =>
-                  setValue('skills', [...(getValues('skills') ?? []), ev])
-                }
+                onValueChange={(ev) => setValue('skills', [...(getValues('skills') ?? []), ev])}
               >
                 <Select.Trigger>
                   <Select.Value placeholder="Select" />
@@ -175,11 +140,7 @@ const ExperiencesCommonForm = forwardRef<
                     onChange={(ev) => setSearchSkills(ev.target.value)}
                   />
                   {filteredSkills?.map(({ id, name }) => (
-                    <Select.Item
-                      key={id}
-                      value={id}
-                      disabled={watch('skills')?.includes(id)}
-                    >
+                    <Select.Item key={id} value={id} disabled={watch('skills')?.includes(id)}>
                       {name}
                     </Select.Item>
                   ))}
@@ -187,9 +148,7 @@ const ExperiencesCommonForm = forwardRef<
               </Select.Root>
             </TagList>
           )}
-          <Form.Message>
-            {errors.skills && tForm(errors.skills?.message)}
-          </Form.Message>
+          <Form.Message>{errors.skills && tForm(errors.skills?.message)}</Form.Message>
         </Form.Group>
         <Button type="submit" className="mt-2" disabled={isLoading}>
           Concluir

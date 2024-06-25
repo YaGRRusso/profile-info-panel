@@ -13,9 +13,8 @@ export const useCoursesCreate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof courses.coursesControllerCreate>,
-    ) => await courses.coursesControllerCreate(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof courses.coursesControllerCreate>) =>
+      await courses.coursesControllerCreate(...data).then(unwrap),
     mutationKey: ['coursesControllerCreate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] })
@@ -41,9 +40,8 @@ export const useCoursesRemove = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof courses.coursesControllerRemove>,
-    ) => await courses.coursesControllerRemove(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof courses.coursesControllerRemove>) =>
+      await courses.coursesControllerRemove(...data).then(unwrap),
     mutationKey: ['coursesControllerRemove'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] })
@@ -69,9 +67,8 @@ export const useCoursesUpdate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof courses.coursesControllerUpdate>,
-    ) => await courses.coursesControllerUpdate(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof courses.coursesControllerUpdate>) =>
+      await courses.coursesControllerUpdate(...data).then(unwrap),
     mutationKey: ['coursesControllerUpdate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] })

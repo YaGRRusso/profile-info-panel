@@ -6,11 +6,7 @@ import ToastInfo from './components/Buttons/ToastInfo'
 import { Link } from '@/common/navigation'
 import { Divider, Logos, ThemeChanger } from '@/components'
 
-import {
-  CircleNotch,
-  GithubLogo,
-  Translate,
-} from '@phosphor-icons/react/dist/ssr'
+import { CircleNotch, GithubLogo, Translate } from '@phosphor-icons/react/dist/ssr'
 import { Metadata } from 'next'
 import { useLocale, useTranslations } from 'next-intl'
 

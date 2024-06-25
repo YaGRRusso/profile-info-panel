@@ -13,9 +13,8 @@ export const useProjectsCreate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof projects.projectsControllerCreate>,
-    ) => await projects.projectsControllerCreate(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof projects.projectsControllerCreate>) =>
+      await projects.projectsControllerCreate(...data).then(unwrap),
     mutationKey: ['projectsControllerCreate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['projects'] })
@@ -41,9 +40,8 @@ export const useProjectsRemove = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof projects.projectsControllerRemove>,
-    ) => await projects.projectsControllerRemove(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof projects.projectsControllerRemove>) =>
+      await projects.projectsControllerRemove(...data).then(unwrap),
     mutationKey: ['projectsControllerRemove'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['projects'] })
@@ -69,9 +67,8 @@ export const useProjectsUpdate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof projects.projectsControllerUpdate>,
-    ) => await projects.projectsControllerUpdate(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof projects.projectsControllerUpdate>) =>
+      await projects.projectsControllerUpdate(...data).then(unwrap),
     mutationKey: ['projectsControllerUpdate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['projects'] })

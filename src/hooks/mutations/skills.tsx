@@ -13,9 +13,8 @@ export const useSkillsCreate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof skills.skillsControllerCreate>,
-    ) => await skills.skillsControllerCreate(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof skills.skillsControllerCreate>) =>
+      await skills.skillsControllerCreate(...data).then(unwrap),
     mutationKey: ['skillsControllerCreate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['skills'] })
@@ -41,9 +40,8 @@ export const useSkillsRemove = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof skills.skillsControllerRemove>,
-    ) => await skills.skillsControllerRemove(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof skills.skillsControllerRemove>) =>
+      await skills.skillsControllerRemove(...data).then(unwrap),
     mutationKey: ['skillsControllerRemove'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['skills'] })
@@ -69,9 +67,8 @@ export const useSkillsUpdate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof skills.skillsControllerUpdate>,
-    ) => await skills.skillsControllerUpdate(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof skills.skillsControllerUpdate>) =>
+      await skills.skillsControllerUpdate(...data).then(unwrap),
     mutationKey: ['skillsControllerUpdate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['skills'] })

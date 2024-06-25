@@ -12,10 +12,7 @@ export default function Courses() {
   return (
     <main className="flex h-full w-full flex-col gap-8">
       <div className="flex justify-between gap-4 max-xs:flex-col">
-        <TitleDesc
-          title={tCourses('title')}
-          description={tCourses('description')}
-        />
+        <TitleDesc title={tCourses('title')} description={tCourses('description')} />
         <CoursesForm />
       </div>
       <CoursesTable />

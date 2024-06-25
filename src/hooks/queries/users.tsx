@@ -4,14 +4,11 @@ import { QueryDataProps } from '@/types/query-data'
 
 import { useQuery } from '@tanstack/react-query'
 
-export const useUsersFindMe = (
-  ...data: QueryDataProps<typeof users.usersControllerFindMe>
-) => {
+export const useUsersFindMe = (...data: QueryDataProps<typeof users.usersControllerFindMe>) => {
   const users = useUsers()
 
   return useQuery({
     queryKey: ['me'],
-    queryFn: async () =>
-      await users.usersControllerFindMe(...data).then(unwrap),
+    queryFn: async () => await users.usersControllerFindMe(...data).then(unwrap),
   })
 }

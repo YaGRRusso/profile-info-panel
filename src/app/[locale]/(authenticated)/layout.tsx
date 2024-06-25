@@ -36,16 +36,10 @@ export default async function RootLayout({
     <html lang={params.locale}>
       <Providers>
         <NextIntlClientProvider locale={params.locale} messages={messages}>
-          <Body.Root
-            className={cn('font-sans antialiased', montserrat.variable)}
-          >
+          <Body.Root className={cn('font-sans antialiased', montserrat.variable)}>
             <Menu.Root>
               <Menu.Group>
-                <Menu.Button
-                  icon={<House weight="bold" />}
-                  text={tSidebar('home')}
-                  path="/home"
-                />
+                <Menu.Button icon={<House weight="bold" />} text={tSidebar('home')} path="/home" />
                 <Menu.Button
                   icon={<Brain weight="bold" />}
                   text={tSidebar('skills')}

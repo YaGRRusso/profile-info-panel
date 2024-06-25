@@ -5,8 +5,7 @@ import { cn } from '@/lib/utils'
 import { MagnifyingGlass } from '@phosphor-icons/react'
 import { InputHTMLAttributes, forwardRef } from 'react'
 
-export interface SelectSearchProps
-  extends InputHTMLAttributes<HTMLInputElement> {}
+export interface SelectSearchProps extends InputHTMLAttributes<HTMLInputElement> {}
 
 const SelectSearch = forwardRef<HTMLInputElement, SelectSearchProps>(
   ({ className, ...rest }, ref) => {

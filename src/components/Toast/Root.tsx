@@ -11,8 +11,7 @@ const toastVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          'border bg-white text-gray-950 dark:bg-gray-950 dark:text-gray-50',
+        default: 'border bg-white text-gray-950 dark:bg-gray-950 dark:text-gray-50',
         destructive:
           'destructive group border-red-500 bg-red-500 text-gray-50 dark:border-red-900 dark:bg-red-900 dark:text-gray-50',
       },
@@ -27,18 +26,17 @@ export interface ToastRootProps
   extends ComponentPropsWithoutRef<typeof ToastPrimitives.Root>,
     VariantProps<typeof toastVariants> {}
 
-const ToastRoot = forwardRef<
-  ElementRef<typeof ToastPrimitives.Root>,
-  ToastRootProps
->(({ className, variant, ...rest }, ref) => {
-  return (
-    <ToastPrimitives.Root
-      ref={ref}
-      className={cn(toastVariants({ variant }), className)}
-      {...rest}
-    />
-  )
-})
+const ToastRoot = forwardRef<ElementRef<typeof ToastPrimitives.Root>, ToastRootProps>(
+  ({ className, variant, ...rest }, ref) => {
+    return (
+      <ToastPrimitives.Root
+        ref={ref}
+        className={cn(toastVariants({ variant }), className)}
+        {...rest}
+      />
+    )
+  },
+)
 ToastRoot.displayName = ToastPrimitives.Root.displayName
 
 export type ToastProps = ComponentPropsWithoutRef<typeof ToastRoot>

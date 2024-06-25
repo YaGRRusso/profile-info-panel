@@ -11,7 +11,6 @@ export const useCoursesFindAll = (
 
   return useQuery({
     queryKey: ['courses'],
-    queryFn: async () =>
-      await courses.coursesControllerFindAll(...data).then(unwrap),
+    queryFn: async () => await courses.coursesControllerFindAll(...data).then(unwrap),
   })
 }

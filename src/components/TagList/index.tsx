@@ -46,9 +46,7 @@ const TagList = forwardRef<HTMLDivElement, TagListProps>(
         <ScrollArea className="flex max-h-24 max-w-full flex-wrap items-stretch rounded-t-md p-2">
           {tagsList}
         </ScrollArea>
-        <div className="rounded-b-md [&>*]:bg-white [&>*]:dark:bg-gray-950">
-          {children}
-        </div>
+        <div className="rounded-b-md [&>*]:bg-white [&>*]:dark:bg-gray-950">{children}</div>
       </div>
     )
   },

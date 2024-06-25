@@ -18,7 +18,6 @@ const AlertDialogDescription = forwardRef<
     {...rest}
   />
 ))
-AlertDialogDescription.displayName =
-  AlertDialogPrimitive.Description.displayName
+AlertDialogDescription.displayName = AlertDialogPrimitive.Description.displayName
 
 export default AlertDialogDescription

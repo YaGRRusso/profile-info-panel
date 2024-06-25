@@ -24,15 +24,13 @@ const DialogInfo: FC<DialogInfoProps> = ({ ...rest }) => {
         <AlertDialog.Header>
           <AlertDialog.Title>Are you absolutely sure?</AlertDialog.Title>
           <AlertDialog.Description>
-            This action cannot be undone. This will show a{' '}
-            <strong>SUCCESS</strong> message on your browser console.
+            This action cannot be undone. This will show a <strong>SUCCESS</strong> message on your
+            browser console.
           </AlertDialog.Description>
         </AlertDialog.Header>
         <AlertDialog.Footer>
           <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
-          <AlertDialog.Action onClick={() => console.log('Success')}>
-            Continue
-          </AlertDialog.Action>
+          <AlertDialog.Action onClick={() => console.log('Success')}>Continue</AlertDialog.Action>
         </AlertDialog.Footer>
       </AlertDialog.Content>
     </AlertDialog.Root>

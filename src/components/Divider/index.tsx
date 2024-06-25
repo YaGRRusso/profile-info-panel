@@ -5,17 +5,10 @@ import { cn } from '@/lib/utils'
 import * as SeparatorPrimitive from '@radix-ui/react-separator'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
-export interface DividerProps
-  extends ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> {}
+export interface DividerProps extends ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> {}
 
-const Divider = forwardRef<
-  ElementRef<typeof SeparatorPrimitive.Root>,
-  DividerProps
->(
-  (
-    { className, orientation = 'horizontal', decorative = true, ...rest },
-    ref,
-  ) => (
+const Divider = forwardRef<ElementRef<typeof SeparatorPrimitive.Root>, DividerProps>(
+  ({ className, orientation = 'horizontal', decorative = true, ...rest }, ref) => (
     <SeparatorPrimitive.Root
       ref={ref}
       decorative={decorative}

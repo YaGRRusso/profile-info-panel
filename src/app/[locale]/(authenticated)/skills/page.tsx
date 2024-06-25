@@ -12,10 +12,7 @@ export default function Skills() {
   return (
     <main className="flex h-full w-full flex-col gap-8">
       <div className="flex justify-between gap-4 max-xs:flex-col">
-        <TitleDesc
-          title={tSkills('title')}
-          description={tSkills('description')}
-        />
+        <TitleDesc title={tSkills('title')} description={tSkills('description')} />
         <SkillsForm />
       </div>
       <SkillsTable />

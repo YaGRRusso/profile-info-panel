@@ -22,57 +22,33 @@ function useSingleton<T>(key: string, factory: () => T): T {
 export type * from './api'
 
 export function useRoot() {
-  return useSingleton(
-    'default',
-    () => new DefaultApi(undefined, undefined, instance),
-  )
+  return useSingleton('default', () => new DefaultApi(undefined, undefined, instance))
 }
 
 export function useAuth() {
-  return useSingleton(
-    'authentication',
-    () => new AuthApi(undefined, undefined, instance),
-  )
+  return useSingleton('authentication', () => new AuthApi(undefined, undefined, instance))
 }
 
 export function useUsers() {
-  return useSingleton(
-    'users',
-    () => new UsersApi(undefined, undefined, instance),
-  )
+  return useSingleton('users', () => new UsersApi(undefined, undefined, instance))
 }
 
 export function useSkills() {
-  return useSingleton(
-    'skills',
-    () => new SkillsApi(undefined, undefined, instance),
-  )
+  return useSingleton('skills', () => new SkillsApi(undefined, undefined, instance))
 }
 
 export function useCourses() {
-  return useSingleton(
-    'courses',
-    () => new CoursesApi(undefined, undefined, instance),
-  )
+  return useSingleton('courses', () => new CoursesApi(undefined, undefined, instance))
 }
 
 export function useFormations() {
-  return useSingleton(
-    'formations',
-    () => new FormationsApi(undefined, undefined, instance),
-  )
+  return useSingleton('formations', () => new FormationsApi(undefined, undefined, instance))
 }
 
 export function useExperiences() {
-  return useSingleton(
-    'experiences',
-    () => new ExperiencesApi(undefined, undefined, instance),
-  )
+  return useSingleton('experiences', () => new ExperiencesApi(undefined, undefined, instance))
 }
 
 export function useProjects() {
-  return useSingleton(
-    'projects',
-    () => new ProjectsApi(undefined, undefined, instance),
-  )
+  return useSingleton('projects', () => new ProjectsApi(undefined, undefined, instance))
 }

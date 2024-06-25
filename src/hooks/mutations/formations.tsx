@@ -13,9 +13,8 @@ export const useFormationsCreate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof formations.formationsControllerCreate>,
-    ) => await formations.formationsControllerCreate(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof formations.formationsControllerCreate>) =>
+      await formations.formationsControllerCreate(...data).then(unwrap),
     mutationKey: ['formationsControllerCreate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['formations'] })
@@ -41,9 +40,8 @@ export const useFormationsRemove = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof formations.formationsControllerRemove>,
-    ) => await formations.formationsControllerRemove(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof formations.formationsControllerRemove>) =>
+      await formations.formationsControllerRemove(...data).then(unwrap),
     mutationKey: ['formationsControllerRemove'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['formations'] })
@@ -69,9 +67,8 @@ export const useFormationsUpdate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof formations.formationsControllerUpdate>,
-    ) => await formations.formationsControllerUpdate(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof formations.formationsControllerUpdate>) =>
+      await formations.formationsControllerUpdate(...data).then(unwrap),
     mutationKey: ['formationsControllerUpdate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['formations'] })

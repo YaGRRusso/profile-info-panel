@@ -15,11 +15,7 @@ export interface TableRootProps extends HTMLAttributes<HTMLTableElement> {
 export const TableRoot = forwardRef<HTMLTableElement, TableRootProps>(
   ({ isLoading, isEmpty, children, className, ...rest }, ref) => (
     <div className="relative w-full overflow-auto rounded">
-      <table
-        ref={ref}
-        className={cn('w-full caption-bottom text-sm', className)}
-        {...rest}
-      >
+      <table ref={ref} className={cn('w-full caption-bottom text-sm', className)} {...rest}>
         {children}
         {(isEmpty || isLoading) && (
           <TableCaption className="py-8">

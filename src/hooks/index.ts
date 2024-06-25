@@ -8,11 +8,7 @@ export { useSkillsFindAll } from './queries/skills'
 export { useUsersFindMe } from './queries/users'
 
 // mutations
-export {
-  useCoursesCreate,
-  useCoursesRemove,
-  useCoursesUpdate,
-} from './mutations/courses'
+export { useCoursesCreate, useCoursesRemove, useCoursesUpdate } from './mutations/courses'
 export {
   useExperiencesCreate,
   useExperiencesRemove,
@@ -23,14 +19,6 @@ export {
   useFormationsRemove,
   useFormationsUpdate,
 } from './mutations/formations'
-export {
-  useProjectsCreate,
-  useProjectsRemove,
-  useProjectsUpdate,
-} from './mutations/projects'
-export {
-  useSkillsCreate,
-  useSkillsRemove,
-  useSkillsUpdate,
-} from './mutations/skills'
+export { useProjectsCreate, useProjectsRemove, useProjectsUpdate } from './mutations/projects'
+export { useSkillsCreate, useSkillsRemove, useSkillsUpdate } from './mutations/skills'
 export { useUsersCreate, useUsersUpdate } from './mutations/users'

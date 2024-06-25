@@ -14,10 +14,7 @@ const AlertDialogTitle = forwardRef<
 >(({ className, ...rest }, ref) => (
   <AlertDialogPrimitive.Title
     ref={ref}
-    className={cn(
-      'py-6 text-lg font-semibold text-gray-900 dark:text-gray-50',
-      className,
-    )}
+    className={cn('py-6 text-lg font-semibold text-gray-900 dark:text-gray-50', className)}
     {...rest}
   />
 ))

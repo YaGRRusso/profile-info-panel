@@ -11,10 +11,7 @@ const BodyRoot: FC<BodyRootProps> = ({ children, className, ...rest }) => {
   const { theme } = useThemeContext()
 
   return (
-    <body
-      className={cn(theme, 'flex min-h-screen max-lg:flex-col', className)}
-      {...rest}
-    >
+    <body className={cn(theme, 'flex min-h-screen max-lg:flex-col', className)} {...rest}>
       {children}
     </body>
   )

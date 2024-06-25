@@ -75,9 +75,7 @@ const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
           value={watch('email')}
           placeholder="johndoe@email.com"
         />
-        <Form.Message>
-          {errors.email && tForm(errors.email?.message)}
-        </Form.Message>
+        <Form.Message>{errors.email && tForm(errors.email?.message)}</Form.Message>
       </Form.Group>
       <Form.Group>
         <Form.Label>Password</Form.Label>
@@ -87,9 +85,7 @@ const SignInForm: FC<SignInFormProps> = ({ defaultValues, ...rest }) => {
           type="password"
           placeholder="Your password"
         />
-        <Form.Message>
-          {errors.password && tForm(errors.password?.message)}
-        </Form.Message>
+        <Form.Message>{errors.password && tForm(errors.password?.message)}</Form.Message>
       </Form.Group>
       <span className='text-gray-300" text-sm'>
         {tSignIn('dontHaveAccount')}{' '}

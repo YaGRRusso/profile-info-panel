@@ -12,10 +12,7 @@ export default function Formations() {
   return (
     <main className="flex h-full w-full flex-col gap-8">
       <div className="flex justify-between gap-4 max-xs:flex-col">
-        <TitleDesc
-          title={tFormations('title')}
-          description={tFormations('description')}
-        />
+        <TitleDesc title={tFormations('title')} description={tFormations('description')} />
         <FormationsForm />
       </div>
       <FormationsTable />

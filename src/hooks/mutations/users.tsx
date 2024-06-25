@@ -14,9 +14,8 @@ export const useUsersUpdate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof users.usersControllerUpdate>,
-    ) => await users.usersControllerUpdate(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof users.usersControllerUpdate>) =>
+      await users.usersControllerUpdate(...data).then(unwrap),
     mutationKey: ['me'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['me'] })
@@ -42,9 +41,8 @@ export const useUsersCreate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof users.usersControllerCreate>,
-    ) => await users.usersControllerCreate(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof users.usersControllerCreate>) =>
+      await users.usersControllerCreate(...data).then(unwrap),
     mutationKey: ['usersControllerCreate'],
     onSuccess: () => replace('/signin'),
     onError: ({ response }: AxiosError<any>) => {

@@ -2,8 +2,7 @@ import { cn } from '@/lib/utils'
 
 import { ButtonHTMLAttributes, forwardRef } from 'react'
 
-export interface BadgeButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface BadgeButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const BadgeButton = forwardRef<HTMLButtonElement, BadgeButtonProps>(
   ({ className, children, ...rest }, ref) => {

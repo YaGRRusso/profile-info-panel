@@ -13,9 +13,8 @@ export const useExperiencesCreate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof experiences.experiencesControllerCreate>,
-    ) => await experiences.experiencesControllerCreate(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof experiences.experiencesControllerCreate>) =>
+      await experiences.experiencesControllerCreate(...data).then(unwrap),
     mutationKey: ['experiencesControllerCreate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['experiences'] })
@@ -41,9 +40,8 @@ export const useExperiencesRemove = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof experiences.experiencesControllerRemove>,
-    ) => await experiences.experiencesControllerRemove(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof experiences.experiencesControllerRemove>) =>
+      await experiences.experiencesControllerRemove(...data).then(unwrap),
     mutationKey: ['experiencesControllerRemove'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['experiences'] })
@@ -69,9 +67,8 @@ export const useExperiencesUpdate = () => {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: async (
-      data: MutationDataProps<typeof experiences.experiencesControllerUpdate>,
-    ) => await experiences.experiencesControllerUpdate(...data).then(unwrap),
+    mutationFn: async (data: MutationDataProps<typeof experiences.experiencesControllerUpdate>) =>
+      await experiences.experiencesControllerUpdate(...data).then(unwrap),
     mutationKey: ['experiencesControllerUpdate'],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['experiences'] })

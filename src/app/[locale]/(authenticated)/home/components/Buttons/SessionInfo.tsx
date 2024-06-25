@@ -6,8 +6,7 @@ import { User } from '@phosphor-icons/react'
 import { useSession } from 'next-auth/react'
 import { ButtonHTMLAttributes, FC } from 'react'
 
-export interface SessionInfoProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface SessionInfoProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const SessionInfo: FC<SessionInfoProps> = ({ ...rest }) => {
   const { data: session } = useSession()

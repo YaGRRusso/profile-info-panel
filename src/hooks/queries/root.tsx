@@ -4,9 +4,7 @@ import { QueryDataProps } from '@/types/query-data'
 
 import { useQuery } from '@tanstack/react-query'
 
-export const useRootInfo = (
-  ...data: QueryDataProps<typeof root.appControllerGetHello>
-) => {
+export const useRootInfo = (...data: QueryDataProps<typeof root.appControllerGetHello>) => {
   const root = useRoot()
 
   return useQuery({

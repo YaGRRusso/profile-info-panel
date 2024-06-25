@@ -1,13 +1,6 @@
 'use client'
 
-import {
-  ReactNode,
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from 'react'
 
 type ThemeProps = 'light' | 'dark'
 

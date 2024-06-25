@@ -29,9 +29,7 @@ const MenuRoot: FC<MenuRootProps> = ({ children, ...rest }) => {
             <strong className="font-semibold text-sky-500">Yago</strong>Russo
           </span>
         </div>
-        <div className="flex flex-1 flex-col items-stretch justify-between gap-4">
-          {children}
-        </div>
+        <div className="flex flex-1 flex-col items-stretch justify-between gap-4">{children}</div>
       </aside>
 
       <header

@@ -1,13 +1,6 @@
 'use client'
 
-import {
-  Button,
-  Form,
-  Input,
-  Checkbox,
-  Textarea,
-  Datepicker,
-} from '@/components'
+import { Button, Form, Input, Checkbox, Textarea, Datepicker } from '@/components'
 import { mask } from '@/helpers/mask'
 import { CommonFormValuesProps } from '@/types/common-form'
 
@@ -35,13 +28,10 @@ const formSchema = z.object({
 
 type FormSchemaProps = z.infer<typeof formSchema>
 
-const createFormSchema = formSchema.refine(
-  (data) => data.password === data.passwordConfirm,
-  {
-    message: 'sameValue',
-    path: ['passwordConfirm'],
-  },
-)
+const createFormSchema = formSchema.refine((data) => data.password === data.passwordConfirm, {
+  message: 'sameValue',
+  path: ['passwordConfirm'],
+})
 
 const editFormSchema = formSchema.omit({
   password: true,
@@ -56,17 +46,7 @@ export interface UsersCommonFormProps
 }
 
 const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
-  (
-    {
-      handleSubmit: onSubmit,
-      isLoading,
-      defaultValues,
-      customValues,
-      isEditing,
-      ...rest
-    },
-    ref,
-  ) => {
+  ({ handleSubmit: onSubmit, isLoading, defaultValues, customValues, isEditing, ...rest }, ref) => {
     const tForm = useTranslations('form')
     const [isShowingPassword, setIsShowingPassword] = useState(false)
 
@@ -103,9 +83,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               value={watch('name') ?? ''}
               placeholder="John Doe"
             />
-            <Form.Message>
-              {errors.name && tForm(errors.name?.message)}
-            </Form.Message>
+            <Form.Message>{errors.name && tForm(errors.name?.message)}</Form.Message>
           </Form.Group>
           <Form.Group>
             <Form.Label>Nickname</Form.Label>
@@ -114,9 +92,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               value={watch('nickname') ?? ''}
               placeholder="JohnDoe123"
             />
-            <Form.Message>
-              {errors.nickname && tForm(errors.nickname?.message)}
-            </Form.Message>
+            <Form.Message>{errors.nickname && tForm(errors.nickname?.message)}</Form.Message>
           </Form.Group>
           <Form.Group>
             <Form.Label>Title</Form.Label>
@@ -125,9 +101,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               value={watch('title') ?? ''}
               placeholder="Full Stack Developer"
             />
-            <Form.Message>
-              {errors.title && tForm(errors.title?.message)}
-            </Form.Message>
+            <Form.Message>{errors.title && tForm(errors.title?.message)}</Form.Message>
           </Form.Group>
           <Form.Group>
             <Form.Label>Phone</Form.Label>
@@ -135,15 +109,10 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               placeholder="(00) 00000-0000"
               value={mask('(00) 00000-0000', watch('phone') ?? '').value}
               onChange={(ev) =>
-                setValue(
-                  'phone',
-                  mask('(00) 00000-0000', ev.target.value).unmaskedValue,
-                )
+                setValue('phone', mask('(00) 00000-0000', ev.target.value).unmaskedValue)
               }
             />
-            <Form.Message>
-              {errors.phone && tForm(errors.phone?.message)}
-            </Form.Message>
+            <Form.Message>{errors.phone && tForm(errors.phone?.message)}</Form.Message>
           </Form.Group>
           <Form.Group>
             <Form.Label>Birth</Form.Label>
@@ -152,9 +121,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               selected={watch('birth') ?? ''}
               placeholder="00/00/0000"
             />
-            <Form.Message>
-              {errors.birth && tForm(errors.birth?.message)}
-            </Form.Message>
+            <Form.Message>{errors.birth && tForm(errors.birth?.message)}</Form.Message>
           </Form.Group>
           <Form.Group className="col-span-full">
             <Form.Label>Description</Form.Label>
@@ -163,9 +130,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               value={watch('description') ?? ''}
               placeholder="Description about you"
             />
-            <Form.Message>
-              {errors.description && tForm(errors.description?.message)}
-            </Form.Message>
+            <Form.Message>{errors.description && tForm(errors.description?.message)}</Form.Message>
           </Form.Group>
           {!isEditing && (
             <>
@@ -176,9 +141,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
                   value={watch('email') ?? ''}
                   placeholder="johndoe@email.com"
                 />
-                <Form.Message>
-                  {errors.email && tForm(errors.email?.message)}
-                </Form.Message>
+                <Form.Message>{errors.email && tForm(errors.email?.message)}</Form.Message>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Password</Form.Label>
@@ -188,30 +151,23 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
                   type={isShowingPassword ? 'text' : 'password'}
                   placeholder="Strong password here"
                 />
-                <Form.Message>
-                  {errors.password && tForm(errors.password?.message)}
-                </Form.Message>
+                <Form.Message>{errors.password && tForm(errors.password?.message)}</Form.Message>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Password Confirm</Form.Label>
                 <Input
-                  onChange={(ev) =>
-                    setValue('passwordConfirm', ev.target.value)
-                  }
+                  onChange={(ev) => setValue('passwordConfirm', ev.target.value)}
                   value={watch('passwordConfirm') ?? ''}
                   type={isShowingPassword ? 'text' : 'password'}
                   placeholder="Strong password here"
                 />
                 <Form.Message>
-                  {errors.passwordConfirm &&
-                    tForm(errors.passwordConfirm?.message)}
+                  {errors.passwordConfirm && tForm(errors.passwordConfirm?.message)}
                 </Form.Message>
               </Form.Group>
               <Form.Group className="col-span-full">
                 <Checkbox
-                  onCheckedChange={() =>
-                    setIsShowingPassword(!isShowingPassword)
-                  }
+                  onCheckedChange={() => setIsShowingPassword(!isShowingPassword)}
                   checked={isShowingPassword}
                   placeholder={'Show password'}
                 />
@@ -225,9 +181,7 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               value={watch('address') ?? ''}
               placeholder="Brazil, SP"
             />
-            <Form.Message>
-              {errors.address && tForm(errors.address?.message)}
-            </Form.Message>
+            <Form.Message>{errors.address && tForm(errors.address?.message)}</Form.Message>
           </Form.Group>
           <Form.Group>
             <Form.Label>Postal Code</Form.Label>
@@ -235,15 +189,10 @@ const UsersCommonForm = forwardRef<HTMLFormElement, UsersCommonFormProps>(
               placeholder="00000-000"
               value={mask('00000-000', watch('postal') ?? '').value}
               onChange={(ev) =>
-                setValue(
-                  'postal',
-                  mask('00000-000', ev.target.value).unmaskedValue,
-                )
+                setValue('postal', mask('00000-000', ev.target.value).unmaskedValue)
               }
             />
-            <Form.Message>
-              {errors.postal && tForm(errors.postal?.message)}
-            </Form.Message>
+            <Form.Message>{errors.postal && tForm(errors.postal?.message)}</Form.Message>
           </Form.Group>
         </div>
         <Button type="submit" className="mt-2" disabled={isLoading}>

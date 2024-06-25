@@ -39,10 +39,7 @@ export interface SkillsCommonFormProps
 }
 
 const SkillsCommonForm = forwardRef<HTMLFormElement, SkillsCommonFormProps>(
-  (
-    { handleSubmit: onSubmit, isLoading, defaultValues, customValues, ...rest },
-    ref,
-  ) => {
+  ({ handleSubmit: onSubmit, isLoading, defaultValues, customValues, ...rest }, ref) => {
     const tForm = useTranslations('form')
 
     const {
@@ -73,9 +70,7 @@ const SkillsCommonForm = forwardRef<HTMLFormElement, SkillsCommonFormProps>(
             value={watch('name') ?? ''}
             placeholder="Javascript"
           />
-          <Form.Message>
-            {errors.name && tForm(errors.name?.message)}
-          </Form.Message>
+          <Form.Message>{errors.name && tForm(errors.name?.message)}</Form.Message>
         </Form.Group>
         <Form.Group>
           <Form.Label>Category</Form.Label>
@@ -94,9 +89,7 @@ const SkillsCommonForm = forwardRef<HTMLFormElement, SkillsCommonFormProps>(
               ))}
             </Select.Content>
           </Select.Root>
-          <Form.Message>
-            {errors.category && tForm(errors.category?.message)}
-          </Form.Message>
+          <Form.Message>{errors.category && tForm(errors.category?.message)}</Form.Message>
         </Form.Group>
         <Button type="submit" className="mt-2" disabled={isLoading}>
           Concluir

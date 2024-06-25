@@ -9,10 +9,7 @@ export interface CommandShortcutProps extends HTMLAttributes<HTMLSpanElement> {}
 const CommandShortcut = ({ className, ...rest }: CommandShortcutProps) => {
   return (
     <span
-      className={cn(
-        'ml-auto text-xs tracking-widest text-gray-500 dark:text-gray-400',
-        className,
-      )}
+      className={cn('ml-auto text-xs tracking-widest text-gray-500 dark:text-gray-400', className)}
       {...rest}
     />
   )

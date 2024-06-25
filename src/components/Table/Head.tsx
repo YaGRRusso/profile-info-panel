@@ -2,8 +2,7 @@ import { cn } from '@/lib/utils'
 
 import { ThHTMLAttributes, forwardRef } from 'react'
 
-export interface TableHeadProps
-  extends ThHTMLAttributes<HTMLTableCellElement> {}
+export interface TableHeadProps extends ThHTMLAttributes<HTMLTableCellElement> {}
 
 export const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
   ({ className, ...rest }, ref) => (

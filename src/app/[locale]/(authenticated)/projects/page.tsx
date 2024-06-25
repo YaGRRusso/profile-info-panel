@@ -12,10 +12,7 @@ export default function Projects() {
   return (
     <main className="flex h-full w-full flex-col gap-8">
       <div className="flex justify-between gap-4 max-xs:flex-col">
-        <TitleDesc
-          title={tProjects('title')}
-          description={tProjects('description')}
-        />
+        <TitleDesc title={tProjects('title')} description={tProjects('description')} />
         <ProjectsForm />
       </div>
       <ProjectsTable />

@@ -10,7 +10,7 @@ export const useProjectsFindAll = (
   const projects = useProjects()
 
   return useQuery({
-    queryKey: ['projects'],
+    queryKey: ['projects', ...data],
     queryFn: async () => await projects.projectsControllerFindAll(...data).then(unwrap),
   })
 }

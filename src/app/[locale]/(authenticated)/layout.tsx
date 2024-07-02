@@ -4,6 +4,7 @@ import Menu from '../components/Menu'
 import { Providers } from '../providers'
 
 import { Toaster } from '@/components'
+import { QueryParamsProvider } from '@/contexts/query'
 import { cn } from '@/lib/utils'
 
 import {
@@ -35,52 +36,58 @@ export default async function RootLayout({
   return (
     <html lang={params.locale}>
       <Providers>
-        <NextIntlClientProvider locale={params.locale} messages={messages}>
-          <Body.Root className={cn('font-sans antialiased', montserrat.variable)}>
-            <Menu.Root>
-              <Menu.Group>
-                <Menu.Button icon={<House weight="bold" />} text={tSidebar('home')} path="/home" />
-                <Menu.Button
-                  icon={<Brain weight="bold" />}
-                  text={tSidebar('skills')}
-                  path="/skills"
-                />
-                <Menu.Button
-                  icon={<Trophy weight="bold" />}
-                  text={tSidebar('projects')}
-                  path="/projects"
-                />
-                <Menu.Button
-                  icon={<GraduationCap weight="bold" />}
-                  text={tSidebar('formations')}
-                  path="/formations"
-                />
-                <Menu.Button
-                  icon={<Suitcase weight="bold" />}
-                  text={tSidebar('experiences')}
-                  path="/experiences"
-                />
-                <Menu.Button
-                  icon={<Certificate weight="bold" />}
-                  text={tSidebar('courses')}
-                  path="/courses"
-                />
-              </Menu.Group>
-              <Menu.Group>
-                <Menu.Button
-                  icon={<User weight="bold" />}
-                  text={tSidebar('profile')}
-                  path="/profile"
-                />
-                <SignButton />
-              </Menu.Group>
-            </Menu.Root>
-            <Body.Main>
-              <Toaster />
-              {children}
-            </Body.Main>
-          </Body.Root>
-        </NextIntlClientProvider>
+        <QueryParamsProvider>
+          <NextIntlClientProvider locale={params.locale} messages={messages}>
+            <Body.Root className={cn('font-sans antialiased', montserrat.variable)}>
+              <Menu.Root>
+                <Menu.Group>
+                  <Menu.Button
+                    icon={<House weight="bold" />}
+                    text={tSidebar('home')}
+                    path="/home"
+                  />
+                  <Menu.Button
+                    icon={<Brain weight="bold" />}
+                    text={tSidebar('skills')}
+                    path="/skills"
+                  />
+                  <Menu.Button
+                    icon={<Trophy weight="bold" />}
+                    text={tSidebar('projects')}
+                    path="/projects"
+                  />
+                  <Menu.Button
+                    icon={<GraduationCap weight="bold" />}
+                    text={tSidebar('formations')}
+                    path="/formations"
+                  />
+                  <Menu.Button
+                    icon={<Suitcase weight="bold" />}
+                    text={tSidebar('experiences')}
+                    path="/experiences"
+                  />
+                  <Menu.Button
+                    icon={<Certificate weight="bold" />}
+                    text={tSidebar('courses')}
+                    path="/courses"
+                  />
+                </Menu.Group>
+                <Menu.Group>
+                  <Menu.Button
+                    icon={<User weight="bold" />}
+                    text={tSidebar('profile')}
+                    path="/profile"
+                  />
+                  <SignButton />
+                </Menu.Group>
+              </Menu.Root>
+              <Body.Main>
+                <Toaster />
+                {children}
+              </Body.Main>
+            </Body.Root>
+          </NextIntlClientProvider>
+        </QueryParamsProvider>
       </Providers>
     </html>
   )

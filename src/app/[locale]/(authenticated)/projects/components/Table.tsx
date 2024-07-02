@@ -1,6 +1,14 @@
 'use client'
 
-import { DeleteButton, EditButton, FloatingForm, Table, TableRootProps } from '@/components'
+import {
+  DeleteButton,
+  EditButton,
+  FloatingForm,
+  Pagination,
+  Table,
+  TableRootProps,
+} from '@/components'
+import { CommonQueryParams, useQueryParams } from '@/contexts/query'
 import ProjectsCommonForm from '@/forms/ProjectsCommonForm'
 import { formatDate } from '@/helpers/date'
 import { useProjectsFindAll, useProjectsRemove, useProjectsUpdate } from '@/hooks'
@@ -12,8 +20,9 @@ import { forwardRef, useState } from 'react'
 export interface ProjectsTableProps extends TableRootProps {}
 
 const ProjectsTable = forwardRef<HTMLTableElement, ProjectsTableProps>(({ ...rest }, ref) => {
+  const { params, setParams } = useQueryParams<CommonQueryParams>()
   const [editingProject, setEditingProject] = useState<ProjectDto>()
-  const { data, isFetching } = useProjectsFindAll()
+  const { data, isFetching } = useProjectsFindAll(params.page, params.limit)
   const deleteProject = useProjectsRemove()
   const updateProject = useProjectsUpdate()
 
@@ -66,6 +75,15 @@ const ProjectsTable = forwardRef<HTMLTableElement, ProjectsTableProps>(({ ...res
           ))}
         </Table.Body>
       </Table.Root>
+
+      {data?.pagination && data.pagination.totalPages > 1 && (
+        <Pagination
+          totalPages={data?.pagination.totalPages}
+          currentPage={data?.pagination.currentPage}
+          totalRecords={data?.pagination.totalRecords}
+          onPageChange={(pg) => setParams({ page: pg.toString() })}
+        />
+      )}
 
       <FloatingForm
         description="Fill the form below"

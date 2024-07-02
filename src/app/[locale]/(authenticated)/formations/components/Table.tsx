@@ -1,6 +1,14 @@
 'use client'
 
-import { DeleteButton, EditButton, FloatingForm, Table, TableRootProps } from '@/components'
+import {
+  DeleteButton,
+  EditButton,
+  FloatingForm,
+  Pagination,
+  Table,
+  TableRootProps,
+} from '@/components'
+import { CommonQueryParams, useQueryParams } from '@/contexts/query'
 import FormationsCommonForm from '@/forms/FormationsCommonForm'
 import { formatDate } from '@/helpers/date'
 import { useFormationsFindAll, useFormationsRemove, useFormationsUpdate } from '@/hooks'
@@ -12,8 +20,9 @@ import { forwardRef, useState } from 'react'
 export interface FormationsTableProps extends TableRootProps {}
 
 const FormationsTable = forwardRef<HTMLTableElement, FormationsTableProps>(({ ...rest }, ref) => {
+  const { params, setParams } = useQueryParams<CommonQueryParams>()
   const [editingFormation, setEditingFormation] = useState<FormationDto>()
-  const { data, isFetching } = useFormationsFindAll()
+  const { data, isFetching } = useFormationsFindAll(params.page, params.limit)
   const deleteFormation = useFormationsRemove()
   const updateFormation = useFormationsUpdate()
 
@@ -83,6 +92,15 @@ const FormationsTable = forwardRef<HTMLTableElement, FormationsTableProps>(({ ..
           ))}
         </Table.Body>
       </Table.Root>
+
+      {data?.pagination && data.pagination.totalPages > 1 && (
+        <Pagination
+          totalPages={data?.pagination.totalPages}
+          currentPage={data?.pagination.currentPage}
+          totalRecords={data?.pagination.totalRecords}
+          onPageChange={(pg) => setParams({ page: pg.toString() })}
+        />
+      )}
 
       <FloatingForm
         description="Fill the form below"

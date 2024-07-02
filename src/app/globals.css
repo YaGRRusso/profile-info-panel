@@ -4,7 +4,7 @@
 
 @layer utilities {
   .interactive {
-    @apply outline-none ring-offset-white ring-2 ring-gray-950 ring-offset-2 dark:ring-offset-gray-950 dark:ring-gray-300;
+    @apply outline-none ring-2 ring-gray-950 ring-offset-2 ring-offset-white dark:ring-gray-300 dark:ring-offset-gray-950;
   }
 
   .ellipsis {
@@ -12,6 +12,10 @@
   }
 
   .emphasis {
-    @apply hover:underline underline-offset-1
+    @apply underline-offset-1 hover:underline;
   }
+}
+
+.rdp-vhidden {
+  @apply hidden;
 }

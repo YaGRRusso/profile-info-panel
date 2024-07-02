@@ -8,7 +8,7 @@ export const useRootInfo = (...data: QueryDataProps<typeof root.appControllerGet
   const root = useRoot()
 
   return useQuery({
-    queryKey: ['info'],
+    queryKey: ['info', ...data],
     queryFn: async () => await root.appControllerGetHello(...data).then(unwrap),
   })
 }

@@ -86,3 +86,6 @@ export type * from './FloatingForm'
 
 export { default as TagList } from './TagList'
 export type * from './TagList'
+
+export { default as Pagination } from './Pagination'
+export type * from './Pagination'

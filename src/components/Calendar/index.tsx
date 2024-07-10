@@ -1,12 +1,14 @@
 'use client'
 
 import { buttonVariants } from '../Button'
+import ScrollArea from '../ScrollArea'
+import Select from '../Select'
 
 import { cn } from '@/lib/utils'
 
 import { CaretLeft, CaretRight } from '@phosphor-icons/react'
-import { ComponentProps } from 'react'
-import { DayPicker } from 'react-day-picker'
+import { ChangeEvent, Children, ComponentProps, HTMLProps, ReactElement } from 'react'
+import { DayPicker, DropdownProps } from 'react-day-picker'
 
 export type CalendarProps = ComponentProps<typeof DayPicker>
 
@@ -20,6 +22,7 @@ const Calendar = ({ className, classNames, showOutsideDays = true, ...rest }: Ca
         month: 'space-y-4',
         caption: 'flex justify-center pt-1 relative items-center',
         caption_label: 'text-sm font-medium',
+        caption_dropdowns: 'flex justify-center gap-1 w-full',
         nav: 'space-x-1 flex items-center',
         nav_button: cn(
           buttonVariants({ variant: 'outline' }),
@@ -49,8 +52,38 @@ const Calendar = ({ className, classNames, showOutsideDays = true, ...rest }: Ca
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ...rest }) => <CaretLeft className="h-4 w-4" {...rest} />,
-        IconRight: ({ ...rest }) => <CaretRight className="h-4 w-4" {...rest} />,
+        IconLeft: () => <CaretLeft className="h-4 w-4" />,
+        IconRight: () => <CaretRight className="h-4 w-4" />,
+        Dropdown: ({ value, onChange, children }: DropdownProps) => {
+          const options = Children.toArray(children) as ReactElement<HTMLProps<HTMLOptionElement>>[]
+          const selected = options.find((child) => child.props.value === value)
+          return (
+            <Select.Root
+              value={value?.toString()}
+              onValueChange={(value) =>
+                onChange?.({
+                  target: { value },
+                } as ChangeEvent<HTMLSelectElement>)
+              }
+            >
+              <Select.Trigger className="flex-1">
+                <Select.Value>{selected?.props?.children}</Select.Value>
+              </Select.Trigger>
+              <Select.Content position="popper">
+                <ScrollArea className="h-80">
+                  {options.map((option, id: number) => (
+                    <Select.Item
+                      key={`${option.props.value}-${id}`}
+                      value={option.props.value?.toString() ?? ''}
+                    >
+                      {option.props.children}
+                    </Select.Item>
+                  ))}
+                </ScrollArea>
+              </Select.Content>
+            </Select.Root>
+          )
+        },
       }}
       {...rest}
     />

@@ -8,7 +8,7 @@ export const useUsersFindMe = (...data: QueryDataProps<typeof users.usersControl
   const users = useUsers()
 
   return useQuery({
-    queryKey: ['me'],
+    queryKey: ['me', ...data],
     queryFn: async () => await users.usersControllerFindMe(...data).then(unwrap),
   })
 }

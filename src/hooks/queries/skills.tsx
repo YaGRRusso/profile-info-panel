@@ -9,8 +9,16 @@ export const useSkillsFindAll = (
 ) => {
   const skills = useSkills()
 
+  // return useInfiniteQuery({
+  //   queryKey: ['skills', data],
+  //   queryFn: async ({ pageParam }) =>
+  //     await skills.skillsControllerFindAll(pageParam.toString()).then(unwrap),
+  //   initialPageParam: 1,
+  //   getNextPageParam: (lastPage) => lastPage?.pagination.nextPage,
+  // })
+
   return useQuery({
-    queryKey: ['skills'],
+    queryKey: ['skills', ...data],
     queryFn: async () => await skills.skillsControllerFindAll(...data).then(unwrap),
   })
 }

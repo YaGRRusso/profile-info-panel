@@ -1,6 +1,14 @@
 'use client'
 
-import { DeleteButton, EditButton, FloatingForm, Table, TableRootProps } from '@/components'
+import {
+  DeleteButton,
+  EditButton,
+  FloatingForm,
+  Pagination,
+  Table,
+  TableRootProps,
+} from '@/components'
+import { CommonQueryParams, useQueryParams } from '@/contexts/query'
 import SkillsCommonForm from '@/forms/SkillsCommonForm'
 import { formatDate } from '@/helpers/date'
 import { useSkillsFindAll, useSkillsRemove, useSkillsUpdate } from '@/hooks'
@@ -11,8 +19,9 @@ import { forwardRef, useState } from 'react'
 export interface SkillsTableProps extends TableRootProps {}
 
 const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(({ ...rest }, ref) => {
+  const { params, setParams } = useQueryParams<CommonQueryParams>()
   const [editingSkill, setEditingSkill] = useState<SkillDto>()
-  const { data, isFetching } = useSkillsFindAll()
+  const { data, isFetching } = useSkillsFindAll(params.page, params.limit)
   const updateSkill = useSkillsUpdate()
   const deleteSkill = useSkillsRemove()
 
@@ -53,6 +62,15 @@ const SkillsTable = forwardRef<HTMLTableElement, SkillsTableProps>(({ ...rest },
           ))}
         </Table.Body>
       </Table.Root>
+
+      {data?.pagination && data.pagination.totalPages > 1 && (
+        <Pagination
+          totalPages={data?.pagination.totalPages}
+          currentPage={data?.pagination.currentPage}
+          totalRecords={data?.pagination.totalRecords}
+          onPageChange={(pg) => setParams({ page: pg.toString() })}
+        />
+      )}
 
       <FloatingForm
         description="Fill the form below"

@@ -17,6 +17,14 @@ export type DatePickerProps = Omit<CalendarProps, 'selected' | 'onSelect' | 'mod
   onSelect?: SelectSingleEventHandler
 }
 
+const { from, to } = (() => {
+  const today = new Date()
+  return {
+    from: today.getFullYear() - 60,
+    to: today.getFullYear(),
+  }
+})()
+
 const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
   ({ selected, placeholder, className, onSelect, ...rest }, ref) => {
     const date = useMemo(() => {
@@ -47,7 +55,16 @@ const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
           </Button>
         </Popover.Trigger>
         <Popover.Content className="w-auto p-0">
-          <Calendar mode="single" selected={selected} onSelect={onSelect} initialFocus {...rest} />
+          <Calendar
+            mode="single"
+            selected={selected}
+            onSelect={onSelect}
+            initialFocus
+            captionLayout="dropdown"
+            fromYear={from}
+            toYear={to}
+            {...rest}
+          />
         </Popover.Content>
       </Popover.Root>
     )

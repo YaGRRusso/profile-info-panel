@@ -1,6 +1,14 @@
 'use client'
 
-import { DeleteButton, EditButton, FloatingForm, Table, TableRootProps } from '@/components'
+import {
+  DeleteButton,
+  EditButton,
+  FloatingForm,
+  Pagination,
+  Table,
+  TableRootProps,
+} from '@/components'
+import { CommonQueryParams, useQueryParams } from '@/contexts/query'
 import ExperiencesCommonForm from '@/forms/ExperiencesCommonForm'
 import { formatDate } from '@/helpers/date'
 import { useExperiencesFindAll, useExperiencesRemove, useExperiencesUpdate } from '@/hooks'
@@ -11,8 +19,9 @@ import { forwardRef, useState } from 'react'
 export interface ExperiencesTableProps extends TableRootProps {}
 
 const ExperiencesTable = forwardRef<HTMLTableElement, ExperiencesTableProps>(({ ...rest }, ref) => {
+  const { params, setParams } = useQueryParams<CommonQueryParams>()
   const [editingExperience, setEditingExperience] = useState<ExperienceDto>()
-  const { data, isFetching } = useExperiencesFindAll()
+  const { data, isFetching } = useExperiencesFindAll(params.page, params.limit)
   const deleteExperience = useExperiencesRemove()
   const updateExperience = useExperiencesUpdate()
 
@@ -74,6 +83,15 @@ const ExperiencesTable = forwardRef<HTMLTableElement, ExperiencesTableProps>(({ 
           ))}
         </Table.Body>
       </Table.Root>
+
+      {data?.pagination && data.pagination.totalPages > 1 && (
+        <Pagination
+          totalPages={data?.pagination.totalPages}
+          currentPage={data?.pagination.currentPage}
+          totalRecords={data?.pagination.totalRecords}
+          onPageChange={(pg) => setParams({ page: pg.toString() })}
+        />
+      )}
 
       <FloatingForm
         description="Fill the form below"

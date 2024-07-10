@@ -10,7 +10,7 @@ export const useFormationsFindAll = (
   const formations = useFormations()
 
   return useQuery({
-    queryKey: ['formations'],
+    queryKey: ['formations', ...data],
     queryFn: async () => await formations.formationsControllerFindAll(...data).then(unwrap),
   })
 }

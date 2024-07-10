@@ -17,7 +17,7 @@ const SignUpForm: FC<SignUpFormProps> = () => {
     <>
       <UsersCommonForm
         isLoading={createUser.isPending}
-        handleSubmit={(data) => createUser.mutate(data as any)}
+        handleSubmit={(data) => createUser.mutate([data] as any)}
       />
       <span className='text-gray-300" text-sm'>
         {tSignUp('alreadyHaveAccount')}{' '}
